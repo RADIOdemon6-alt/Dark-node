@@ -147,18 +147,19 @@
     </div>
 
     <!-- 🎵 تشغيل الأغنية تلقائيًا -->
-    <audio autoplay loop>
-        <source src="https://files.catbox.moe/yaq5lw.opus" type="audio/ogg">
-        متصفحك لا يدعم تشغيل الصوت.
-    </audio>
+    <audio id="bgMusic" loop>
+    <source src="https://files.catbox.moe/yaq5lw.opus" type="audio/ogg">
+    متصفحك لا يدعم تشغيل الصوت.
+</audio>
+<button class="btn" onclick="playAudio()">🎵 تشغيل الموسيقى</button>
 
-    <script>
-        function showPage(pageId) {
-            let pages = document.querySelectorAll('.page');
-            pages.forEach(page => page.classList.remove('active'));
-            document.getElementById(pageId).classList.add('active');
+<script>
+    function playAudio() {
+        let audio = document.getElementById("bgMusic");
+        if (audio.paused) {
+            audio.play();
+        } else {
+            audio.pause();
         }
-    </script>
-
-</body>
-</html>
+    }
+</script>
