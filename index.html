@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚡ Cyber API Store</title>
+    <title>⚡ Api Dark Node</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* 🎨 إعدادات عامة */
         * {
             margin: 0;
             padding: 0;
@@ -18,8 +17,8 @@
             color: #fff;
             text-align: center;
         }
-        
-        /* 🔹 شريط التنقل */
+
+        /* 🔥 شريط التنقل */
         .navbar {
             background: rgba(0, 0, 0, 0.8);
             padding: 15px;
@@ -40,7 +39,7 @@
             text-shadow: 0px 0px 10px #00ffee;
         }
 
-        /* 🏠 تصميم الصفحات */
+        /* 🎮 تصميم الصفحات */
         .container {
             max-width: 900px;
             margin: 50px auto;
@@ -83,7 +82,6 @@
         .active {
             display: block;
         }
-
     </style>
 </head>
 <body>
@@ -92,20 +90,21 @@
     <div class="navbar">
         <a href="#" onclick="showPage('home')">🏠 الرئيسية</a>
         <a href="#" onclick="showPage('api')">⚙️ API</a>
+        <a href="#" onclick="showPage('buy')">🛒 شراء السكريبت</a>
         <a href="#" onclick="showPage('contact')">📩 تواصل معنا</a>
     </div>
 
     <!-- 🏠 الصفحة الرئيسية -->
     <div id="home" class="container page active">
-        <h1>⚡ أهلاً بك في <span class="neon-text">Cyber API Store</span></h1>
-        <p>أفضل مكان للحصول على APIs متطورة.</p>
+        <h1>✨ مرحبًا بك في <span class="neon-text">API Dark Node</span> ✨</h1>
+        <p>🚀 الموقع صُمم بالكامل بواسطة **شيطان الإذاعة**! 🚀</p>
+        <p>🔮 احصل على أفضل السكريبتات والـ APIs باحترافية!</p>
         <button class="btn" onclick="showPage('api')">🚀 تصفح الـ APIs</button>
     </div>
 
     <!-- ⚙️ صفحة الـ APIs -->
     <div id="api" class="container page">
         <h1>🛠️ قائمة الـ APIs</h1>
-        <p>اكتشف APIs متقدمة لتطوير مشاريعك.</p>
         <ul style="list-style: none; padding: 0;">
             <li>🔹 <a href="https://api.openai.com/" target="_blank" class="neon-text">ChatGPT API</a></li>
             <li>🔹 <a href="https://api.weather.com/" target="_blank" class="neon-text">Weather API</a></li>
@@ -114,25 +113,52 @@
         </ul>
     </div>
 
+    <!-- 🛒 صفحة شراء السكريبت -->
+    <div id="buy" class="container page">
+        <h1>🍷 أسعار السكريبتات والبوتات 🍷</h1>
+        <p>اختر ما يناسبك واضغط على الزر للشراء عبر واتساب:</p>
+        <ul style="list-style: none; padding: 0;">
+            <li>⚜️ سكريبت بوت عادي (بدون أزرار) → 30 جنيه مصري 
+                <a href="https://wa.me/201063808608" target="_blank"><button class="btn">💰 شراء</button></a>
+            </li>
+            <li>⚜️ سكريبت بوت أزرار (بدون أوامر) → 40 جنيه مصري 
+                <a href="https://wa.me/201063808608" target="_blank"><button class="btn">💰 شراء</button></a>
+            </li>
+            <li>⚜️ سكريبت بوت أزرار (مع أوامر) → 65 جنيه مصري 
+                <a href="https://wa.me/201063808608" target="_blank"><button class="btn">💰 شراء</button></a>
+            </li>
+            <li>⚜️ سكريبت بوت ميكو → 100 جنيه مصري 
+                <a href="https://wa.me/201063808608" target="_blank"><button class="btn">💰 شراء</button></a>
+            </li>
+            <li>⚜️ سكريبت بوت ميكو (V2) → 150 جنيه مصري 
+                <a href="https://wa.me/201063808608" target="_blank"><button class="btn">💰 شراء</button></a>
+            </li>
+        </ul>
+        <p>⚠️ ملاحظات مهمة: يتم إرسال فيديو شرح مع الروابط والدعم حتى التشغيل الكامل.</p>
+    </div>
+
     <!-- 📩 صفحة تواصل مع المطور -->
     <div id="contact" class="container page">
         <h1>📩 تواصل مع المطور</h1>
         <p>للدعم والاستفسارات، يمكنك مراسلتي عبر الواتساب.</p>
-        <a href="https://wa.me/1234567890" target="_blank">
+        <a href="https://wa.me/201063808608" target="_blank">
             <button class="btn">💬 دردشة واتساب</button>
         </a>
     </div>
 
+    <!-- 🎵 تشغيل الأغنية تلقائيًا -->
+    <audio autoplay loop>
+        <source src="https://files.catbox.moe/yaq5lw.opus" type="audio/ogg">
+        متصفحك لا يدعم تشغيل الصوت.
+    </audio>
+
     <script>
         function showPage(pageId) {
-            // إخفاء كل الصفحات
             let pages = document.querySelectorAll('.page');
             pages.forEach(page => page.classList.remove('active'));
-
-            // إظهار الصفحة المطلوبة
             document.getElementById(pageId).classList.add('active');
         }
     </script>
 
 </body>
-    </html>
+</html>
