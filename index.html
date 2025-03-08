@@ -19,49 +19,6 @@
             text-align: center;
             overflow-y: auto;
         }
-        .sidebar {
-            position: fixed;
-            top: 0;
-            left: -220px;
-            width: 200px;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            padding: 20px;
-            box-shadow: 0px 0px 15px rgba(255, 0, 0, 0.7);
-            transition: left 0.4s ease-in-out;
-            z-index: 1000;
-        }
-        .sidebar a {
-            display: block;
-            color: #ff0077;
-            text-decoration: none;
-            font-size: 18px;
-            margin: 15px 0;
-            transition: 0.3s;
-        }
-        .sidebar a:hover {
-            color: #00ffee;
-            text-shadow: 0px 0px 10px #00ffee;
-        }
-        .toggle-btn {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: #ff0077;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0px 0px 10px #ff0077;
-            transition: 0.3s;
-        }
-        .toggle-btn:hover {
-            background: #00ffee;
-            box-shadow: 0px 0px 15px #00ffee;
-        }
         .container {
             max-width: 900px;
             margin: 50px auto;
@@ -78,31 +35,10 @@
             color: #00ffee;
             text-shadow: 0px 0px 10px #00ffee;
         }
-        .page {
-            display: none;
-        }
-        .active {
-            display: block;
-        }
-        .btn {
-            background: #ff0077;
-            padding: 10px 20px;
-            margin: 10px;
-            border: none;
-            border-radius: 5px;
-            color: white;
-            font-size: 18px;
-            cursor: pointer;
-            transition: 0.3s;
-            box-shadow: 0px 0px 10px #ff0077;
-        }
-        .btn:hover {
-            background: #00ffee;
-            box-shadow: 0px 0px 15px #00ffee;
-        }
         .api-item {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             background: #200000;
             padding: 10px;
             margin: 10px 0;
@@ -111,30 +47,26 @@
             color: #ff4444;
             font-size: 18px;
             font-weight: bold;
-            cursor: pointer;
         }
-        .api-item:hover {
-            background: #330000;
-            box-shadow: 0px 0px 20px #ff0000;
+        .copy-btn {
+            background: #ff0077;
+            border: none;
+            padding: 5px 10px;
+            color: white;
+            cursor: pointer;
+            border-radius: 3px;
+            transition: 0.3s;
+            box-shadow: 0px 0px 10px #ff0077;
+        }
+        .copy-btn:hover {
+            background: #00ffee;
+            box-shadow: 0px 0px 15px #00ffee;
         }
     </style>
 </head>
 <body>
 
-    <div class="sidebar" id="sidebar">
-        <a href="#" onclick="showPage('home')">🏠 الرئيسية</a>
-        <a href="#" onclick="showPage('buy')">🛒 شراء السكريبت</a>
-        <a href="#" onclick="showPage('api')">🛰 API</a>
-        <a href="#" onclick="showPage('developer')">💻 المطور</a>
-    </div>
-
-    <div class="toggle-btn" onclick="toggleSidebar()">☰</div>
-
-    <div id="home" class="container page active">
-        <h1>✨ مرحبًا بك في <span class="neon-text">API Dark Node</span> ✨</h1>
-    </div>
-
-    <div id="buy" class="container page">
+    <div id="buy" class="container page active">
         <h1 style="color: #ff0000; text-shadow: 0px 0px 10px red;">🍷 أسعار السكريبتات 🍷</h1>
         <div class="api-item">⚜️ بوت عادي دون أزرار (بدون أوامر) → <span style="color: #ff4444;">30 جنيه</span></div>
         <div class="api-item">⚜️ بوت أزرار (بدون أوامر) → <span style="color: #ff4444;">40 جنيه</span></div>
@@ -144,24 +76,20 @@
         <p>💡 يتم إرسال فيديو شرح مع السكريبت</p>
         <p>💡 يتم التواصل مع العميل حتى يتم تشغيل البوت بنجاح</p>
         <p>💰 أقبل دفع فودافون كاش، شحن ببجي، تحويل Instapay</p>
-        <a href="https://wa.me/201063808608"><button class="btn">📩 للشراء أو الاستفسار</button></a>
+        <a href="https://wa.me/201063808608"><button class="copy-btn">📩 للشراء أو الاستفسار</button></a>
     </div>
 
     <div id="api" class="container page">
         <h1>🛰 API</h1>
-        <div class="api-item">🚀 API الصور → <span>https://api.example.com/images</span></div>
-        <div class="api-item">🎵 API الأغاني → <span>https://api.example.com/music</span></div>
-        <div class="api-item">📄 API النصوص → <span>https://api.example.com/text</span></div>
-    </div>
-
-    <div id="developer" class="container page">
-        <h1>💻 المطور</h1>
-        <p>👨‍💻 اسم المطور: 𝑅𝐴𝐷𝐼𝛩 𝐷𝐸𝑀𝛩𝑁</p>
-        <p>🤖 اسم البوت: 𝙱𝙾𝚃-𝙼𝚄𝙺𝙾</p>
-        <a href="https://wa.me/201063808608"><button class="btn">📩 التواصل مع المطور</button></a>
-        <a href="https://chat.whatsapp.com/BNARMEg1L87JOz8oSR9eFD"><button class="btn">🛠 دعم البوت</button></a>
-        <a href="https://whatsapp.com/channel/0029VaumDtWJZg4B8jLyMK2q"><button class="btn">📢 القناة لكل جديد</button></a>
-        <a href="https://whatsapp.com/channel/0029Vb2j3d6HVvTiMzx5QF13"><button class="btn">🌐 قناة Dark-Node</button></a>
+        <div class="api-item">
+            🚀 API الصور → <button class="copy-btn" onclick="copyText('https://api.example.com/images')">📋 نسخ</button>
+        </div>
+        <div class="api-item">
+            🎵 API الأغاني → <button class="copy-btn" onclick="copyText('https://api.example.com/music')">📋 نسخ</button>
+        </div>
+        <div class="api-item">
+            📄 API النصوص → <button class="copy-btn" onclick="copyText('https://api.example.com/text')">📋 نسخ</button>
+        </div>
     </div>
 
     <audio id="bgMusic" autoplay loop>
@@ -169,13 +97,12 @@
     </audio>
 
     <script>
-        function showPage(pageId) {
-            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-            document.getElementById(pageId).classList.add('active');
-        }
-        function toggleSidebar() {
-            let sidebar = document.getElementById("sidebar");
-            sidebar.style.left = sidebar.style.left === "0px" ? "-220px" : "0px";
+        function copyText(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert("تم نسخ الرابط: " + text);
+            }).catch(err => {
+                console.error('فشل النسخ: ', err);
+            });
         }
     </script>
 
