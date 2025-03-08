@@ -11,18 +11,14 @@
         .sidebar { position: fixed; top: 0; left: -220px; width: 200px; height: 100%; background: rgba(0, 0, 0, 0.9); padding: 20px; box-shadow: 0px 0px 15px rgba(255, 0, 0, 0.7); transition: left 0.4s ease-in-out; z-index: 1000; }
         .sidebar a { display: block; color: #ff0077; text-decoration: none; font-size: 18px; margin: 15px 0; transition: 0.3s; }
         .sidebar a:hover { color: #00ffee; text-shadow: 0px 0px 10px #00ffee; }
-        .toggle-btn { position: fixed; top: 20px; right: 20px; background: #ff0077; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0px 0px 10px #ff0077; transition: 0.3s; }
-        .toggle-btn:hover { background: #00ffee; box-shadow: 0px 0px 15px #00ffee; }
+        .toggle-btn, .music-btn { position: fixed; bottom: 20px; right: 20px; background: #ff0077; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0px 0px 10px #ff0077; transition: 0.3s; }
+        .toggle-btn { top: 20px; }
+        .toggle-btn:hover, .music-btn:hover { background: #00ffee; box-shadow: 0px 0px 15px #00ffee; }
         .container { max-width: 900px; margin: 50px auto; padding: 20px; border-radius: 10px; background: rgba(20, 20, 20, 0.9); box-shadow: 0px 0px 20px rgba(255, 0, 255, 0.7); }
-        h1 { font-size: 30px; text-shadow: 0px 0px 10px #ff0077; }
-        .neon-text { color: #00ffee; text-shadow: 0px 0px 10px #00ffee; }
-        .page { display: none; }
-        .active { display: block; }
-        .btn { background: #ff0077; padding: 10px 20px; margin: 10px; border: none; border-radius: 5px; color: white; font-size: 18px; cursor: pointer; transition: 0.3s; box-shadow: 0px 0px 10px #ff0077; }
+        .api-item { display: flex; justify-content: space-between; align-items: center; background: #200000; padding: 10px; margin: 10px 0; border-radius: 5px; box-shadow: 0px 0px 15px red; color: #ff4444; font-size: 18px; font-weight: bold; }
+        .api-hidden { filter: blur(5px); user-select: none; }
+        .btn { background: #ff0077; padding: 10px 20px; border-radius: 5px; color: white; cursor: pointer; transition: 0.3s; box-shadow: 0px 0px 10px #ff0077; }
         .btn:hover { background: #00ffee; box-shadow: 0px 0px 15px #00ffee; }
-        .api-item { display: flex; justify-content: space-between; align-items: center; background: #200000; padding: 10px; margin: 10px 0; border-radius: 5px; box-shadow: 0px 0px 15px red; color: #ff4444; font-size: 18px; font-weight: bold; cursor: pointer; }
-        .api-item button { background: #ff0077; border: none; padding: 5px 10px; cursor: pointer; border-radius: 5px; color: white; font-size: 16px; transition: 0.3s; }
-        .api-item button:hover { background: #00ffee; }
     </style>
 </head>
 <body>
@@ -31,10 +27,11 @@
     <a href="#" onclick="showPage('home')">🏠 الرئيسية</a>
     <a href="#" onclick="showPage('buy')">🛒 شراء السكريبت</a>
     <a href="#" onclick="showPage('api')">🛰 API</a>
-    <a href="#" onclick="showPage('developer')">💻 المطور</a>
+    <a href="#" onclick="showPage('developer')">💻 معلومات المطور</a>
 </div>
 
 <div class="toggle-btn" onclick="toggleSidebar()">☰</div>
+<div class="music-btn" onclick="toggleMusic()">🎵</div>
 
 <div id="home" class="container page active">
     <h1>✨ مرحبًا بك في <span class="neon-text">API Dark Node</span> ✨</h1>
@@ -42,33 +39,30 @@
 
 <div id="buy" class="container page">
     <h1 style="color: #ff0000; text-shadow: 0px 0px 10px red;">🍷 أسعار السكريبتات 🍷</h1>
-    <div class="api-item">⚜️ بوت عادي دون أزرار (بدون أوامر) → <span>30 جنيه</span></div>
-    <div class="api-item">⚜️ بوت أزرار (بدون أوامر) → <span>40 جنيه</span></div>
-    <div class="api-item">⚜️ بوت أزرار (مع أوامر) → <span>65 جنيه</span></div>
-    <div class="api-item">⚜️ بوت ميكو → <span>100 جنيه</span></div>
+    <div class="api-item">⚜️ بوت عادي دون أزرار → <span>30 جنيه</span></div>
     <div class="api-item">⚜️ بوت ميكو (V2) → <span>150 جنيه</span></div>
-    <p>💡 يتم إرسال فيديو شرح مع السكريبت</p>
-    <p>💡 يتم التواصل مع العميل حتى يتم تشغيل البوت بنجاح</p>
-    <p>💰 أقبل دفع فودافون كاش، شحن ببجي، تحويل Instapay</p>
-    <a href="https://wa.me/201063808608"><button class="btn">📩 للشراء أو الاستفسار</button></a>
+    <p>💰 الدفع عبر فودافون كاش، ببجي، Instapay</p>
+    <a href="https://wa.me/201063808608"><button class="btn">📩 للشراء</button></a>
 </div>
 
 <div id="api" class="container page">
     <h1>🛰 API</h1>
-    <div class="api-item">🚀 API الصور → <span id="api1">https://api.example.com/images</span> <button onclick="copyToClipboard('api1')">📋 نسخ</button></div>
-    <div class="api-item">🎵 API الأغاني → <span id="api2">https://api.example.com/music</span> <button onclick="copyToClipboard('api2')">📋 نسخ</button></div>
-    <div class="api-item">📄 API النصوص → <span id="api3">https://api.example.com/text</span> <button onclick="copyToClipboard('api3')">📋 نسخ</button></div>
+    <div class="api-item">🚀 API الصور → <span id="api1" class="api-hidden">https://api.example.com/images</span> <button class="btn" onclick="copyToClipboard('api1')">📋 نسخ</button></div>
+    <div class="api-item">🎵 API الأغاني → <span id="api2" class="api-hidden">https://api.example.com/music</span> <button class="btn" onclick="copyToClipboard('api2')">📋 نسخ</button></div>
+    <div class="api-item">📄 API النصوص → <span id="api3" class="api-hidden">https://api.example.com/text</span> <button class="btn" onclick="copyToClipboard('api3')">📋 نسخ</button></div>
 </div>
 
 <div id="developer" class="container page">
     <h1>💻 المطور</h1>
     <p>👨‍💻 اسم المطور: 𝑅𝐴𝐷𝐼𝛩 𝐷𝐸𝑀𝛩𝑁</p>
     <p>🤖 اسم البوت: 𝙱𝙾𝚃-𝙼𝚄𝙺𝙾</p>
-    <a href="https://wa.me/201063808608"><button class="btn">📩 التواصل مع المطور</button></a>
+    <a href="https://wa.me/201063808608"><button class="btn">📩 واتساب</button></a>
     <a href="https://chat.whatsapp.com/BNARMEg1L87JOz8oSR9eFD"><button class="btn">🛠 دعم البوت</button></a>
+    <a href="https://whatsapp.com/channel/0029Vb2j3d6HVvTiMzx5QF13"><button class="btn">📢 قناة Dark-node</button></a>
+    <a href="https://whatsapp.com/channel/0029VaumDtWJZg4B8jLyMK2q"><button class="btn">📢 تابع قناتي لي معرفه كل جديد</button></a>
 </div>
 
-<audio id="bgMusic" autoplay loop>
+<audio id="bgMusic" loop>
     <source src="https://files.catbox.moe/yaq5lw.opus" type="audio/ogg">
 </audio>
 
@@ -82,9 +76,17 @@
         sidebar.style.left = sidebar.style.left === "0px" ? "-220px" : "0px";
     }
     function copyToClipboard(id) {
-        let text = document.getElementById(id).innerText;
+        let text = document.getElementById(id).textContent;
         navigator.clipboard.writeText(text);
         alert("تم نسخ الرابط!");
+    }
+    function toggleMusic() {
+        let music = document.getElementById("bgMusic");
+        if (music.paused) {
+            music.play();
+        } else {
+            music.pause();
+        }
     }
 </script>
 
