@@ -17,153 +17,128 @@
             background-size: cover;
             color: #fff;
             text-align: center;
-            transition: background 0.5s ease;
-        }
-        .dark-mode {
-            background: #111 !important;
-        }
-        .container {
-            max-width: 900px;
-            margin: 50px auto;
-            padding: 20px;
-            border-radius: 10px;
-            background: rgba(20, 20, 20, 0.9);
-            box-shadow: 0px 0px 20px rgba(255, 0, 255, 0.7);
-            transition: box-shadow 0.5s ease-in-out;
-        }
-        .neon-text {
-            font-size: 30px;
-            text-shadow: 0px 0px 15px #ff0077, 0px 0px 30px #ff0077;
-            animation: glow 1.5s infinite alternate;
-        }
-        @keyframes glow {
-            from {
-                text-shadow: 0px 0px 10px #ff0077, 0px 0px 20px #ff0077;
-            }
-            to {
-                text-shadow: 0px 0px 20px #ff0077, 0px 0px 40px #ff0077;
-            }
-        }
-        .api-item {
-            background: rgba(0, 0, 0, 0.8);
-            padding: 15px;
-            margin: 10px 0;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 255, 255, 0.7);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .api-name {
-            font-size: 18px;
-            color: #ff0077;
-        }
-        .btn {
-            background: #ff0077;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 5px;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-            transition: 0.3s;
-            box-shadow: 0px 0px 10px #ff0077;
-        }
-        .btn:hover {
-            background: #00ffee;
-            box-shadow: 0px 0px 15px #00ffee;
-        }
-        .options {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            margin-top: 10px;
-        }
-        .toggle-mode {
-            margin-top: 20px;
-            padding: 10px;
-            background: #222;
-            color: white;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: 0.3s;
-        }
-        .toggle-mode:hover {
-            background: #444;
-        }
-        .typing-effect {
-            font-size: 24px;
-            color: #00ffee;
-            white-space: nowrap;
             overflow: hidden;
-            border-right: 2px solid #00ffee;
-            animation: typing 3s steps(20, end) infinite alternate;
         }
-        @keyframes typing {
-            from {
-                width: 0;
-            }
-            to {
-                width: 100%;
-            }
+        .welcome-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://files.catbox.moe/x4pv0v.jpg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            z-index: 2000;
+            transition: opacity 1s ease-in-out;
+        }
+        .welcome-screen h1 {
+            font-size: 36px;
+            color: #ff0077;
+            text-shadow: 0px 0px 10px #ff0077;
+        }
+        .welcome-btn {
+            background: #00ffee;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            color: black;
+            font-size: 20px;
+            cursor: pointer;
+            margin-top: 20px;
+            box-shadow: 0px 0px 15px #00ffee;
+            transition: 0.3s;
+        }
+        .welcome-btn:hover {
+            background: #ff0077;
+            box-shadow: 0px 0px 20px #ff0077;
+        }
+        .hidden {
+            opacity: 0;
+            pointer-events: none;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>🌐 <span class="neon-text">API Dark Node</span> 🌐</h1>
-        <p class="typing-effect">🚀 أحدث الـ APIs بلمسة احترافية! 🚀</p>
-
-        <div class="api-item">
-            <span class="api-name">📡 API المستخدمين</span>
-            <button class="btn" onclick="toggleOptions('api1')">🔍 عرض الخيارات</button>
-            <div class="options" id="api1">
-                <button class="btn" onclick="openApi('https://api.example.com/v1/users')">🔑 دخول</button>
-                <button class="btn" onclick="copyApi('https://api.example.com/v1/users')">📋 نسخ الـ API</button>
-            </div>
-        </div>
-
-        <div class="api-item">
-            <span class="api-name">📡 API البيانات</span>
-            <button class="btn" onclick="toggleOptions('api2')">🔍 عرض الخيارات</button>
-            <div class="options" id="api2">
-                <button class="btn" onclick="openApi('https://api.example.com/v1/data')">🔑 دخول</button>
-                <button class="btn" onclick="copyApi('https://api.example.com/v1/data')">📋 نسخ الـ API</button>
-            </div>
-        </div>
-
-        <button class="toggle-mode" onclick="toggleDarkMode()">🌙 تبديل الوضع الليلي</button>
+    <div class="welcome-screen" id="welcomeScreen">
+        <h1>✨ مرحبًا بك في <span class="neon-text">API Dark Node</span> ✨</h1>
+        <button class="welcome-btn" onclick="hideWelcome()">ابدأ</button>
     </div>
 
-    <audio id="clickSound" src="https://www.fesliyanstudios.com/play-mp3/4380"></audio>
+    <div class="sidebar" id="sidebar">
+        <a href="#" onclick="showPage('home')">🏠 الرئيسية</a>
+        <a href="#" onclick="showPage('buy')">🛒 شراء السكريبت</a>
+        <a href="#" onclick="showPage('api')">🌐 API</a>
+        <a href="#" onclick="showPage('contact')">📩 تواصل معنا</a>
+    </div>
+
+    <div class="toggle-btn" onclick="toggleSidebar()">☰</div>
+
+    <div id="home" class="container page active">
+        <h1>✨ مرحبًا بك في <span class="neon-text">API Dark Node</span> ✨</h1>
+    </div>
+
+    <div id="buy" class="container page">
+        <h1>🍷 أسعار السكريبتات 🍷</h1>
+        <ul>
+            <li>⚜️ بوت عادي → 30 جنيه <a href="https://wa.me/201063808608"><button class="btn">💰 شراء</button></a></li>
+            <li>⚜️ بوت أزرار → 40 جنيه <a href="https://wa.me/201063808608"><button class="btn">💰 شراء</button></a></li>
+            <li>⚜️ بوت أزرار + أوامر → 65 جنيه <a href="https://wa.me/201063808608"><button class="btn">💰 شراء</button></a></li>
+            <li>⚜️ بوت ميكو → 100 جنيه <a href="https://wa.me/201063808608"><button class="btn">💰 شراء</button></a></li>
+            <li>⚜️ بوت ميكو V2 → 150 جنيه <a href="https://wa.me/201063808608"><button class="btn">💰 شراء</button></a></li>
+        </ul>
+    </div>
+
+    <div id="api" class="container page">
+        <h1>🌐 API</h1>
+        <div class="api-item">
+            <span>https://api.example.com/v1/data</span>
+            <button onclick="copyToClipboard('https://api.example.com/v1/data')">📋 نسخ</button>
+        </div>
+        <div class="api-item">
+            <span>https://api.example.com/v1/users</span>
+            <button onclick="copyToClipboard('https://api.example.com/v1/users')">📋 نسخ</button>
+        </div>
+    </div>
+
+    <div id="contact" class="container page">
+        <h1>📩 تواصل معنا</h1>
+        <a href="https://wa.me/201063808608"><button class="btn">💬 واتساب</button></a>
+    </div>
+
+    <audio id="bgMusic" loop>
+        <source src="https://files.catbox.moe/yaq5lw.opus" type="audio/ogg">
+    </audio>
+    
+    <div class="music-btn" onclick="toggleMusic()">🎵</div>
 
     <script>
-        function toggleOptions(id) {
-            let options = document.getElementById(id);
-            options.style.display = options.style.display === "flex" ? "none" : "flex";
-            playClickSound();
+        function hideWelcome() {
+            let welcomeScreen = document.getElementById("welcomeScreen");
+            welcomeScreen.classList.add("hidden");
         }
 
-        function openApi(url) {
-            window.open(url, '_blank');
-            playClickSound();
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
         }
 
-        function copyApi(url) {
-            navigator.clipboard.writeText(url);
-            alert("✅ تم نسخ رابط الـ API!");
-            playClickSound();
+        function toggleSidebar() {
+            let sidebar = document.getElementById("sidebar");
+            sidebar.style.left = sidebar.style.left === "0px" ? "-220px" : "0px";
         }
 
-        function toggleDarkMode() {
-            document.body.classList.toggle('dark-mode');
-            playClickSound();
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text);
+            alert("✅ تم النسخ!");
         }
 
-        function playClickSound() {
-            document.getElementById('clickSound').play();
+        function toggleMusic() {
+            let music = document.getElementById("bgMusic");
+            music.paused ? music.play() : music.pause();
         }
     </script>
 
