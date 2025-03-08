@@ -117,25 +117,6 @@
             background: #330000;
             box-shadow: 0px 0px 20px #ff0000;
         }
-        .music-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #ff0077;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0px 0px 10px #ff0077;
-            transition: 0.3s;
-        }
-        .music-btn:hover {
-            background: #00ffee;
-            box-shadow: 0px 0px 15px #00ffee;
-        }
     </style>
 </head>
 <body>
@@ -143,8 +124,7 @@
     <div class="sidebar" id="sidebar">
         <a href="#" onclick="showPage('home')">🏠 الرئيسية</a>
         <a href="#" onclick="showPage('buy')">🛒 شراء السكريبت</a>
-        <a href="#" onclick="showPage('api')">🌐 API</a>
-        <a href="#" onclick="showPage('contact')">📩 تواصل معنا</a>
+        <a href="#" onclick="showPage('developer')">💻 المطور</a>
     </div>
 
     <div class="toggle-btn" onclick="toggleSidebar()">☰</div>
@@ -160,25 +140,25 @@
         <div class="api-item">⚜️ بوت أزرار (مع أوامر) → <span style="color: #ff4444;">65 جنيه</span></div>
         <div class="api-item">⚜️ بوت ميكو → <span style="color: #ff4444;">100 جنيه</span></div>
         <div class="api-item">⚜️ بوت ميكو (V2) → <span style="color: #ff4444;">150 جنيه</span></div>
+        <p>💡 يتم إرسال فيديو شرح مع السكريبت</p>
+        <p>💡 يتم التواصل مع العميل حتى يتم تشغيل البوت بنجاح</p>
+        <p>💰 أقبل دفع فودافون كاش، شحن ببجي، تحويل Instapay</p>
+        <a href="https://wa.me/201063808608"><button class="btn">📩 للشراء أو الاستفسار</button></a>
     </div>
 
-    <div id="api" class="container page">
-        <h1>🌐 API</h1>
-        <div class="api-item">🚀 API 1 - بيانات المستخدم</div>
-        <div class="api-item">⚡ API 2 - المستخدمين</div>
-        <div class="api-item">🔥 API 3 - الخدمات</div>
-    </div>
-
-    <div id="contact" class="container page">
-        <h1>📩 تواصل معنا</h1>
-        <a href="https://wa.me/201063808608"><button class="btn">💬 واتساب</button></a>
+    <div id="developer" class="container page">
+        <h1>💻 المطور</h1>
+        <p>👨‍💻 اسم المطور: 𝑅𝐴𝐷𝐼𝛩 𝐷𝐸𝑀𝛩𝑁</p>
+        <p>🤖 اسم البوت: 𝙱𝙾𝚃-𝙼𝚄𝙺𝙾</p>
+        <a href="https://wa.me/201063808608"><button class="btn">📩 التواصل مع المطور</button></a>
+        <a href="https://chat.whatsapp.com/BNARMEg1L87JOz8oSR9eFD"><button class="btn">🛠 دعم البوت</button></a>
+        <a href="https://whatsapp.com/channel/0029VaumDtWJZg4B8jLyMK2q"><button class="btn">📢 القناة لكل جديد</button></a>
+        <a href="https://whatsapp.com/channel/0029Vb2j3d6HVvTiMzx5QF13"><button class="btn">🌐 قناة Dark-Node</button></a>
     </div>
 
     <audio id="bgMusic" autoplay loop>
         <source src="https://files.catbox.moe/yaq5lw.opus" type="audio/ogg">
     </audio>
-
-    <div class="music-btn" onclick="toggleMusic()">🎵</div>
 
     <script>
         function showPage(pageId) {
@@ -188,10 +168,6 @@
         function toggleSidebar() {
             let sidebar = document.getElementById("sidebar");
             sidebar.style.left = sidebar.style.left === "0px" ? "-220px" : "0px";
-        }
-        function toggleMusic() {
-            let music = document.getElementById("bgMusic");
-            music.paused ? music.play() : music.pause();
         }
     </script>
 
