@@ -13,81 +13,105 @@
             font-family: 'Orbitron', sans-serif;
         }
         body {
-            background: #0a0a0a;
+            background: #000;
             color: #fff;
-            text-align: center;
+            overflow: hidden;
         }
 
-        /* 🔥 شريط التنقل */
-        .navbar {
-            background: rgba(0, 0, 0, 0.8);
-            padding: 15px;
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            box-shadow: 0px 0px 10px rgba(255, 0, 255, 0.7);
+        /* 🔥 تأثيرات النيون السيبرانية */
+        .glow {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: red;
+            filter: blur(80px);
+            animation: moveNeon 10s infinite linear;
+            opacity: 0.7;
         }
-        .navbar a {
-            color: #ff0077;
-            text-decoration: none;
-            font-size: 20px;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-        .navbar a:hover {
-            color: #00ffee;
-            text-shadow: 0px 0px 10px #00ffee;
+        @keyframes moveNeon {
+            0% { top: 0; left: 0; }
+            25% { top: 50%; left: 90%; }
+            50% { top: 100%; left: 50%; }
+            75% { top: 50%; left: 10%; }
+            100% { top: 0; left: 0; }
         }
 
-        /* 🎮 تصميم الصفحات */
-        .container {
-            max-width: 900px;
-            margin: 50px auto;
+        /* 📜 القائمة الجانبية */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 200px;
+            background: rgba(10, 10, 10, 0.9);
+            box-shadow: 5px 0px 15px red;
             padding: 20px;
-            border-radius: 10px;
-            background: rgba(20, 20, 20, 0.9);
-            box-shadow: 0px 0px 20px rgba(255, 0, 255, 0.7);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
-        h1 {
-            font-size: 30px;
-            text-shadow: 0px 0px 10px #ff0077;
-        }
-        .neon-text {
-            color: #00ffee;
-            text-shadow: 0px 0px 10px #00ffee;
-        }
-
-        /* ✨ أزرار نيون */
-        .btn {
-            background: #ff0077;
-            padding: 10px 20px;
-            margin: 10px;
-            border: none;
-            border-radius: 5px;
-            color: white;
+        .sidebar a {
+            color: red;
+            text-decoration: none;
             font-size: 18px;
-            cursor: pointer;
+            padding: 10px;
+            border-left: 5px solid transparent;
             transition: 0.3s;
-            box-shadow: 0px 0px 10px #ff0077;
         }
-        .btn:hover {
-            background: #00ffee;
-            box-shadow: 0px 0px 15px #00ffee;
+        .sidebar a:hover {
+            color: #ff0033;
+            border-left: 5px solid #ff0033;
+            text-shadow: 0px 0px 10px red;
         }
 
-        /* 🕹️ إخفاء الصفحات */
-        .page {
+        /* 🔥 الصفحات */
+        .container {
+            position: absolute;
+            left: 250px;
+            top: 50px;
+            width: calc(100% - 300px);
+            padding: 20px;
+            background: rgba(20, 20, 20, 0.9);
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px red;
             display: none;
         }
         .active {
             display: block;
         }
+
+        /* ✨ العناوين */
+        h1 {
+            text-shadow: 0px 0px 10px red;
+            font-size: 30px;
+        }
+
+        /* 🎵 زر تشغيل الموسيقى */
+        .music-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: red;
+            padding: 15px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0px 0px 20px red;
+            transition: 0.3s;
+        }
+        .music-btn:hover {
+            background: #ff0033;
+            box-shadow: 0px 0px 30px red;
+        }
     </style>
 </head>
 <body>
 
-    <!-- 🔥 شريط التنقل -->
-    <div class="navbar">
+    <!-- 🔥 إضاءة سيبرانية متحركة -->
+    <div class="glow"></div>
+
+    <!-- 📜 القائمة الجانبية -->
+    <div class="sidebar">
         <a href="#" onclick="showPage('home')">🏠 الرئيسية</a>
         <a href="#" onclick="showPage('api')">⚙️ API</a>
         <a href="#" onclick="showPage('buy')">🛒 شراء السكريبت</a>
@@ -95,71 +119,74 @@
     </div>
 
     <!-- 🏠 الصفحة الرئيسية -->
-    <div id="home" class="container page active">
-        <h1>✨ مرحبًا بك في <span class="neon-text">API Dark Node</span> ✨</h1>
+    <div id="home" class="container active">
+        <h1>✨ مرحبًا بك في <span style="color: red;">API Dark Node</span> ✨</h1>
         <p>🚀 الموقع صُمم بالكامل بواسطة **شيطان الإذاعة**! 🚀</p>
         <p>🔮 احصل على أفضل السكريبتات والـ APIs باحترافية!</p>
-        <button class="btn" onclick="showPage('api')">🚀 تصفح الـ APIs</button>
     </div>
 
     <!-- ⚙️ صفحة الـ APIs -->
-    <div id="api" class="container page">
+    <div id="api" class="container">
         <h1>🛠️ قائمة الـ APIs</h1>
-        <ul style="list-style: none; padding: 0;">
-            <li>🔹 <a href="https://api.openai.com/" target="_blank" class="neon-text">ChatGPT API</a></li>
-            <li>🔹 <a href="https://api.weather.com/" target="_blank" class="neon-text">Weather API</a></li>
-            <li>🔹 <a href="https://randomuser.me/api/" target="_blank" class="neon-text">Random User API</a></li>
-            <li>🔹 <a href="https://api.nasa.gov/" target="_blank" class="neon-text">NASA API</a></li>
+        <ul>
+            <li>🔹 <a href="https://api.openai.com/" target="_blank" style="color:red;">ChatGPT API</a></li>
+            <li>🔹 <a href="https://api.weather.com/" target="_blank" style="color:red;">Weather API</a></li>
         </ul>
     </div>
 
     <!-- 🛒 صفحة شراء السكريبت -->
-    <div id="buy" class="container page">
+    <div id="buy" class="container">
         <h1>🍷 أسعار السكريبتات والبوتات 🍷</h1>
         <p>اختر ما يناسبك واضغط على الزر للشراء عبر واتساب:</p>
-        <ul style="list-style: none; padding: 0;">
-            <li>⚜️ سكريبت بوت عادي (بدون أزرار) → 30 جنيه مصري 
-                <a href="https://wa.me/201063808608" target="_blank"><button class="btn">💰 شراء</button></a>
-            </li>
-            <li>⚜️ سكريبت بوت أزرار (بدون أوامر) → 40 جنيه مصري 
-                <a href="https://wa.me/201063808608" target="_blank"><button class="btn">💰 شراء</button></a>
-            </li>
-            <li>⚜️ سكريبت بوت أزرار (مع أوامر) → 65 جنيه مصري 
-                <a href="https://wa.me/201063808608" target="_blank"><button class="btn">💰 شراء</button></a>
-            </li>
+        <ul>
             <li>⚜️ سكريبت بوت ميكو → 100 جنيه مصري 
-                <a href="https://wa.me/201063808608" target="_blank"><button class="btn">💰 شراء</button></a>
-            </li>
-            <li>⚜️ سكريبت بوت ميكو (V2) → 150 جنيه مصري 
-                <a href="https://wa.me/201063808608" target="_blank"><button class="btn">💰 شراء</button></a>
+                <a href="https://wa.me/201063808608" target="_blank">
+                    <button style="background:red; color:white;">💰 شراء</button>
+                </a>
             </li>
         </ul>
-        <p>⚠️ ملاحظات مهمة: يتم إرسال فيديو شرح مع الروابط والدعم حتى التشغيل الكامل.</p>
     </div>
 
     <!-- 📩 صفحة تواصل مع المطور -->
-    <div id="contact" class="container page">
+    <div id="contact" class="container">
         <h1>📩 تواصل مع المطور</h1>
         <p>للدعم والاستفسارات، يمكنك مراسلتي عبر الواتساب.</p>
         <a href="https://wa.me/201063808608" target="_blank">
-            <button class="btn">💬 دردشة واتساب</button>
+            <button style="background:red; color:white;">💬 دردشة واتساب</button>
         </a>
     </div>
 
     <!-- 🎵 تشغيل الأغنية تلقائيًا -->
     <audio id="bgMusic" loop>
-    <source src="https://files.catbox.moe/yaq5lw.opus" type="audio/ogg">
-    متصفحك لا يدعم تشغيل الصوت.
-</audio>
-<button class="btn" onclick="playAudio()">🎵 تشغيل الموسيقى</button>
+        <source src="https://files.catbox.moe/yaq5lw.opus" type="audio/ogg">
+        متصفحك لا يدعم تشغيل الصوت.
+    </audio>
+    <button class="music-btn" onclick="playAudio()">🎵</button>
 
-<script>
-    function playAudio() {
-        let audio = document.getElementById("bgMusic");
-        if (audio.paused) {
-            audio.play();
-        } else {
-            audio.pause();
+    <script>
+        function showPage(pageId) {
+            document.querySelectorAll('.container').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
         }
-    }
-</script>
+
+        function playAudio() {
+            let audio = document.getElementById("bgMusic");
+            if (audio.paused) {
+                audio.play();
+            } else {
+                audio.pause();
+            }
+        }
+
+        // تشغيل الموسيقى تلقائيًا بعد تحميل الموقع
+        window.onload = function() {
+            document.getElementById("bgMusic").play().catch(e => {
+                console.log("المتصفح منع التشغيل التلقائي للموسيقى.");
+            });
+        };
+    </script>
+
+</body>
+</html>
