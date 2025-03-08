@@ -17,7 +17,7 @@
             background-size: cover;
             color: #fff;
             text-align: center;
-            overflow-y: auto; /* جعل الصفحة قابلة للتمرير */
+            overflow-y: auto;
         }
         .sidebar {
             position: fixed;
@@ -153,33 +153,14 @@
         <h1>✨ مرحبًا بك في <span class="neon-text">API Dark Node</span> ✨</h1>
     </div>
 
-      <div id="buy" class="container">
+    <div id="buy" class="container page">
         <h1 style="color: #ff0000; text-shadow: 0px 0px 10px red;">🍷 أسعار السكريبتات 🍷</h1>
 
-        <div class="api-item">
-            ⚜️ بوت عادي دون أزرار (بدون أوامر) → <span style="color: #ff4444;">30 جنيه</span>
-            <a href="https://wa.me/201063808608"><button class="btn">💰 شراء</button></a>
-        </div>
-
-        <div class="api-item">
-            ⚜️ بوت أزرار (بدون أوامر) → <span style="color: #ff4444;">40 جنيه</span>
-            <a href="https://wa.me/201063808608"><button class="btn">💰 شراء</button></a>
-        </div>
-
-        <div class="api-item">
-            ⚜️ بوت أزرار (مع أوامر) → <span style="color: #ff4444;">65 جنيه</span>
-            <a href="https://wa.me/201063808608"><button class="btn">💰 شراء</button></a>
-        </div>
-
-        <div class="api-item">
-            ⚜️ بوت ميكو → <span style="color: #ff4444;">100 جنيه</span>
-            <a href="https://wa.me/201063808608"><button class="btn">💰 شراء</button></a>
-        </div>
-
-        <div class="api-item">
-            ⚜️ بوت ميكو (V2) → <span style="color: #ff4444;">150 جنيه</span>
-            <a href="https://wa.me/201063808608"><button class="btn">💰 شراء</button></a>
-        </div>
+        <div class="api-item">⚜️ بوت عادي دون أزرار (بدون أوامر) → <span>30 جنيه</span> <a href="https://wa.me/201063808608"><button class="btn">💰 شراء</button></a></div>
+        <div class="api-item">⚜️ بوت أزرار (بدون أوامر) → <span>40 جنيه</span> <a href="https://wa.me/201063808608"><button class="btn">💰 شراء</button></a></div>
+        <div class="api-item">⚜️ بوت أزرار (مع أوامر) → <span>65 جنيه</span> <a href="https://wa.me/201063808608"><button class="btn">💰 شراء</button></a></div>
+        <div class="api-item">⚜️ بوت ميكو → <span>100 جنيه</span> <a href="https://wa.me/201063808608"><button class="btn">💰 شراء</button></a></div>
+        <div class="api-item">⚜️ بوت ميكو (V2) → <span>150 جنيه</span> <a href="https://wa.me/201063808608"><button class="btn">💰 شراء</button></a></div>
     </div>
 
     <div id="api" class="container page">
@@ -194,12 +175,6 @@
         <a href="https://wa.me/201063808608"><button class="btn">💬 واتساب</button></a>
     </div>
 
-    <audio id="bgMusic" loop>
-        <source src="https://files.catbox.moe/yaq5lw.opus" type="audio/ogg">
-    </audio>
-
-    <div class="music-btn" onclick="toggleMusic()">🎵</div>
-
     <script>
         function showPage(pageId) {
             document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
@@ -208,10 +183,6 @@
         function toggleSidebar() {
             let sidebar = document.getElementById("sidebar");
             sidebar.style.left = sidebar.style.left === "0px" ? "-220px" : "0px";
-        }
-        function toggleMusic() {
-            let music = document.getElementById("bgMusic");
-            music.paused ? music.play() : music.pause();
         }
     </script>
 
