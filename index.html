@@ -56,8 +56,56 @@
             box-shadow: 0px 0px 20px #ff0077;
         }
         .hidden {
-            opacity: 0;
-            pointer-events: none;
+            display: none;
+        }
+        .sidebar {
+            position: fixed;
+            left: -220px;
+            top: 0;
+            width: 220px;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            padding-top: 20px;
+            transition: 0.3s;
+        }
+        .sidebar a {
+            display: block;
+            padding: 15px;
+            color: white;
+            text-decoration: none;
+            text-align: left;
+        }
+        .sidebar a:hover {
+            background: #ff0077;
+        }
+        .toggle-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: #ff0077;
+            color: white;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px #ff0077;
+        }
+        .container {
+            display: none;
+            padding: 50px;
+        }
+        .container.active {
+            display: block;
+        }
+        .music-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #ff0077;
+            color: white;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px #ff0077;
         }
     </style>
 </head>
@@ -68,20 +116,20 @@
         <button class="welcome-btn" onclick="hideWelcome()">ابدأ</button>
     </div>
 
-    <div class="sidebar" id="sidebar">
+    <div class="sidebar hidden" id="sidebar">
         <a href="#" onclick="showPage('home')">🏠 الرئيسية</a>
         <a href="#" onclick="showPage('buy')">🛒 شراء السكريبت</a>
         <a href="#" onclick="showPage('api')">🌐 API</a>
         <a href="#" onclick="showPage('contact')">📩 تواصل معنا</a>
     </div>
 
-    <div class="toggle-btn" onclick="toggleSidebar()">☰</div>
+    <div class="toggle-btn hidden" onclick="toggleSidebar()">☰</div>
 
-    <div id="home" class="container page active">
+    <div id="home" class="container page hidden active">
         <h1>✨ مرحبًا بك في <span class="neon-text">API Dark Node</span> ✨</h1>
     </div>
 
-    <div id="buy" class="container page">
+    <div id="buy" class="container page hidden">
         <h1>🍷 أسعار السكريبتات 🍷</h1>
         <ul>
             <li>⚜️ بوت عادي → 30 جنيه <a href="https://wa.me/201063808608"><button class="btn">💰 شراء</button></a></li>
@@ -92,7 +140,7 @@
         </ul>
     </div>
 
-    <div id="api" class="container page">
+    <div id="api" class="container page hidden">
         <h1>🌐 API</h1>
         <div class="api-item">
             <span>https://api.example.com/v1/data</span>
@@ -104,7 +152,7 @@
         </div>
     </div>
 
-    <div id="contact" class="container page">
+    <div id="contact" class="container page hidden">
         <h1>📩 تواصل معنا</h1>
         <a href="https://wa.me/201063808608"><button class="btn">💬 واتساب</button></a>
     </div>
@@ -113,12 +161,13 @@
         <source src="https://files.catbox.moe/yaq5lw.opus" type="audio/ogg">
     </audio>
     
-    <div class="music-btn" onclick="toggleMusic()">🎵</div>
+    <div class="music-btn hidden" onclick="toggleMusic()">🎵</div>
 
     <script>
         function hideWelcome() {
-            let welcomeScreen = document.getElementById("welcomeScreen");
-            welcomeScreen.classList.add("hidden");
+            document.getElementById("welcomeScreen").classList.add("hidden");
+            document.querySelectorAll(".hidden").forEach(el => el.classList.remove("hidden"));
+            document.getElementById("bgMusic").play();
         }
 
         function showPage(pageId) {
