@@ -58,6 +58,10 @@
         .hidden {
             display: none;
         }
+        .fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
         .sidebar {
             position: fixed;
             left: -220px;
@@ -96,6 +100,22 @@
         .container.active {
             display: block;
         }
+        .typing-effect {
+            display: inline-block;
+            border-right: 3px solid #ff0077;
+            white-space: nowrap;
+            overflow: hidden;
+            font-size: 30px;
+            width: 0;
+            animation: typing 3s steps(30, end) forwards, blink 0.8s infinite;
+        }
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
         .music-btn {
             position: fixed;
             bottom: 20px;
@@ -126,35 +146,7 @@
     <div class="toggle-btn hidden" onclick="toggleSidebar()">☰</div>
 
     <div id="home" class="container page hidden active">
-        <h1>✨ مرحبًا بك في <span class="neon-text">API Dark Node</span> ✨</h1>
-    </div>
-
-    <div id="buy" class="container page hidden">
-        <h1>🍷 أسعار السكريبتات 🍷</h1>
-        <ul>
-            <li>⚜️ بوت عادي → 30 جنيه <a href="https://wa.me/201063808608"><button class="btn">💰 شراء</button></a></li>
-            <li>⚜️ بوت أزرار → 40 جنيه <a href="https://wa.me/201063808608"><button class="btn">💰 شراء</button></a></li>
-            <li>⚜️ بوت أزرار + أوامر → 65 جنيه <a href="https://wa.me/201063808608"><button class="btn">💰 شراء</button></a></li>
-            <li>⚜️ بوت ميكو → 100 جنيه <a href="https://wa.me/201063808608"><button class="btn">💰 شراء</button></a></li>
-            <li>⚜️ بوت ميكو V2 → 150 جنيه <a href="https://wa.me/201063808608"><button class="btn">💰 شراء</button></a></li>
-        </ul>
-    </div>
-
-    <div id="api" class="container page hidden">
-        <h1>🌐 API</h1>
-        <div class="api-item">
-            <span>https://api.example.com/v1/data</span>
-            <button onclick="copyToClipboard('https://api.example.com/v1/data')">📋 نسخ</button>
-        </div>
-        <div class="api-item">
-            <span>https://api.example.com/v1/users</span>
-            <button onclick="copyToClipboard('https://api.example.com/v1/users')">📋 نسخ</button>
-        </div>
-    </div>
-
-    <div id="contact" class="container page hidden">
-        <h1>📩 تواصل معنا</h1>
-        <a href="https://wa.me/201063808608"><button class="btn">💬 واتساب</button></a>
+        <h1><span class="typing-effect" id="typingText">✨ مرحبًا بك في API Dark Node ✨</span></h1>
     </div>
 
     <audio id="bgMusic" loop>
@@ -165,9 +157,14 @@
 
     <script>
         function hideWelcome() {
-            document.getElementById("welcomeScreen").classList.add("hidden");
-            document.querySelectorAll(".hidden").forEach(el => el.classList.remove("hidden"));
-            document.getElementById("bgMusic").play();
+            let welcomeScreen = document.getElementById("welcomeScreen");
+            welcomeScreen.classList.add("fade-out");
+            setTimeout(() => {
+                welcomeScreen.classList.add("hidden");
+                document.querySelectorAll(".hidden").forEach(el => el.classList.remove("hidden"));
+                document.getElementById("bgMusic").play();
+                startTypingEffect();
+            }, 1000);
         }
 
         function showPage(pageId) {
@@ -180,14 +177,16 @@
             sidebar.style.left = sidebar.style.left === "0px" ? "-220px" : "0px";
         }
 
-        function copyToClipboard(text) {
-            navigator.clipboard.writeText(text);
-            alert("✅ تم النسخ!");
-        }
-
         function toggleMusic() {
             let music = document.getElementById("bgMusic");
             music.paused ? music.play() : music.pause();
+        }
+
+        function startTypingEffect() {
+            let textElement = document.getElementById("typingText");
+            textElement.style.animation = "none"; 
+            void textElement.offsetWidth; 
+            textElement.style.animation = "typing 3s steps(30, end) forwards, blink 0.8s infinite";
         }
     </script>
 
