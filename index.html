@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>موقعي</title>
+    <title>API Example</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -28,7 +28,7 @@
             margin: 10px;
             font-size: 18px;
             color: white;
-            background-color: #25D366; /* لون واتساب */
+            background-color: #25D366;
             border: none;
             border-radius: 5px;
             text-decoration: none;
@@ -37,20 +37,26 @@
         .btn-group {
             margin-top: 20px;
         }
+        #data {
+            font-size: 18px;
+            color: #333;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
 
-    <!-- 🌟 القسم الرئيسي -->
+    <!-- 🏠 القسم الرئيسي -->
     <div class="section">
         <h1>مرحبًا بك في موقعي!</h1>
         <p>استكشف خدماتنا وتواصل معنا عبر الواتساب.</p>
     </div>
 
-    <!-- 🚀 قسم الخدمات -->
+    <!-- 🌍 قسم البيانات من API -->
     <div class="section">
-        <h2>خدماتنا</h2>
-        <p>نقدم أفضل الحلول لمساعدتك في تحقيق أهدافك.</p>
+        <h2>📡 بيانات من API</h2>
+        <p id="data">جاري تحميل البيانات...</p>
+        <button class="btn" onclick="fetchData()">🔄 تحديث البيانات</button>
     </div>
 
     <!-- 📞 قسم التواصل -->
@@ -59,10 +65,31 @@
         <p>للتواصل السريع معنا، استخدم الأزرار أدناه:</p>
         
         <div class="btn-group">
-            <a class="btn" href="https://wa.me/2123456789" target="_blank">📩 دردشة خاصة</a>
-            <a class="btn" href="https://chat.whatsapp.com/ABCDEFGHIJKL" target="_blank">👥 دخول المجموعة</a>
+            <a id="whatsapp-btn" class="btn" href="#" target="_blank">📩 دردشة خاصة</a>
         </div>
     </div>
+
+    <script>
+        async function fetchData() {
+            try {
+                const response = await fetch("https://jsonplaceholder.typicode.com/users/1"); // 🔗 مثال API خارجي
+                const data = await response.json();
+                
+                // 📝 تحديث البيانات في الصفحة
+                document.getElementById("data").innerHTML = `👤 الاسم: ${data.name} <br> 📧 البريد: ${data.email}`;
+                
+                // 📞 تحديث زر واتساب برقم من API
+                let phoneNumber = "201063808608"; // 🔄 هنا يمكنك استبداله برقم من API
+                document.getElementById("whatsapp-btn").href = `https://wa.me/${phoneNumber}`;
+            } catch (error) {
+                document.getElementById("data").innerHTML = "❌ فشل تحميل البيانات!";
+                console.error("Error fetching data:", error);
+            }
+        }
+
+        // 🔄 جلب البيانات عند تحميل الصفحة
+        fetchData();
+    </script>
 
 </body>
 </html>
