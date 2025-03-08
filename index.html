@@ -17,7 +17,8 @@
             background-size: cover;
             color: #fff;
             text-align: center;
-            overflow: hidden;
+            overflow-y: auto;
+            height: 100vh;
         }
         .sidebar {
             position: fixed;
@@ -69,6 +70,7 @@
             border-radius: 10px;
             background: rgba(20, 20, 20, 0.9);
             box-shadow: 0px 0px 20px rgba(255, 0, 255, 0.7);
+            overflow-y: auto;
         }
         h1 {
             font-size: 30px;
@@ -117,6 +119,25 @@
             background: #330000;
             box-shadow: 0px 0px 20px #ff0000;
         }
+        .music-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #00ffee;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0px 0px 10px #00ffee;
+            transition: 0.3s;
+        }
+        .music-btn:hover {
+            background: #ff0077;
+            box-shadow: 0px 0px 15px #ff0077;
+        }
     </style>
 </head>
 <body>
@@ -136,41 +157,29 @@
 
     <div id="buy" class="container page">
         <h1 style="color: #ff0000; text-shadow: 0px 0px 10px red;">🍷 أسعار السكريبتات 🍷</h1>
-
         <div class="api-item">
-            ⚜️ بوت عادي دون أزرار (بدون أوامر) → <span style="color: #ff4444;">30 جنيه</span>
-            <a href="https://wa.me/201063808608"><button class="btn">💰 شراء</button></a>
-        </div>
-
-        <div class="api-item">
-            ⚜️ بوت أزرار (بدون أوامر) → <span style="color: #ff4444;">40 جنيه</span>
-            <a href="https://wa.me/201063808608"><button class="btn">💰 شراء</button></a>
-        </div>
-
-        <div class="api-item">
-            ⚜️ بوت أزرار (مع أوامر) → <span style="color: #ff4444;">65 جنيه</span>
-            <a href="https://wa.me/201063808608"><button class="btn">💰 شراء</button></a>
-        </div>
-
-        <div class="api-item">
-            ⚜️ بوت ميكو → <span style="color: #ff4444;">100 جنيه</span>
-            <a href="https://wa.me/201063808608"><button class="btn">💰 شراء</button></a>
-        </div>
-
-        <div class="api-item">
-            ⚜️ بوت ميكو (V2) → <span style="color: #ff4444;">150 جنيه</span>
+            ⚜️ بوت عادي → <span style="color: #ff4444;">30 جنيه</span>
             <a href="https://wa.me/201063808608"><button class="btn">💰 شراء</button></a>
         </div>
     </div>
 
     <div id="api" class="container page">
         <h1>🌐 API</h1>
+        <div class="api-item">📌 API 1 → <span style="color: #ff4444;">الرابط</span></div>
+        <div class="api-item">📌 API 2 → <span style="color: #ff4444;">الرابط</span></div>
+        <div class="api-item">📌 API 3 → <span style="color: #ff4444;">الرابط</span></div>
     </div>
 
     <div id="contact" class="container page">
         <h1>📩 تواصل معنا</h1>
         <a href="https://wa.me/201063808608"><button class="btn">💬 واتساب</button></a>
     </div>
+
+    <audio id="background-music" loop>
+        <source src="https://www.myinstants.com/media/sounds/anime-opening.mp3" type="audio/mpeg">
+    </audio>
+    
+    <div class="music-btn" onclick="toggleMusic()">🎵</div>
 
     <script>
         function showPage(pageId) {
@@ -180,6 +189,14 @@
         function toggleSidebar() {
             let sidebar = document.getElementById("sidebar");
             sidebar.style.left = sidebar.style.left === "0px" ? "-220px" : "0px";
+        }
+        function toggleMusic() {
+            let music = document.getElementById("background-music");
+            if (music.paused) {
+                music.play();
+            } else {
+                music.pause();
+            }
         }
     </script>
 
