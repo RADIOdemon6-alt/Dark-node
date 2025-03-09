@@ -68,20 +68,43 @@
 
         .sidebar ul li:hover { background: red; color: black; }
 
-        /* تأثير الذوبان والزجاج المكسور */
-        .fade-out { opacity: 0; transform: scale(0.95); transition: all 0.5s ease-in-out; }
-        .fade-in { opacity: 1; transform: scale(1); transition: all 0.5s ease-in-out; }
-        .broken-glass {
-            animation: glassBreak 0.8s forwards;
+        /* زر العائم */
+        .floating-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: red;
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 1.2rem;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 15px red;
+            transition: all 0.3s;
         }
 
-        @keyframes glassBreak {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.1) rotate(5deg); opacity: 0.5; }
-            100% { transform: scale(0.8) rotate(-10deg); opacity: 0; }
+        .floating-btn:hover { background: #ff4444; box-shadow: 0 0 30px red; }
+
+        /* زر الرجوع */
+        .back-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: red;
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 1.2rem;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 15px red;
+            transition: all 0.3s;
         }
 
-        /* محتوى الأقسام */
+        .back-btn:hover { background: #ff4444; box-shadow: 0 0 30px red; }
+
+        /* الأقسام */
         .category-container {
             display: none;
             flex-direction: column;
@@ -117,11 +140,15 @@
 
         .api-box:hover { background: red; transform: scale(1.1); }
 
-        /* مشغل الموسيقى */
-        .audio-container {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
+        /* تأثير الزجاج المكسور */
+        .broken-glass {
+            animation: glassBreak 0.8s forwards;
+        }
+
+        @keyframes glassBreak {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1) rotate(5deg); opacity: 0.5; }
+            100% { transform: scale(0.8) rotate(-10deg); opacity: 0; }
         }
 
     </style>
@@ -153,13 +180,12 @@
             </ul>
         </div>
 
-        <!-- مشغل الموسيقى -->
-        <div class="audio-container">
-            <audio controls autoplay loop>
-                <source src="https://files.catbox.moe/yaq5lw.opus" type="audio/opus">
-                متصفحك لا يدعم تشغيل الموسيقى.
-            </audio>
-        </div>
+        <!-- زر تشغيل وإيقاف الأغنية -->
+        <button class="floating-btn" onclick="toggleMusic()">🎵</button>
+
+        <!-- زر الرجوع -->
+        <button class="back-btn" onclick="goBack()">⬅</button>
+
     </div>
 
     <!-- الأقسام -->
@@ -169,14 +195,14 @@
         <div class="api-box" id="api2" onclick="copyAPI('API 2')">API 2</div>
     </div>
 
+    <audio id="background-music" loop>
+        <source src="https://files.catbox.moe/yaq5lw.opus" type="audio/opus">
+    </audio>
+
     <script>
         function startWebsite() {
-            document.getElementById('intro').classList.add('fade-out');
-            setTimeout(() => {
-                document.getElementById('intro').style.display = 'none';
-                document.getElementById('main-page').classList.remove('hidden');
-                document.getElementById('main-page').classList.add('fade-in');
-            }, 500);
+            document.getElementById('intro').style.display = 'none';
+            document.getElementById('main-page').classList.remove('hidden');
         }
 
         function openCategory(category) {
@@ -188,9 +214,14 @@
             }, 800);
         }
 
-        function copyAPI(api) {
-            navigator.clipboard.writeText(api);
-            alert(`تم نسخ ${api} بنجاح!`);
+        function toggleMusic() {
+            let music = document.getElementById("background-music");
+            music.paused ? music.play() : music.pause();
+        }
+
+        function goBack() {
+            document.getElementById('category-page').classList.remove('active');
+            document.getElementById('main-page').style.display = 'block';
         }
     </script>
 
