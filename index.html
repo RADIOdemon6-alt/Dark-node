@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Orbitron', sans-serif; background: #000; color: white; text-align: center; overflow: hidden; transition: all 0.5s ease-in-out; }
+        body { font-family: 'Orbitron', sans-serif; background: #000; color: white; text-align: center; overflow: hidden; }
 
         /* شاشة الترحيب */
         .neon-box {
@@ -16,6 +16,7 @@
             align-items: center;
             height: 100vh;
             background: url('https://files.catbox.moe/4cjw97.jpg') no-repeat center center/cover;
+            flex-direction: column;
         }
 
         .neon-box h1 {
@@ -24,7 +25,6 @@
             padding: 20px 40px;
             border: 5px solid red;
             text-shadow: 0 0 15px red;
-            box-shadow: 0 0 20px red;
             background: rgba(0, 0, 0, 0.7);
         }
 
@@ -37,26 +37,25 @@
             cursor: pointer;
             border-radius: 10px;
             transition: all 0.3s ease-in-out;
-            box-shadow: 0 0 15px red;
         }
 
-        .start-btn:hover { background: #ff4444; box-shadow: 0 0 30px red; transform: scale(1.1); }
+        .start-btn:hover { background: #ff4444; transform: scale(1.1); }
 
         /* الصفحة الرئيسية */
         .hidden { display: none; }
-        .header { padding: 20px; background: rgba(255, 0, 0, 0.2); backdrop-filter: blur(10px); }
-
+        .container { display: flex; }
+        
         .sidebar {
             position: fixed;
             left: 0;
             width: 250px;
             height: 100%;
             background: rgba(255, 0, 0, 0.1);
-            backdrop-filter: blur(10px);
             padding-top: 20px;
+            transition: transform 0.5s ease-in-out;
         }
 
-        .sidebar h2 { color: red; text-shadow: 0 0 10px red; margin-bottom: 10px; }
+        .sidebar h2 { color: red; margin-bottom: 10px; }
         .sidebar ul { list-style: none; padding: 0; }
         .sidebar ul li {
             padding: 10px;
@@ -68,162 +67,132 @@
 
         .sidebar ul li:hover { background: red; color: black; }
 
+        .content {
+            flex-grow: 1;
+            padding: 50px;
+            text-align: center;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .section {
+            display: none;
+            padding: 50px;
+            background: rgba(255, 0, 0, 0.2);
+            border-radius: 10px;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .section.show {
+            display: block;
+            transform: translateY(0);
+        }
+
         /* زر العائم */
-        .floating-btn {
+        .floating-btn, .back-btn {
             position: fixed;
             bottom: 20px;
             right: 20px;
             background: red;
-            color: white;
-            border: none;
             padding: 15px;
-            font-size: 1.2rem;
-            border-radius: 50%;
+            border: none;
             cursor: pointer;
-            box-shadow: 0 0 15px red;
+            border-radius: 50%;
+            font-size: 1.2rem;
             transition: all 0.3s;
         }
 
-        .floating-btn:hover { background: #ff4444; box-shadow: 0 0 30px red; }
+        .floating-btn:hover, .back-btn:hover { background: #ff4444; transform: scale(1.1); }
 
-        /* زر الرجوع */
         .back-btn {
-            position: fixed;
-            bottom: 20px;
             left: 20px;
-            background: red;
-            color: white;
-            border: none;
-            padding: 15px;
-            font-size: 1.2rem;
-            border-radius: 50%;
-            cursor: pointer;
-            box-shadow: 0 0 15px red;
-            transition: all 0.3s;
-        }
-
-        .back-btn:hover { background: #ff4444; box-shadow: 0 0 30px red; }
-
-        /* الأقسام */
-        .category-container {
             display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            text-align: center;
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out;
         }
 
-        .category-container.active { display: flex; opacity: 1; }
-
-        h1 {
-            font-size: 2.5rem;
-            padding: 20px;
-            background: rgba(255, 0, 0, 0.3);
-            box-shadow: 0 0 15px red;
-            backdrop-filter: blur(10px);
-            border-radius: 10px;
-        }
-
-        .api-box {
-            margin-top: 20px;
-            padding: 10px 20px;
-            background: rgba(255, 0, 0, 0.3);
-            backdrop-filter: blur(10px);
-            cursor: pointer;
-            border-radius: 10px;
-            transition: all 0.3s;
-            box-shadow: 0 0 10px red;
-        }
-
-        .api-box:hover { background: red; transform: scale(1.1); }
-
-        /* تأثير الزجاج المكسور */
-        .broken-glass {
-            animation: glassBreak 0.8s forwards;
-        }
-
-        @keyframes glassBreak {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.1) rotate(5deg); opacity: 0.5; }
-            100% { transform: scale(0.8) rotate(-10deg); opacity: 0; }
-        }
-
+        /* تأثير السحب */
+        .slide-in { transform: translateX(100vw); }
+        .slide-in.active { transform: translateX(0); }
     </style>
 </head>
 <body>
 
     <!-- شاشة الترحيب -->
-    <div class="neon-box" id="intro">
-        <div>
-            <h1>مرحبًا في Dark Node API</h1>
-            <button class="start-btn" onclick="startWebsite()">ابدأ</button>
-        </div>
+    <div class="neon-box">
+        <h1>مرحبًا في Dark Node API</h1>
+        <button class="start-btn" onclick="startSite()">ابدأ</button>
     </div>
 
     <!-- الصفحة الرئيسية -->
-    <div id="main-page" class="hidden fade-in">
-        <div class="header">
-            <h1>Dark Node API</h1>
-        </div>
-
+    <div class="container hidden">
         <div class="sidebar">
-            <h2>القائمة</h2>
+            <h2>القوائم</h2>
             <ul>
-                <li onclick="openCategory('AI')">🤖 AI Tools</li>
-                <li onclick="openCategory('Download')">📥 Download</li>
-                <li onclick="openCategory('Games')">🎮 Games</li>
-                <li onclick="openCategory('Images')">🖼 Images</li>
-                <li onclick="openCategory('Tools')">🛠 Tools</li>
+                <li onclick="openSection('ai')">🧠 AI Tools</li>
+                <li onclick="openSection('download')">📥 Download</li>
+                <li onclick="openSection('games')">🎮 Games</li>
+                <li onclick="openSection('images')">🖼 Images</li>
+                <li onclick="openSection('islamic')">☪️ Islamic</li>
+                <li onclick="openSection('search')">🔍 Search</li>
+                <li onclick="openSection('tools')">🛠 Tools</li>
             </ul>
         </div>
-
-        <!-- زر تشغيل وإيقاف الأغنية -->
-        <button class="floating-btn" onclick="toggleMusic()">🎵</button>
-
-        <!-- زر الرجوع -->
-        <button class="back-btn" onclick="goBack()">⬅</button>
-
+        
+        <div class="content">
+            <h1>مرحبًا بك في Dark Node API</h1>
+            <p>اختر أحد الأقسام من القائمة.</p>
+        </div>
     </div>
 
     <!-- الأقسام -->
-    <div id="category-page" class="category-container">
-        <h1 id="category-title">قسم</h1>
-        <div class="api-box" id="api1" onclick="copyAPI('API 1')">API 1</div>
-        <div class="api-box" id="api2" onclick="copyAPI('API 2')">API 2</div>
+    <div class="section hidden slide-in" id="ai">
+        <button class="back-btn" onclick="goBack()">🔙</button>
+        <h1>🧠 AI Tools</h1>
+        <p>API: /api/ai</p>
     </div>
 
-    <audio id="background-music" loop>
-        <source src="https://files.catbox.moe/yaq5lw.opus" type="audio/opus">
+    <div class="section hidden slide-in" id="download">
+        <button class="back-btn" onclick="goBack()">🔙</button>
+        <h1>📥 Download</h1>
+        <p>API: /api/download</p>
+    </div>
+
+    <div class="section hidden slide-in" id="games">
+        <button class="back-btn" onclick="goBack()">🔙</button>
+        <h1>🎮 Games</h1>
+        <p>API: /api/games</p>
+    </div>
+
+    <button class="floating-btn" onclick="toggleMusic()">🎵</button>
+    <audio id="bg-music" loop>
+        <source src="https://files.catbox.moe/yaq5lw.opus" type="audio/ogg">
     </audio>
 
     <script>
-        function startWebsite() {
-            document.getElementById('intro').style.display = 'none';
-            document.getElementById('main-page').classList.remove('hidden');
+        function startSite() {
+            document.querySelector('.neon-box').style.display = 'none';
+            document.querySelector('.container').classList.remove('hidden');
         }
 
-        function openCategory(category) {
-            document.getElementById('main-page').classList.add('broken-glass');
-            setTimeout(() => {
-                document.getElementById('main-page').style.display = 'none';
-                document.getElementById('category-page').classList.add('active');
-                document.getElementById("category-title").innerText = `قسم ${category}`;
-            }, 800);
-        }
-
-        function toggleMusic() {
-            let music = document.getElementById("background-music");
-            music.paused ? music.play() : music.pause();
+        function openSection(sectionId) {
+            document.querySelector('.container').style.display = 'none';
+            document.getElementById(sectionId).classList.add('show', 'active');
+            document.getElementById(sectionId).style.display = 'block';
+            document.querySelector('.back-btn').style.display = 'block';
         }
 
         function goBack() {
-            document.getElementById('category-page').classList.remove('active');
-            document.getElementById('main-page').style.display = 'block';
+            document.querySelector('.container').style.display = 'flex';
+            document.querySelectorAll('.section').forEach(sec => sec.classList.remove('show', 'active'));
+            document.querySelector('.back-btn').style.display = 'none';
+        }
+
+        function toggleMusic() {
+            var music = document.getElementById("bg-music");
+            if (music.paused) {
+                music.play();
+            } else {
+                music.pause();
+            }
         }
     </script>
-
 </body>
 </html>
