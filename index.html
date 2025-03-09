@@ -3,22 +3,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الصفحة الرئيسية</title>
-    <link rel="stylesheet" href="style.css">
+    <title>⚡ Api Dark Node</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Orbitron', sans-serif;
+        }
+        body {
+            background: url('https://files.catbox.moe/5o0hnu.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            text-align: center;
+        }
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -220px;
+            width: 200px;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 20px;
+            transition: left 0.4s;
+            box-shadow: 0px 0px 15px rgba(255, 0, 0, 0.7);
+        }
+        .sidebar a {
+            display: block;
+            color: #ff0077;
+            text-decoration: none;
+            font-size: 18px;
+            margin: 15px 0;
+            transition: 0.3s;
+        }
+        .sidebar a:hover {
+            color: #00ffee;
+            text-shadow: 0px 0px 10px #00ffee;
+        }
+        .toggle-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: #ff0077;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0px 0px 10px #ff0077;
+            transition: 0.3s;
+        }
+        .toggle-btn:hover {
+            background: #00ffee;
+            box-shadow: 0px 0px 15px #00ffee;
+        }
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 10px;
+            background: rgba(20, 20, 20, 0.9);
+            box-shadow: 0px 0px 20px rgba(255, 0, 255, 0.7);
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+        .api-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #200000;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            box-shadow: 0px 0px 15px red;
+            color: #ff4444;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .api-hidden {
+            display: none;
+        }
+        .btn {
+            background: #ff0077;
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0px 0px 10px #ff0077;
+        }
+        .btn:hover {
+            background: #00ffee;
+            box-shadow: 0px 0px 15px #00ffee;
+        }
+    </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1 class="welcome-text">مرحبًا بك في الصفحة الرئيسية</h1>
-        <button class="menu-btn" onclick="toggleMenu()">📂 فتح القائمة</button>
-    </div>
+<!-- القائمة الجانبية -->
+<div class="sidebar" id="sidebar">
+    <a href="#" onclick="showPage('home')">🏠 الرئيسية</a>
+    <a href="#" onclick="showPage('api')">🛰 API</a>
+    <a href="#" onclick="showPage('developer')">💻 معلومات المطور</a>
+</div>
 
-    <div id="sidebar" class="sidebar">
-        <button class="close-btn" onclick="toggleMenu()">✖</button>
-        <a href="developer.html">👨‍💻 قسم المطور</a>
-        <a href="api.html">🔗 قسم الـ API</a>
-    </div>
+<!-- زر فتح القائمة -->
+<div class="toggle-btn" onclick="toggleSidebar()">☰</div>
 
-    <script src="script.js"></script>
+<!-- الصفحة الرئيسية -->
+<div id="home" class="container active">
+    <h1>⚡ مرحبًا بك في API Dark Node ⚡</h1>
+    <p>أفضل منصة لخدمات API سريعة ومتطورة.</p>
+</div>
+
+<!-- قسم API -->
+<div id="api" class="container">
+    <h1>🛰 قائمة API</h1>
+    <div class="api-item">
+        <span>🔗 API 1</span>
+        <button class="btn" onclick="copyApi('api1')">📋 نسخ</button>
+        <span id="api1" class="api-hidden">https://api.example.com/1</span>
+    </div>
+    <div class="api-item">
+        <span>🔗 API 2</span>
+        <button class="btn" onclick="copyApi('api2')">📋 نسخ</button>
+        <span id="api2" class="api-hidden">https://api.example.com/2</span>
+    </div>
+</div>
+
+<!-- قسم معلومات المطور -->
+<div id="developer" class="container">
+    <h1>💻 معلومات المطور</h1>
+    <p>👑 الاسم: 𝑅𝐴𝐷𝐼𝛩 𝐷𝐸𝑀𝛩𝑁</p>
+    <p>📞 واتساب: <a href="https://wa.me/1234567890" target="_blank">اضغط هنا</a></p>
+</div>
+
+<script>
+    function toggleSidebar() {
+        let sidebar = document.getElementById("sidebar");
+        sidebar.style.left = (sidebar.style.left === "0px") ? "-220px" : "0px";
+    }
+
+    function showPage(pageId) {
+        let sections = document.querySelectorAll('.container');
+        sections.forEach(section => section.classList.remove('active'));
+        document.getElementById(pageId).classList.add('active');
+        toggleSidebar();
+    }
+
+    function copyApi(apiId) {
+        let apiText = document.getElementById(apiId).innerText;
+        navigator.clipboard.writeText(apiText);
+        alert("تم نسخ الرابط بنجاح! 📋");
+    }
+</script>
+
 </body>
 </html>
