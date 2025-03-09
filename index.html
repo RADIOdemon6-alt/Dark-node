@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="ar">
+<!DOCTYPE html><html lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,56 +21,36 @@
         .btn:hover { background: #00ffee; box-shadow: 0px 0px 15px #00ffee; }
     </style>
 </head>
-<body>
-
-<div class="sidebar" id="sidebar">
+<body><div class="sidebar" id="sidebar">
     <a href="#" onclick="showPage('home')">🏠 الرئيسية</a>
     <a href="#" onclick="showPage('buy')">🛒 شراء السكريبت</a>
     <a href="#" onclick="showPage('api')">🛰 API</a>
-    <a href="#" onclick="showPage('ai')">🤖 الذكاء الاصطناعي</a>
     <a href="#" onclick="showPage('developer')">💻 معلومات المطور</a>
-</div>
-
-<div class="toggle-btn" onclick="toggleSidebar()">☰</div>
-<div class="music-btn" onclick="toggleMusic()">🎵</div>
-
-<div id="home" class="container active">
+</div><div class="toggle-btn" onclick="toggleSidebar()">☰</div>
+<div class="music-btn" onclick="toggleMusic()">🎵</div><div id="home" class="container active">
     <h1>✨ مرحبًا بك في <span class="neon-text">API Dark Node</span> ✨</h1>
-</div>
-
-<div id="buy" class="container">
+</div><div id="buy" class="container">
     <h1 style="color: #ff0000; text-shadow: 0px 0px 10px red;">🍷 أسعار السكريبتات 🍷</h1>
-    <div class="api-item">⚜️ اسكريبت البوت دون مساعده → <span>150 جنيه</span></div>
+    <div class="api-item">⚜️اسكريبت البوت دون مساعده → <span>150 جنيه</span></div>
     <div class="api-item">⚜️ اسكريبت البوت مع المساعده في رفعه و تشغيله → <span>250 جنيه</span></div>
     <p>الدفع عبر فودافون كاش او شحن ببجي او instapay</p>
     <a href="https://wa.me/201063808608"><button class="btn">📩 للشراء</button></a>
-</div>
-
-<div id="api" class="container">
+</div><div id="api" class="container">
     <h1>🛰 API</h1>
     <div class="api-item">🚀 API الصور → <span id="api1" class="api-hidden">https://api.example.com/images</span> <button class="btn" onclick="copyToClipboard('api1')">📋 إظهار</button></div>
     <div class="api-item">🎵 API الأغاني → <span id="api2" class="api-hidden">https://api.example.com/music</span> <button class="btn" onclick="copyToClipboard('api2')">📋 إظهار</button></div>
     <div class="api-item">📄 API النصوص → <span id="api3" class="api-hidden">https://api.example.com/text</span> <button class="btn" onclick="copyToClipboard('api3')">📋 إظهار</button></div>
-</div>
-
-<div id="ai" class="container">
-    <h1>🤖 الذكاء الاصطناعي</h1>
-    <div class="api-item">💡 API الذكاء الاصطناعي → <span id="apiAI" class="api-hidden">https://api.example.com/ai</span> <button class="btn" onclick="copyToClipboard('apiAI')">📋 إظهار</button></div>
-    <p>🧠 استمتع بتجربة الذكاء الاصطناعي المتطورة!</p>
-</div>
-
-<div id="developer" class="container">
+</div><div id="developer" class="container">
     <h1>💻 المطور</h1>
     <p>👨‍💻 اسم المطور: 𝑅𝐴𝐷𝐼𝛩 𝐷𝐸𝑀𝛩𝑁</p>
     <p>🤖 اسم البوت: 𝙱𝙾𝚃-𝙼𝚄𝙺𝙾</p>
     <a href="https://wa.me/201063808608"><button class="btn">📩 واتساب</button></a>
-</div>
-
-<audio id="bgMusic" loop>
+    <a href="https://chat.whatsapp.com/BNARMEg1L87JOz8oSR9eFD"><button class="btn">🛠 دعم البوت</button></a>
+    <a href="https://whatsapp.com/channel/0029Vb2j3d6HVvTiMzx5QF13"><button class="btn">📢 قناة Dark-node</button></a>
+    <a href="https://whatsapp.com/channel/0029VaumDtWJZg4B8jLyMK2q"><button class="btn">📢 تابع قناتي لي معرفه كل جديد</button></a>
+</div><audio id="bgMusic" loop>
     <source src="https://files.catbox.moe/yaq5lw.opus" type="audio/ogg">
-</audio>
-
-<script>
+</audio><script>
     function showPage(pageId) {
         document.querySelectorAll('.container').forEach(page => page.classList.remove('active'));
         document.getElementById(pageId).classList.add('active');
@@ -90,7 +69,5 @@
         let music = document.getElementById("bgMusic");
         music.paused ? music.play() : music.pause();
     }
-</script>
-
-</body>
+</script></body>
 </html>
