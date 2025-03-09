@@ -3,24 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚡ 𝑨𝑳𝑨𝑺𝑻𝑶𝑹 - Dark Node</title>
-    <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
+    <title>⚡ Api Dark Node</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'UnifrakturCook', cursive; }
-        body { background: url('https://files.catbox.moe/k6eptt.jpg') no-repeat center center fixed; background-size: cover; color: #FFD700; text-align: center; overflow-y: auto; }
-        .sidebar { position: fixed; top: 0; left: -220px; width: 200px; height: 100%; background: rgba(20, 0, 0, 0.95); padding: 20px; box-shadow: 0px 0px 15px rgba(255, 0, 0, 0.7); transition: left 0.4s ease-in-out; z-index: 1000; }
-        .sidebar a { display: block; color: #FFD700; text-decoration: none; font-size: 20px; margin: 15px 0; transition: 0.3s; text-shadow: 0px 0px 10px red; }
-        .sidebar a:hover { color: #FF0000; text-shadow: 0px 0px 15px #FF0000; }
-        .toggle-btn, .music-btn { position: fixed; bottom: 20px; right: 20px; background: #8B0000; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0px 0px 10px #FFD700; transition: 0.3s; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Orbitron', sans-serif; }
+        body { background: url('https://files.catbox.moe/5o0hnu.jpg') no-repeat center center fixed; background-size: cover; color: #fff; text-align: center; overflow-y: auto; }
+        .sidebar { position: fixed; top: 0; left: -220px; width: 200px; height: 100%; background: rgba(0, 0, 0, 0.9); padding: 20px; box-shadow: 0px 0px 15px rgba(255, 0, 0, 0.7); transition: left 0.4s ease-in-out; z-index: 1000; }
+        .sidebar a { display: block; color: #ff0077; text-decoration: none; font-size: 18px; margin: 15px 0; transition: 0.3s; }
+        .sidebar a:hover { color: #00ffee; text-shadow: 0px 0px 10px #00ffee; }
+        .toggle-btn, .music-btn { position: fixed; bottom: 20px; right: 20px; background: #ff0077; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0px 0px 10px #ff0077; transition: 0.3s; }
         .toggle-btn { top: 20px; }
-        .toggle-btn:hover, .music-btn:hover { background: #FFD700; box-shadow: 0px 0px 15px #FFD700; }
-        .container { max-width: 900px; margin: 50px auto; padding: 20px; border-radius: 10px; background: rgba(30, 0, 0, 0.95); box-shadow: 0px 0px 20px rgba(255, 0, 0, 0.7); display: none; }
+        .toggle-btn:hover, .music-btn:hover { background: #00ffee; box-shadow: 0px 0px 15px #00ffee; }
+        .container { max-width: 900px; margin: 50px auto; padding: 20px; border-radius: 10px; background: rgba(20, 20, 20, 0.9); box-shadow: 0px 0px 20px rgba(255, 0, 255, 0.7); display: none; }
         .active { display: block; }
-        .api-item { display: flex; justify-content: space-between; align-items: center; background: #400000; padding: 10px; margin: 10px 0; border-radius: 5px; box-shadow: 0px 0px 15px red; color: #FFD700; font-size: 20px; font-weight: bold; }
+        .api-item { display: flex; justify-content: space-between; align-items: center; background: #200000; padding: 10px; margin: 10px 0; border-radius: 5px; box-shadow: 0px 0px 15px red; color: #ff4444; font-size: 18px; font-weight: bold; }
         .api-hidden { display: none; }
-        .btn { background: #8B0000; padding: 10px 20px; border-radius: 5px; color: white; cursor: pointer; transition: 0.3s; box-shadow: 0px 0px 10px #FFD700; }
-        .btn:hover { background: #FFD700; box-shadow: 0px 0px 15px #FFD700; color: #8B0000; }
-        .neon-text { text-shadow: 0px 0px 15px #FFD700, 0px 0px 30px red; font-size: 28px; }
+        .btn { background: #ff0077; padding: 10px 20px; border-radius: 5px; color: white; cursor: pointer; transition: 0.3s; box-shadow: 0px 0px 10px #ff0077; }
+        .btn:hover { background: #00ffee; box-shadow: 0px 0px 15px #00ffee; }
     </style>
 </head>
 <body>
@@ -36,13 +35,13 @@
 <div class="music-btn" onclick="toggleMusic()">🎵</div>
 
 <div id="home" class="container active">
-    <h1>✨ مرحبًا بك في <span class="neon-text">𝑨𝑳𝑨𝑺𝑻𝑶𝑹 Dark Node</span> ✨</h1>
+    <h1>✨ مرحبًا بك في <span class="neon-text">API Dark Node</span> ✨</h1>
 </div>
 
 <div id="buy" class="container">
-    <h1 style="color: #FFD700; text-shadow: 0px 0px 10px gold;">🍷 أسعار السكريبتات 🍷</h1>
-    <div class="api-item">⚜️ اسكريبت البوت دون مساعده → <span>150 جنيه</span></div>
-    <div class="api-item">⚜️ اسكريبت البوت مع المساعده → <span>250 جنيه</span></div>
+    <h1 style="color: #ff0000; text-shadow: 0px 0px 10px red;">🍷 أسعار السكريبتات 🍷</h1>
+    <div class="api-item">⚜️اسكريبت البوت دون مساعده → <span>150 جنيه</span></div>
+    <div class="api-item">⚜️ اسكريبت البوت مع المساعده في رفعه و تشغيله → <span>250 جنيه</span></div>
     <p>الدفع عبر فودافون كاش او شحن ببجي او instapay</p>
     <a href="https://wa.me/201063808608"><button class="btn">📩 للشراء</button></a>
 </div>
@@ -50,6 +49,8 @@
 <div id="api" class="container">
     <h1>🛰 API</h1>
     <div class="api-item">🚀 API الصور → <span id="api1" class="api-hidden">https://api.example.com/images</span> <button class="btn" onclick="copyToClipboard('api1')">📋 إظهار</button></div>
+    <div class="api-item">🎵 API الأغاني → <span id="api2" class="api-hidden">https://api.example.com/music</span> <button class="btn" onclick="copyToClipboard('api2')">📋 إظهار</button></div>
+    <div class="api-item">📄 API النصوص → <span id="api3" class="api-hidden">https://api.example.com/text</span> <button class="btn" onclick="copyToClipboard('api3')">📋 إظهار</button></div>
 </div>
 
 <div id="developer" class="container">
@@ -57,6 +58,9 @@
     <p>👨‍💻 اسم المطور: 𝑅𝐴𝐷𝐼𝛩 𝐷𝐸𝑀𝛩𝑁</p>
     <p>🤖 اسم البوت: 𝙱𝙾𝚃-𝙼𝚄𝙺𝙾</p>
     <a href="https://wa.me/201063808608"><button class="btn">📩 واتساب</button></a>
+    <a href="https://chat.whatsapp.com/BNARMEg1L87JOz8oSR9eFD"><button class="btn">🛠 دعم البوت</button></a>
+    <a href="https://whatsapp.com/channel/0029Vb2j3d6HVvTiMzx5QF13"><button class="btn">📢 قناة Dark-node</button></a>
+    <a href="https://whatsapp.com/channel/0029VaumDtWJZg4B8jLyMK2q"><button class="btn">📢 تابع قناتي لي معرفه كل جديد</button></a>
 </div>
 
 <audio id="bgMusic" loop>
