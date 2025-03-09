@@ -63,7 +63,7 @@
 
         if (userKey === validKey) {
             try {
-                let response = await fetch("https://api.example.com/data"); // 🔥 استبدل برابط API الحقيقي
+                let response = await fetch("https://api-streamline-pro.vercel.app/api/ai/chat-model"); // 🔥 استبدل برابط API الحقيقي
                 let data = await response.json();
                 document.getElementById("apiResult").style.display = "block";
                 document.getElementById("apiData").textContent = JSON.stringify(data, null, 2);
