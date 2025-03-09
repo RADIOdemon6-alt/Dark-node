@@ -1,147 +1,181 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dark Node API</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        /* Reset */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body, html { font-family: 'Orbitron', sans-serif; color: #fff; background: #000; overflow-x: hidden; }
-
-        /* Landing Page */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Orbitron', sans-serif; }
+        body { background: #000; color: #fff; text-align: center; overflow-x: hidden; }
+        
+        /* شاشة البداية */
         .landing {
-            display: flex; justify-content: center; align-items: center;
-            height: 100vh; background: url('https://files.catbox.moe/4cjw97.jpg') no-repeat center center/cover;
-            text-align: center; flex-direction: column;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background: url('https://files.catbox.moe/4cjw97.jpg') no-repeat center center/cover;
         }
-
-        .landing h1 { font-size: 3rem; color: #ff0000; text-shadow: 0 0 15px #ff0000; margin-bottom: 20px; }
+        .landing h1 { font-size: 2.5rem; color: #ff1493; text-shadow: 0 0 15px #ff1493; margin-bottom: 20px; }
         .landing button {
-            background: #ff0000; color: #000; font-size: 1.5rem;
+            background: #ff1493; color: #000; font-size: 1.5rem;
             padding: 15px 30px; border: none; cursor: pointer; border-radius: 5px;
             transition: all 0.3s ease;
         }
-        .landing button:hover { background: #ff4444; box-shadow: 0 0 10px #ff0000; }
+        .landing button:hover { background: #ff44aa; box-shadow: 0 0 10px #ff1493; }
 
-        /* Main Page */
+        /* الصفحة الرئيسية */
         .hidden { display: none; }
-
-        /* Floating Button */
-        .floating-btn {
-            position: fixed; bottom: 20px; right: 20px;
-            background: #ff0000; color: #fff; padding: 15px;
-            border-radius: 50%; font-size: 1.5rem; border: none;
-            cursor: pointer; box-shadow: 0 0 10px #ff0000;
+        .main { padding: 50px; }
+        .welcome-box {
+            background: rgba(255, 20, 147, 0.2);
+            border: 2px solid #ff1493;
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px #ff1493;
         }
-
-        /* API Boxes */
-        .api-container { display: flex; justify-content: center; flex-wrap: wrap; margin-top: 50px; }
-        .api-box {
-            background: #1a0000; color: #ff0000; padding: 20px;
-            margin: 10px; border-radius: 10px; cursor: pointer;
-            box-shadow: 0 4px 10px rgba(255, 0, 0, 0.5);
-            transition: all 0.3s ease; width: 200px; text-align: center;
+        .menu-btn {
+            background: #ff1493;
+            color: #000;
+            font-size: 1.2rem;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.3s;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
         }
-        .api-box:hover { background: #ff0000; color: #1a0000; }
-        
-        /* Transition Effect */
-        .fade-enter { opacity: 0; transform: scale(0.9); transition: opacity 0.5s, transform 0.5s; }
-        .fade-enter-active { opacity: 1; transform: scale(1); }
+        .menu-btn:hover { background: #ff44aa; box-shadow: 0 0 10px #ff1493; }
 
-        /* Back Button */
+        /* القائمة الجانبية */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 300px;
+            height: 100%;
+            background: #1a0000;
+            padding: 20px;
+            transition: 0.3s;
+            box-shadow: 2px 0 15px rgba(255, 0, 0, 0.5);
+        }
+        .sidebar.open { left: 0; }
+        .sidebar h2 { color: #ff1493; font-size: 1.5rem; margin-bottom: 20px; }
+        .sidebar ul { list-style: none; padding: 0; }
+        .sidebar ul li { margin: 15px 0; }
+        .sidebar ul li a {
+            text-decoration: none;
+            color: #ddd;
+            font-size: 1.1rem;
+            padding: 10px;
+            display: block;
+            border-radius: 5px;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .sidebar ul li a:hover { background: #ff1493; color: #1a0000; }
+
+        /* زر الرجوع */
         .back-btn {
-            position: fixed; top: 10px; left: 10px;
-            background: #ff0000; color: #fff; padding: 10px;
-            border: none; cursor: pointer; border-radius: 5px;
+            background: #ff1493;
+            color: #000;
+            font-size: 1.2rem;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.3s;
+            margin-top: 20px;
         }
+        .back-btn:hover { background: #ff44aa; }
+
+        /* صفحات الأقسام */
+        .container {
+            padding: 50px;
+        }
+        .btn {
+            background: #ff1493;
+            color: #000;
+            padding: 10px;
+            margin: 5px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        .btn:hover { background: #ff44aa; }
+
+        /* مربعات API */
+        .api-box {
+            background: rgba(255, 20, 147, 0.2);
+            border: 2px solid #ff1493;
+            padding: 10px;
+            border-radius: 10px;
+            margin: 10px auto;
+            width: 80%;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .api-box:hover { background: rgba(255, 20, 147, 0.5); }
+
     </style>
 </head>
 <body>
-    <!-- Landing Page -->
+
+    <!-- شاشة البداية -->
     <div class="landing" id="landing">
-        <h1>مرحبا بك في موقع Dark Node API</h1>
+        <h1>مرحبا بك في Dark Node API</h1>
         <button onclick="startWebsite()">ابدأ</button>
     </div>
 
-    <!-- Main Page (Hidden by Default) -->
-    <div id="main-page" class="hidden fade-enter">
-        <button class="floating-btn" onclick="goHome()">🏠</button>
-
-        <div class="header">
-            <h1>Dark Node API</h1>
-        </div>
-
-        <!-- API Sections -->
-        <div class="api-container">
-            <div class="api-box" onclick="openPage('ai')">AI Tools</div>
-            <div class="api-box" onclick="openPage('download')">Download</div>
-            <div class="api-box" onclick="openPage('games')">Games</div>
-            <div class="api-box" onclick="openPage('images')">Images</div>
-            <div class="api-box" onclick="openPage('islamic')">Islamic</div>
-            <div class="api-box" onclick="openPage('tools')">Tools</div>
-        </div>
+    <!-- الصفحة الرئيسية -->
+    <div id="main-page" class="hidden">
+        <button class="menu-btn" onclick="toggleSidebar()">☰ القائمة</button>
+        <div class="welcome-box">مرحبًا بك في الصفحة الرئيسية</div>
     </div>
 
-    <!-- API Pages (Initially Hidden) -->
-    <div id="api-page" class="hidden fade-enter">
-        <button class="back-btn" onclick="goBack()">🔙 رجوع</button>
-        <h2 id="api-title" style="text-align:center; margin-top: 50px;"></h2>
-        <div class="api-container" id="api-boxes"></div>
+    <!-- القائمة الجانبية -->
+    <div class="sidebar" id="sidebar">
+        <h2>القائمة</h2>
+        <ul>
+            <li><a onclick="showSection('developer')">💻 المطور</a></li>
+            <li><a onclick="showSection('api')">🔗 API</a></li>
+        </ul>
+    </div>
+
+    <!-- صفحة المطور -->
+    <div id="developer" class="container hidden">
+        <h1>💻 المطور</h1>
+        <p>👨‍💻 اسم المطور: 𝑅𝐴𝐷𝐼𝛩 𝐷𝐸𝑀𝛩𝑁</p>
+        <p>🤖 اسم البوت: 𝙱𝙾𝚃-𝙼𝚄𝙺𝙾</p>
+        <a href="#"><button class="btn">📩 واتساب</button></a>
+        <button class="back-btn" onclick="goBack()">🔙 عودة</button>
+    </div>
+
+    <!-- صفحة API -->
+    <div id="api" class="container hidden">
+        <h1>🔗 الـ API</h1>
+        <p>يوجد هنا كمية الـ API التي تحتاجها</p>
+        <div class="api-box" onclick="copyToClipboard('/api/ai')">📜 AI API</div>
+        <div class="api-box" onclick="copyToClipboard('/api/download')">📜 Download API</div>
+        <div class="api-box" onclick="copyToClipboard('/api/tools')">📜 Tools API</div>
+        <button class="back-btn" onclick="goBack()">🔙 عودة</button>
     </div>
 
     <script>
-        function startWebsite() {
-            document.getElementById('landing').style.display = 'none';
-            document.getElementById('main-page').classList.remove('hidden');
-            document.getElementById('main-page').classList.add('fade-enter-active');
-        }
-
-        function goHome() {
-            document.getElementById('api-page').classList.add('hidden');
-            document.getElementById('main-page').classList.remove('hidden');
-            document.getElementById('main-page').classList.add('fade-enter-active');
-        }
-
-        function goBack() {
-            document.getElementById('api-page').classList.add('hidden');
-            document.getElementById('main-page').classList.remove('hidden');
-            document.getElementById('main-page').classList.add('fade-enter-active');
-        }
-
-        function openPage(api) {
-            const apiEndpoints = {
-                ai: ["/api/ai/text", "/api/ai/voice", "/api/ai/chat"],
-                download: ["/api/download/youtube", "/api/download/instagram", "/api/download/twitter"],
-                games: ["/api/games/rpg", "/api/games/shooter", "/api/games/puzzle"],
-                images: ["/api/images/random", "/api/images/hd", "/api/images/memes"],
-                islamic: ["/api/islamic/quran", "/api/islamic/hadith", "/api/islamic/prayer-times"],
-                tools: ["/api/tools/shorten-url", "/api/tools/qr-code", "/api/tools/password-generator"]
-            };
-
-            document.getElementById('main-page').classList.add('hidden');
-            document.getElementById('api-page').classList.remove('hidden');
-            document.getElementById('api-page').classList.add('fade-enter-active');
-
-            document.getElementById('api-title').innerText = api.toUpperCase() + " API";
-            const apiBoxes = document.getElementById('api-boxes');
-            apiBoxes.innerHTML = "";
-
-            apiEndpoints[api].forEach(endpoint => {
-                let box = document.createElement("div");
-                box.classList.add("api-box");
-                box.innerText = endpoint.split('/').pop().replace('-', ' ').toUpperCase();
-                box.onclick = () => copyToClipboard(endpoint);
-                apiBoxes.appendChild(box);
-            });
-        }
-
-        function copyToClipboard(text) {
-            navigator.clipboard.writeText(text).then(() => {
-                alert("تم نسخ API: " + text);
-            });
-        }
+        function startWebsite() { document.getElementById('landing').style.display = 'none'; document.getElementById('main-page').classList.remove('hidden'); }
+        function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); }
+        function showSection(section) { document.querySelectorAll('.container').forEach(el => el.classList.add('hidden')); document.getElementById(section).classList.remove('hidden'); }
+        function goBack() { document.querySelectorAll('.container').forEach(el => el.classList.add('hidden')); document.getElementById('main-page').classList.remove('hidden'); }
+        function copyToClipboard(text) { navigator.clipboard.writeText(text); alert('تم نسخ: ' + text); }
     </script>
+
 </body>
 </html>
