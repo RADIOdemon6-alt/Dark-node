@@ -3,179 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dark Node API</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Orbitron', sans-serif; }
-        body { background: #000; color: #fff; text-align: center; overflow-x: hidden; }
-        
-        /* شاشة البداية */
-        .landing {
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            background: url('https://files.catbox.moe/4cjw97.jpg') no-repeat center center/cover;
-        }
-        .landing h1 { font-size: 2.5rem; color: #ff1493; text-shadow: 0 0 15px #ff1493; margin-bottom: 20px; }
-        .landing button {
-            background: #ff1493; color: #000; font-size: 1.5rem;
-            padding: 15px 30px; border: none; cursor: pointer; border-radius: 5px;
-            transition: all 0.3s ease;
-        }
-        .landing button:hover { background: #ff44aa; box-shadow: 0 0 10px #ff1493; }
-
-        /* الصفحة الرئيسية */
-        .hidden { display: none; }
-        .main { padding: 50px; }
-        .welcome-box {
-            background: rgba(255, 20, 147, 0.2);
-            border: 2px solid #ff1493;
-            padding: 20px;
-            border-radius: 10px;
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            text-shadow: 0 0 10px #ff1493;
-        }
-        .menu-btn {
-            background: #ff1493;
-            color: #000;
-            font-size: 1.2rem;
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: 0.3s;
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 1000;
-        }
-        .menu-btn:hover { background: #ff44aa; box-shadow: 0 0 10px #ff1493; }
-
-        /* القائمة الجانبية */
-        .sidebar {
-            position: fixed;
-            top: 0;
-            left: -300px;
-            width: 300px;
-            height: 100%;
-            background: #1a0000;
-            padding: 20px;
-            transition: 0.3s;
-            box-shadow: 2px 0 15px rgba(255, 0, 0, 0.5);
-        }
-        .sidebar.open { left: 0; }
-        .sidebar h2 { color: #ff1493; font-size: 1.5rem; margin-bottom: 20px; }
-        .sidebar ul { list-style: none; padding: 0; }
-        .sidebar ul li { margin: 15px 0; }
-        .sidebar ul li a {
-            text-decoration: none;
-            color: #ddd;
-            font-size: 1.1rem;
-            padding: 10px;
-            display: block;
-            border-radius: 5px;
-            transition: 0.3s;
-            cursor: pointer;
-        }
-        .sidebar ul li a:hover { background: #ff1493; color: #1a0000; }
-
-        /* زر الرجوع */
-        .back-btn {
-            background: #ff1493;
-            color: #000;
-            font-size: 1.2rem;
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: 0.3s;
-            margin-top: 20px;
-        }
-        .back-btn:hover { background: #ff44aa; }
-
-        /* صفحات الأقسام */
-        .container {
-            padding: 50px;
-        }
-        .btn {
-            background: #ff1493;
-            color: #000;
-            padding: 10px;
-            margin: 5px;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: 0.3s;
-        }
-        .btn:hover { background: #ff44aa; }
-
-        /* مربعات API */
-        .api-box {
-            background: rgba(255, 20, 147, 0.2);
-            border: 2px solid #ff1493;
-            padding: 10px;
-            border-radius: 10px;
-            margin: 10px auto;
-            width: 80%;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .api-box:hover { background: rgba(255, 20, 147, 0.5); }
-
-    </style>
+    <title>الصفحة الرئيسية</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- شاشة البداية -->
-    <div class="landing" id="landing">
-        <h1>مرحبا بك في Dark Node API</h1>
-        <button onclick="startWebsite()">ابدأ</button>
+    <div class="container">
+        <h1 class="welcome-text">مرحبًا بك في الصفحة الرئيسية</h1>
+        <button class="menu-btn" onclick="toggleMenu()">📂 فتح القائمة</button>
     </div>
 
-    <!-- الصفحة الرئيسية -->
-    <div id="main-page" class="hidden">
-        <button class="menu-btn" onclick="toggleSidebar()">☰ القائمة</button>
-        <div class="welcome-box">مرحبًا بك في الصفحة الرئيسية</div>
+    <div id="sidebar" class="sidebar">
+        <button class="close-btn" onclick="toggleMenu()">✖</button>
+        <a href="developer.html">👨‍💻 قسم المطور</a>
+        <a href="api.html">🔗 قسم الـ API</a>
     </div>
 
-    <!-- القائمة الجانبية -->
-    <div class="sidebar" id="sidebar">
-        <h2>القائمة</h2>
-        <ul>
-            <li><a onclick="showSection('developer')">💻 المطور</a></li>
-            <li><a onclick="showSection('api')">🔗 API</a></li>
-        </ul>
-    </div>
-
-    <!-- صفحة المطور -->
-    <div id="developer" class="container hidden">
-        <h1>💻 المطور</h1>
-        <p>👨‍💻 اسم المطور: 𝑅𝐴𝐷𝐼𝛩 𝐷𝐸𝑀𝛩𝑁</p>
-        <p>🤖 اسم البوت: 𝙱𝙾𝚃-𝙼𝚄𝙺𝙾</p>
-        <a href="#"><button class="btn">📩 واتساب</button></a>
-        <button class="back-btn" onclick="goBack()">🔙 عودة</button>
-    </div>
-
-    <!-- صفحة API -->
-    <div id="api" class="container hidden">
-        <h1>🔗 الـ API</h1>
-        <p>يوجد هنا كمية الـ API التي تحتاجها</p>
-        <div class="api-box" onclick="copyToClipboard('/api/ai')">📜 AI API</div>
-        <div class="api-box" onclick="copyToClipboard('/api/download')">📜 Download API</div>
-        <div class="api-box" onclick="copyToClipboard('/api/tools')">📜 Tools API</div>
-        <button class="back-btn" onclick="goBack()">🔙 عودة</button>
-    </div>
-
-    <script>
-        function startWebsite() { document.getElementById('landing').style.display = 'none'; document.getElementById('main-page').classList.remove('hidden'); }
-        function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); }
-        function showSection(section) { document.querySelectorAll('.container').forEach(el => el.classList.add('hidden')); document.getElementById(section).classList.remove('hidden'); }
-        function goBack() { document.querySelectorAll('.container').forEach(el => el.classList.add('hidden')); document.getElementById('main-page').classList.remove('hidden'); }
-        function copyToClipboard(text) { navigator.clipboard.writeText(text); alert('تم نسخ: ' + text); }
-    </script>
-
+    <script src="script.js"></script>
 </body>
 </html>
