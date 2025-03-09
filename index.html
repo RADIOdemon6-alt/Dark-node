@@ -3,187 +3,218 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dark Node</title>
+    <title>Dark Node API</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
-
         body {
-            font-family: 'Orbitron', sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background: black;
+            background-color: #1a1a1a;
             color: white;
             text-align: center;
-            overflow: hidden;
+            overflow: hidden; /* 🚫 تعطيل التمرير افتراضيًا */
         }
 
-        /* ✨ تأثيرات النيون */
-        .neon-text {
-            color: red;
-            text-shadow: 0 0 5px red, 0 0 10px red, 0 0 20px crimson;
-            animation: glow 1.5s infinite alternate;
-        }
-
-        @keyframes glow {
-            0% { text-shadow: 0 0 5px red, 0 0 10px crimson; }
-            100% { text-shadow: 0 0 10px red, 0 0 20px darkred; }
-        }
-
-        /* ✨ زر النيون */
-        .neon-btn {
-            background: none;
-            border: 2px solid red;
-            padding: 15px 20px;
-            color: white;
-            font-size: 18px;
-            cursor: pointer;
-            text-transform: uppercase;
-            transition: 0.3s;
-            animation: glow 1.5s infinite alternate;
-            margin-top: 20px;
-        }
-
-        .neon-btn:hover {
-            background: red;
-            color: black;
-            box-shadow: 0 0 20px red;
-        }
-
-        /* ✨ الصفحات */
+        /* 🌟 صفحات */
         .page {
-            width: 100%;
-            height: 100vh;
             display: none;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 20px;
-        }
-
-        /* ✨ صفحة الترحيب */
-        #welcome {
-            background: url('https://files.catbox.moe/0iu86x.jpg') no-repeat center center/cover;
-        }
-
-        /* ✨ القائمة الجانبية */
-        .sidebar {
-            position: fixed;
-            left: -250px;
-            top: 0;
-            width: 250px;
             height: 100vh;
-            background: black;
-            border-right: 2px solid red;
-            box-shadow: 0 0 20px red;
+        }
+
+        .active {
+            display: flex;
+        }
+
+        /* 🌟 صفحة الترحيب */
+        #welcome {
+            background: url("https://files.catbox.moe/0iu86x.jpg") no-repeat center center/cover;
+            width: 100%;
+            height: 100vh;
+        }
+
+        #welcome h1, #welcome button {
+            position: absolute;
+            z-index: 2;
+        }
+
+        #welcome h1 {
+            top: 30%;
+            font-size: 30px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        #welcome button {
+            top: 50%;
+            background-color: #ff0066;
+            padding: 15px;
+            font-size: 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        /* 🌟 القائمة الجانبية */
+        .sidebar {
+            width: 250px;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            right: -250px;
+            background-color: rgba(0, 0, 0, 0.9);
+            padding-top: 20px;
             transition: 0.3s;
-            padding-top: 50px;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
         }
 
         .sidebar a {
-            display: block;
             padding: 15px;
             text-decoration: none;
+            font-size: 20px;
             color: white;
-            text-align: center;
-            border-bottom: 1px solid red;
-            transition: 0.3s;
+            display: block;
+            transition: 0.2s;
         }
 
         .sidebar a:hover {
-            background: red;
-            color: black;
+            background-color: #ff0066;
         }
 
-        /* ✨ زر القائمة */
         .menu-btn {
-            position: fixed;
-            left: 10px;
-            top: 10px;
-            font-size: 25px;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: #00ccff;
+            border: none;
+            padding: 10px 15px;
+            font-size: 18px;
             cursor: pointer;
-            background: red;
+            border-radius: 5px;
+        }
+
+        /* 🌟 صفحة API */
+        .api-container {
+            text-align: center;
+        }
+
+        .api-categories button {
+            background-color: #9900cc;
+            padding: 10px;
+        }
+
+        .api-categories button:hover {
+            background-color: #7700aa;
+        }
+
+        #api-list p {
+            background-color: #333;
             padding: 10px;
             border-radius: 5px;
-            color: black;
-            box-shadow: 0 0 10px red;
-        }
-
-        /* ✨ صندوق API */
-        .api-box {
-            background: black;
-            border: 2px solid red;
-            padding: 10px;
-            margin: 10px 0;
-            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             cursor: pointer;
-            transition: 0.3s;
         }
 
-        .api-box:hover {
-            background: red;
-            color: black;
-            box-shadow: 0 0 10px red;
+        #api-list p:hover {
+            background-color: #444;
+        }
+
+        .scroll-enabled {
+            overflow-y: auto !important;
         }
     </style>
 </head>
 <body>
 
-    <!-- ✨ صفحة الترحيب -->
-    <div id="welcome" class="page" style="display: flex;">
-        <h1 class="neon-text">مرحبًا بك في Dark Node</h1>
-        <button class="neon-btn" onclick="switchPage('home')">ابدأ</button>
+    <!-- 🌟 صفحة الترحيب -->
+    <div id="welcome" class="page active">
+        <h1>مرحبًا بكم في <span>Dark Node API</span></h1>
+        <button onclick="switchPage('home')">ابدأ</button>
     </div>
 
-    <!-- ✨ القائمة الجانبية -->
-    <div class="sidebar" id="sidebar">
-        <a href="#" onclick="switchPage('api')">🔗 API</a>
-        <a href="#" onclick="switchPage('developer')">💻 المطور</a>
-        <a href="#" onclick="switchPage('contact')">📩 تواصل معنا</a>
-    </div>
-
-    <!-- ✨ زر القائمة -->
-    <div class="menu-btn" onclick="toggleSidebar()">☰</div>
-
-    <!-- ✨ الصفحة الرئيسية -->
+    <!-- 🌟 الصفحة الرئيسية -->
     <div id="home" class="page">
-        <img src="https://files.catbox.moe/5o0hnu.jpg" style="width: 80%; max-width: 400px;">
-        <h1 class="neon-text">Dark Node</h1>
+        <button class="menu-btn" onclick="toggleSidebar()">☰</button>
+        <h1>Dark Node API</h1>
+        <button onclick="switchPage('api')">🚀 قائمة الـ API</button>
     </div>
 
-    <!-- ✨ صفحة API -->
+    <!-- 🌟 القائمة الجانبية -->
+    <div id="sidebar" class="sidebar">
+        <a href="javascript:void(0)" onclick="toggleSidebar()">❌ إغلاق</a>
+        <a href="javascript:void(0)" onclick="switchPage('api')">🚀 قائمة API</a>
+        <a href="#">👨‍💻 قسم المطور</a>
+        <a href="#">📞 تواصل معنا</a>
+    </div>
+
+    <!-- 🌟 صفحة API -->
     <div id="api" class="page">
-        <h1 class="neon-text">خدمات API</h1>
-        <div id="api-list"></div>
-        <button class="neon-btn" onclick="switchPage('home')">🔙 رجوع</button>
-    </div>
+        <div class="api-container">
+            <img src="https://files.catbox.moe/j40wnw.jpg" alt="API Page Image" style="width: 100%; max-width: 400px;">
+            <h1>خدمات API</h1>
 
-    <!-- ✨ صفحة المطور -->
-    <div id="developer" class="page">
-        <h1 class="neon-text">💻 المطور</h1>
-        <p>👨‍💻 اسم المطور: 𝑅𝐴𝐷𝐼𝛩 𝐷𝐸𝑀𝛩𝑁</p>
-        <p>🤖 اسم البوت: 𝙱𝙾𝚃-𝙼𝚄𝙺𝙾</p>
-        <button class="neon-btn" onclick="switchPage('home')">🔙 رجوع</button>
-    </div>
+            <div class="api-categories">
+                <button onclick="openCategory('games')">🎮 ألعاب</button>
+                <button onclick="openCategory('ai')">🤖 ذكاء اصطناعي</button>
+                <button onclick="openCategory('tools')">🛠️ أدوات</button>
+                <button onclick="openCategory('religion')">🕌 دين</button>
+                <button onclick="openCategory('download')">📥 تحميل</button>
+                <button onclick="openCategory('search')">🔍 بحث</button>
+            </div>
 
-    <!-- ✨ صفحة التواصل -->
-    <div id="contact" class="page">
-        <h1 class="neon-text">📩 تواصل معنا</h1>
-        <a href="https://wa.me/201063808608"><button class="neon-btn">📩 واتساب</button></a>
-        <a href="https://chat.whatsapp.com/BNARMEg1L87JOz8oSR9eFD"><button class="neon-btn">🛠 دعم البوت</button></a>
-        <a href="https://whatsapp.com/channel/0029Vb2j3d6HVvTiMzx5QF13"><button class="neon-btn">📢 قناة Dark-node</button></a>
-        <button class="neon-btn" onclick="switchPage('home')">🔙 رجوع</button>
+            <div id="api-list"></div>
+            <button onclick="switchPage('home')">🔙 رجوع</button>
+        </div>
     </div>
 
     <script>
-        function switchPage(page) {
-            document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
-            document.getElementById(page).style.display = 'flex';
+        function switchPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            adjustScrolling();
         }
 
         function toggleSidebar() {
-            let sidebar = document.getElementById("sidebar");
-            sidebar.style.left = sidebar.style.left === "0px" ? "-250px" : "0px";
+            const sidebar = document.getElementById("sidebar");
+            sidebar.style.right = (sidebar.style.right === "0px") ? "-250px" : "0px";
         }
+
+        const apiEndpoints = {
+            games: ["https://api.example.com/game1", "https://api.example.com/game2", "https://api.example.com/game3"],
+            ai: ["https://api.example.com/ai1", "https://api.example.com/ai2", "https://api.example.com/ai3"],
+            tools: ["https://api.example.com/tool1", "https://api.example.com/tool2", "https://api.example.com/tool3"],
+            religion: ["https://api.example.com/religion1", "https://api.example.com/religion2", "https://api.example.com/religion3"],
+            download: ["https://api.example.com/download1", "https://api.example.com/download2", "https://api.example.com/download3"],
+            search: ["https://api.example.com/search1", "https://api.example.com/search2", "https://api.example.com/search3"]
+        };
+
+        function openCategory(category) {
+            let list = document.getElementById("api-list");
+            list.innerHTML = "";
+            apiEndpoints[category].forEach(api => {
+                let p = document.createElement("p");
+                p.textContent = api.split("/").pop();
+                p.onclick = () => {
+                    navigator.clipboard.writeText(api);
+                    alert("تم نسخ الرابط: " + api);
+                };
+                list.appendChild(p);
+            });
+        }
+
+        function adjustScrolling() {
+            document.body.classList.toggle('scroll-enabled', document.body.scrollHeight > window.innerHeight);
+        }
+
+        window.onload = adjustScrolling;
+        window.onresize = adjustScrolling;
     </script>
 
 </body>
