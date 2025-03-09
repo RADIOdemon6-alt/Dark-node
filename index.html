@@ -3,196 +3,148 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dark Node API</title>
+    <title>Alakreb API</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; direction: rtl; }
         body { font-family: 'Orbitron', sans-serif; background: #000; color: white; text-align: center; overflow: hidden; }
 
-        /* شاشة الترحيب */
-        .neon-box {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background: url('https://files.catbox.moe/4cjw97.jpg') no-repeat center center/cover;
-            flex-direction: column;
-        }
-
-        .neon-box h1 {
-            font-size: 3rem;
-            color: red;
-            padding: 20px 40px;
-            border: 5px solid red;
-            text-shadow: 0 0 15px red;
-            background: rgba(0, 0, 0, 0.7);
-        }
-
-        .start-btn {
-            margin-top: 30px;
-            background: red;
-            font-size: 1.5rem;
-            padding: 15px 40px;
-            border: none;
-            cursor: pointer;
-            border-radius: 10px;
-            transition: all 0.3s ease-in-out;
-        }
-
-        .start-btn:hover { background: #ff4444; transform: scale(1.1); }
-
-        /* الصفحة الرئيسية */
-        .hidden { display: none; }
-        .container { display: flex; }
-        
+        /* القائمة الجانبية */
         .sidebar {
             position: fixed;
-            left: 0;
+            left: -260px;
             width: 250px;
             height: 100%;
-            background: rgba(255, 0, 0, 0.1);
-            padding-top: 20px;
-            transition: transform 0.5s ease-in-out;
+            background: rgba(20, 20, 20, 0.9);
+            transition: left 0.3s ease-in-out;
+            padding-top: 60px;
         }
 
-        .sidebar h2 { color: red; margin-bottom: 10px; }
+        .sidebar.open { left: 0; }
+        .sidebar h2 { color: red; margin-bottom: 20px; }
         .sidebar ul { list-style: none; padding: 0; }
-        .sidebar ul li {
-            padding: 10px;
-            text-align: center;
-            transition: all 0.3s;
-            cursor: pointer;
-            font-size: 1.2rem;
-        }
-
-        .sidebar ul li:hover { background: red; color: black; }
-
-        .content {
-            flex-grow: 1;
-            padding: 50px;
-            text-align: center;
-            transition: transform 0.5s ease-in-out;
-        }
-
-        .section {
-            display: none;
-            padding: 50px;
-            background: rgba(255, 0, 0, 0.2);
-            border-radius: 10px;
-            transition: transform 0.5s ease-in-out;
-        }
-
-        .section.show {
+        .sidebar ul li { padding: 15px; }
+        .sidebar ul li a {
+            text-decoration: none;
+            color: white;
             display: block;
-            transform: translateY(0);
-        }
-
-        /* زر العائم */
-        .floating-btn, .back-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: red;
-            padding: 15px;
-            border: none;
-            cursor: pointer;
-            border-radius: 50%;
             font-size: 1.2rem;
+            cursor: pointer;
             transition: all 0.3s;
         }
 
-        .floating-btn:hover, .back-btn:hover { background: #ff4444; transform: scale(1.1); }
+        .sidebar ul li a:hover { background: red; padding: 10px; }
 
-        .back-btn {
-            left: 20px;
-            display: none;
+        /* زر القائمة */
+        .menu-btn {
+            position: fixed;
+            left: 15px;
+            top: 15px;
+            font-size: 2rem;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            z-index: 1000;
         }
 
-        /* تأثير السحب */
-        .slide-in { transform: translateX(100vw); }
-        .slide-in.active { transform: translateX(0); }
+        /* محتوى الصفحة */
+        .main-content {
+            margin: 100px auto;
+            width: 80%;
+        }
+
+        .api-output {
+            background: rgba(255, 0, 0, 0.2);
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 10px;
+            min-height: 200px;
+            word-wrap: break-word;
+        }
+
+        /* زر الأغنية العائم */
+        .music-btn {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            background: red;
+            font-size: 1.2rem;
+            padding: 10px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
 
-    <!-- شاشة الترحيب -->
-    <div class="neon-box">
-        <h1>مرحبًا في Dark Node API</h1>
-        <button class="start-btn" onclick="startSite()">ابدأ</button>
+    <!-- زر القائمة -->
+    <button class="menu-btn" onclick="toggleSidebar()">☰</button>
+
+    <!-- القائمة الجانبية -->
+    <div class="sidebar" id="sidebar">
+        <h2>Menu</h2>
+        <ul>
+            <li><a onclick="fetchApi('/api/ai')">🔮 AI Tools</a></li>
+            <li><a onclick="fetchApi('/api/download')">📥 Download</a></li>
+            <li><a onclick="fetchApi('/api/games')">🎮 Games</a></li>
+            <li><a onclick="fetchApi('/api/images')">🖼 Images</a></li>
+            <li><a onclick="fetchApi('/api/islamic')">🕌 Islamic</a></li>
+            <li><a onclick="fetchApi('/api/nsfw')">🔞 NSFW</a></li>
+            <li><a onclick="fetchApi('/api/search')">🔍 Search</a></li>
+            <li><a onclick="fetchApi('/api/tools')">🛠 Tools</a></li>
+            <li><a onclick="fetchApi('/api/ai-image')">🖌 AI Image</a></li>
+        </ul>
+        <ul>
+            <li><a href="https://wa.me/201028085788" target="_blank">💬 Owner Whatsapp</a></li>
+        </ul>
     </div>
 
-    <!-- الصفحة الرئيسية -->
-    <div class="container hidden">
-        <div class="sidebar">
-            <h2>القوائم</h2>
-            <ul>
-                <li onclick="openSection('ai')">🧠 AI Tools</li>
-                <li onclick="openSection('download')">📥 Download</li>
-                <li onclick="openSection('games')">🎮 Games</li>
-                <li onclick="openSection('images')">🖼 Images</li>
-                <li onclick="openSection('islamic')">☪️ Islamic</li>
-                <li onclick="openSection('search')">🔍 Search</li>
-                <li onclick="openSection('tools')">🛠 Tools</li>
-            </ul>
+    <!-- المحتوى الرئيسي -->
+    <div class="main-content">
+        <h2>Welcome to Alakreb API</h2>
+        <div class="api-output" id="api-output">
+            <p>Select a menu option to display API data here.</p>
         </div>
-        
-        <div class="content">
-            <h1>مرحبًا بك في Dark Node API</h1>
-            <p>اختر أحد الأقسام من القائمة.</p>
-        </div>
     </div>
 
-    <!-- الأقسام -->
-    <div class="section hidden slide-in" id="ai">
-        <button class="back-btn" onclick="goBack()">🔙</button>
-        <h1>🧠 AI Tools</h1>
-        <p>API: /api/ai</p>
-    </div>
-
-    <div class="section hidden slide-in" id="download">
-        <button class="back-btn" onclick="goBack()">🔙</button>
-        <h1>📥 Download</h1>
-        <p>API: /api/download</p>
-    </div>
-
-    <div class="section hidden slide-in" id="games">
-        <button class="back-btn" onclick="goBack()">🔙</button>
-        <h1>🎮 Games</h1>
-        <p>API: /api/games</p>
-    </div>
-
-    <button class="floating-btn" onclick="toggleMusic()">🎵</button>
-    <audio id="bg-music" loop>
+    <!-- زر تشغيل الأغنية -->
+    <button class="music-btn" onclick="toggleMusic()">♫</button>
+    <audio id="background-music" loop>
         <source src="https://files.catbox.moe/yaq5lw.opus" type="audio/ogg">
     </audio>
 
     <script>
-        function startSite() {
-            document.querySelector('.neon-box').style.display = 'none';
-            document.querySelector('.container').classList.remove('hidden');
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('open');
         }
 
-        function openSection(sectionId) {
-            document.querySelector('.container').style.display = 'none';
-            document.getElementById(sectionId).classList.add('show', 'active');
-            document.getElementById(sectionId).style.display = 'block';
-            document.querySelector('.back-btn').style.display = 'block';
-        }
-
-        function goBack() {
-            document.querySelector('.container').style.display = 'flex';
-            document.querySelectorAll('.section').forEach(sec => sec.classList.remove('show', 'active'));
-            document.querySelector('.back-btn').style.display = 'none';
+        async function fetchApi(endpoint) {
+            const sidebar = document.getElementById('sidebar');
+            const output = document.getElementById('api-output');
+            output.innerHTML = '<p>Loading...</p>';
+            try {
+                sidebar.classList.remove('open');
+                if (endpoint === '/api/ai-image') {
+                    window.location.href = 'your-ai-page-link.html';  // رابط صفحة الـAI الخاصة بيك
+                    return;
+                }
+                const response = await fetch(endpoint);
+                if (!response.ok) throw new Error('API request failed');
+                const data = await response.json();
+                output.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+            } catch (error) {
+                output.innerHTML = `<p>Error: ${error.message}</p>`;
+            }
         }
 
         function toggleMusic() {
-            var music = document.getElementById("bg-music");
-            if (music.paused) {
-                music.play();
-            } else {
-                music.pause();
-            }
+            let music = document.getElementById("background-music");
+            if (music.paused) { music.play(); } else { music.pause(); }
         }
     </script>
+
 </body>
 </html>
