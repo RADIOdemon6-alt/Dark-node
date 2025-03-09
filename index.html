@@ -3,22 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>𝗗𝗔𝗥𝗞 𝗡𝗢𝗗𝗘 𝗔𝗣𝗜</title>
+    <title>Dark Node API</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        /* Reset */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        body, html {
+        body {
             font-family: 'Orbitron', sans-serif;
-            color: #fff;
             background: #000;
-            overflow-x: hidden;
+            color: white;
             text-align: center;
+            overflow: hidden;
         }
 
         /* Neon Box */
@@ -35,17 +34,14 @@
             color: red;
             padding: 20px 40px;
             border: 5px solid red;
-            border-radius: 15px;
             text-shadow: 0 0 15px red;
             box-shadow: 0 0 20px red;
             background: rgba(0, 0, 0, 0.7);
         }
 
-        /* Button */
         .start-btn {
             margin-top: 30px;
             background: red;
-            color: black;
             font-size: 1.5rem;
             padding: 15px 40px;
             border: none;
@@ -61,43 +57,29 @@
             transform: scale(1.1);
         }
 
-        /* Hidden Main Content */
+        /* Main Content */
         .hidden {
             display: none;
         }
 
-        /* Header */
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 20px;
-            background: rgba(0, 0, 0, 0.8);
-            box-shadow: 0 2px 10px red;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
+            padding: 20px;
+            background: rgba(255, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
         }
 
-        .header h1 {
-            font-size: 2rem;
-            color: red;
-            font-weight: 600;
-        }
-
-        /* Sidebar */
         .sidebar {
             position: fixed;
-            top: 0;
-            left: -300px;
+            left: -250px;
+            width: 250px;
             height: 100%;
-            width: 300px;
-            background: rgba(20, 0, 0, 0.9);
-            padding: 20px;
-            box-shadow: 2px 0 15px red;
-            transition: all 0.3s ease;
-            z-index: 999;
+            background: rgba(255, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease-in-out;
+            padding-top: 20px;
         }
 
         .sidebar.open {
@@ -106,74 +88,77 @@
 
         .sidebar h2 {
             color: red;
-            font-size: 1.5rem;
-            text-align: center;
-            margin-bottom: 20px;
+            text-shadow: 0 0 10px red;
+            margin-bottom: 10px;
         }
 
         .sidebar ul {
             list-style: none;
+            padding: 0;
         }
 
         .sidebar ul li {
-            margin: 15px 0;
-        }
-
-        .sidebar ul li a {
-            text-decoration: none;
-            color: #fff;
-            font-size: 1.1rem;
-            padding: 10px 15px;
-            display: block;
-            border-radius: 5px;
+            padding: 10px;
+            text-align: center;
             transition: all 0.3s;
-            background: black;
-            text-shadow: 0 0 5px red;
             cursor: pointer;
+            font-size: 1.2rem;
         }
 
-        .sidebar ul li a:hover {
+        .sidebar ul li:hover {
             background: red;
             color: black;
-            box-shadow: 0 0 15px red;
         }
 
-        /* Main Content */
         .main-content {
-            padding: 100px 20px;
-            text-align: center;
-            background: url('https://files.catbox.moe/5o0hnu.jpg') no-repeat center center/cover;
-            min-height: 100vh;
-        }
-
-        .main-content h2 {
-            font-size: 3rem;
-            color: red;
-            margin-bottom: 20px;
-            text-shadow: 0 0 15px red;
-        }
-
-        .api-output {
-            margin: 20px auto;
             padding: 20px;
-            background: rgba(0, 0, 0, 0.8);
-            border-radius: 10px;
-            box-shadow: 0 4px 10px red;
-            color: #fff;
-            max-width: 600px;
+            margin-left: 260px;
         }
 
-        .api-output pre {
-            text-align: left;
-            font-size: 1rem;
-            color: red;
-            white-space: pre-wrap;
-            word-wrap: break-word;
+        /* Glass Effect */
+        .glass-effect {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            opacity: 1;
+            transition: all 0.5s ease-in-out;
+        }
+
+        .glass-effect.shattered {
+            opacity: 0;
+            transform: scale(1.2);
+        }
+
+        /* API Boxes */
+        .api-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .api-box {
+            background: rgba(255, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 0 10px red;
+        }
+
+        .api-box:hover {
+            background: red;
+            transform: scale(1.1);
         }
     </style>
 </head>
 <body>
-    <!-- Neon Box -->
+
+    <!-- شاشة الترحيب -->
     <div class="neon-box" id="intro">
         <div>
             <h1>مرحبًا في Dark Node API</h1>
@@ -181,37 +166,40 @@
         </div>
     </div>
 
-    <!-- Main Page -->
+    <!-- الصفحة الرئيسية -->
     <div id="main-page" class="hidden">
-        <!-- Header -->
         <div class="header">
             <h1>Dark Node API</h1>
             <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
         </div>
 
-        <!-- Sidebar -->
         <div class="sidebar" id="sidebar">
             <h2>القائمة</h2>
             <ul>
-                <li><a onclick="fetchApi('/api/ai')">🤖 AI Tools</a></li>
-                <li><a onclick="fetchApi('/api/download')">📥 Download</a></li>
-                <li><a onclick="fetchApi('/api/games')">🎮 Games</a></li>
-                <li><a onclick="fetchApi('/api/images')">🖼 Images</a></li>
-                <li><a onclick="fetchApi('/api/tools')">🛠 Tools</a></li>
-                <li><a href="https://wa.me/201028085788" target="_blank">👑 Contact Owner</a></li>
+                <li onclick="loadCategory('AI')">🤖 AI Tools</li>
+                <li onclick="loadCategory('Download')">📥 Download</li>
+                <li onclick="loadCategory('Games')">🎮 Games</li>
+                <li onclick="loadCategory('Images')">🖼 Images</li>
+                <li onclick="loadCategory('Tools')">🛠 Tools</li>
             </ul>
         </div>
 
-        <!-- Main Content -->
         <div class="main-content">
-            <h2>🔥 أهلاً بك في Dark Node API 🔥</h2>
-            <div class="api-output" id="api-output">
-                <p>حدد خيارًا من القائمة لرؤية البيانات هنا.</p>
-            </div>
+            <h2 id="category-title">🔥 أهلاً بك في Dark Node API 🔥</h2>
+            <div class="glass-effect" id="glass"></div>
+            <div class="api-container" id="api-list"></div>
         </div>
     </div>
 
     <script>
+        const apiData = {
+            "AI": ["/api/ai/chat", "/api/ai/image", "/api/ai/voice"],
+            "Download": ["/api/download/youtube", "/api/download/twitter"],
+            "Games": ["/api/games/trivia", "/api/games/quiz"],
+            "Images": ["/api/images/anime", "/api/images/wallpapers"],
+            "Tools": ["/api/tools/convert", "/api/tools/shorten"]
+        };
+
         function startWebsite() {
             document.getElementById('intro').style.display = 'none';
             document.getElementById('main-page').classList.remove('hidden');
@@ -221,17 +209,29 @@
             document.getElementById('sidebar').classList.toggle('open');
         }
 
-        async function fetchApi(endpoint) {
-            document.getElementById('api-output').innerHTML = '<p>جاري التحميل...</p>';
-            try {
-                const response = await fetch(endpoint);
-                if (!response.ok) throw new Error('فشل تحميل البيانات');
-                const data = await response.json();
-                document.getElementById('api-output').innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
-            } catch (error) {
-                document.getElementById('api-output').innerHTML = `<p>خطأ: ${error.message}</p>`;
-            }
+        function loadCategory(category) {
+            document.getElementById('category-title').textContent = `قسم ${category}`;
+            const apiList = document.getElementById('api-list');
+            apiList.innerHTML = '';
+
+            apiData[category].forEach(api => {
+                const apiBox = document.createElement('div');
+                apiBox.classList.add('api-box');
+                apiBox.textContent = api;
+                apiBox.onclick = () => copyToClipboard(api);
+                apiList.appendChild(apiBox);
+            });
+
+            const glass = document.getElementById('glass');
+            glass.classList.add('shattered');
+            setTimeout(() => glass.classList.remove('shattered'), 500);
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text);
+            alert(`تم نسخ ${text}`);
         }
     </script>
+
 </body>
 </html>
