@@ -29,6 +29,7 @@
             background: url('https://files.catbox.moe/4cjw97.jpg') no-repeat center center/cover;
             text-align: center;
             flex-direction: column;
+            animation: fadeIn 2s ease-in-out;
         }
 
         .landing h1 {
@@ -46,12 +47,14 @@
             border: none;
             cursor: pointer;
             border-radius: 5px;
-            transition: all 0.3s ease;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 0 15px #ff0000;
         }
 
         .landing button:hover {
             background: #ff4444;
-            box-shadow: 0 0 10px #ff0000;
+            box-shadow: 0 0 25px #ff0000;
+            transform: scale(1.1);
         }
 
         /* Main Page */
@@ -69,6 +72,7 @@
             object-fit: cover;
             z-index: -1;
             opacity: 0.2;
+            filter: blur(2px);
         }
 
         /* Header */
@@ -97,24 +101,31 @@
             border: none;
             color: #fff;
             cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-toggle:hover {
+            transform: rotate(90deg);
         }
 
         /* Sidebar */
         .sidebar {
             position: fixed;
             top: 0;
-            left: -300px;
+            left: -320px;
             height: 100%;
-            width: 300px;
+            width: 320px;
             background: #1a0000;
             padding: 20px;
             box-shadow: 2px 0 15px rgba(255, 0, 0, 0.5);
-            transition: all 0.3s ease;
+            transition: all 0.4s ease-in-out;
             z-index: 999;
+            opacity: 0;
         }
 
         .sidebar.open {
             left: 0;
+            opacity: 1;
         }
 
         .sidebar h2 {
@@ -122,6 +133,8 @@
             font-size: 1.5rem;
             text-align: center;
             margin-bottom: 20px;
+            text-transform: uppercase;
+            animation: glitch 1s infinite;
         }
 
         .sidebar ul {
@@ -141,11 +154,13 @@
             border-radius: 5px;
             transition: all 0.3s;
             cursor: pointer;
+            background: rgba(255, 0, 0, 0.2);
         }
 
         .sidebar ul li a:hover {
             background: #ff0000;
             color: #1a0000;
+            transform: scale(1.1);
         }
 
         /* Main Content */
@@ -160,7 +175,7 @@
             margin-bottom: 20px;
         }
 
-        .main-content .api-output {
+        .api-output {
             margin: 20px auto;
             padding: 20px;
             background: rgba(0, 0, 0, 0.9);
@@ -168,62 +183,64 @@
             box-shadow: 0 4px 10px rgba(255, 0, 0, 0.5);
             color: #fff;
             max-width: 600px;
+            animation: fadeIn 1s ease-in-out;
         }
 
-        .main-content .api-output pre {
+        .api-output pre {
             text-align: left;
             font-size: 1rem;
             color: #ff0000;
             white-space: pre-wrap;
             word-wrap: break-word;
+            animation: typing 3s steps(50, end);
         }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes glitch {
+            0% { text-shadow: 2px 2px #ff0000; }
+            50% { text-shadow: -2px -2px #ff4444; }
+            100% { text-shadow: 2px 2px #ff0000; }
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
     </style>
 </head>
 <body>
-    <!-- Landing Page -->
     <div class="landing" id="landing">
-        <h1>مرحبا بك في موقع Dark Node API</h1>
+        <h1>مرحبًا بك في Dark Node API</h1>
         <button onclick="startWebsite()">ابدأ</button>
     </div>
 
-    <!-- Main Content (Hidden by Default) -->
     <div id="main-page" class="hidden">
-        <!-- Video Background -->
         <video class="video-bg" autoplay muted loop>
             <source src="your-video-link.mp4" type="video/mp4">
-            Your browser does not support the video tag.
         </video>
 
-        <!-- Header -->
         <div class="header">
             <h1>Dark Node API</h1>
             <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
         </div>
 
-        <!-- Sidebar -->
         <div class="sidebar" id="sidebar">
-            <h2>Menu</h2>
+            <h2>القائمة</h2>
             <ul>
                 <li><a onclick="fetchApi('/api/ai')">AI Tools</a></li>
-                <li><a onclick="fetchApi('/api/download')">Download</a></li>
-                <li><a onclick="fetchApi('/api/games')">Games</a></li>
-                <li><a onclick="fetchApi('/api/images')">Images</a></li>
-                <li><a onclick="fetchApi('/api/islamic')">Islamic</a></li>
-                <li><a onclick="fetchApi('/api/nsfw')">NSFW</a></li>
-                <li><a onclick="fetchApi('/api/search')">Search</a></li>
-                <li><a onclick="fetchApi('/api/tools')">Tools</a></li>
-                <li><a onclick="fetchApi('/api/ai-image')">AI Image</a></li>
-            </ul>
-            <ul>
-                <li><a href="https://wa.me/201028085788" target="_blank">Owner Whatsapp</a></li>
             </ul>
         </div>
 
-        <!-- Main Content -->
         <div class="main-content">
-            <h2>Welcome to Dark Node API</h2>
+            <h2>Dark Node API</h2>
             <div class="api-output" id="api-output">
-                <p>Select a menu option to display API data here.</p>
+                <p>اختر قائمة لعرض البيانات</p>
             </div>
         </div>
     </div>
@@ -236,21 +253,6 @@
 
         function toggleSidebar() {
             document.getElementById('sidebar').classList.toggle('open');
-        }
-
-        async function fetchApi(endpoint) {
-            const sidebar = document.getElementById('sidebar');
-            const output = document.getElementById('api-output');
-            output.innerHTML = '<p>Loading...</p>';
-            try {
-                sidebar.classList.remove('open');
-                const response = await fetch(endpoint);
-                if (!response.ok) throw new Error('API request failed');
-                const data = await response.json();
-                output.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
-            } catch (error) {
-                output.innerHTML = `<p>Error: ${error.message}</p>`;
-            }
         }
     </script>
 </body>
