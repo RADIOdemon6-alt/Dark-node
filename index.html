@@ -6,168 +6,55 @@
     <title>Dark Node API</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body, html {
-            font-family: 'Orbitron', sans-serif;
-            color: #fff;
-            background: #000;
-            overflow-x: hidden;
-        }
+        /* Reset */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body, html { font-family: 'Orbitron', sans-serif; color: #fff; background: #000; overflow-x: hidden; }
 
         /* Landing Page */
         .landing {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background: url('https://files.catbox.moe/4cjw97.jpg') no-repeat center center/cover;
-            text-align: center;
-            flex-direction: column;
+            display: flex; justify-content: center; align-items: center;
+            height: 100vh; background: url('https://files.catbox.moe/4cjw97.jpg') no-repeat center center/cover;
+            text-align: center; flex-direction: column;
         }
-        .landing h1 {
-            font-size: 3rem;
-            color: #ff0000;
-            text-shadow: 0 0 15px #ff0000;
-            margin-bottom: 20px;
-        }
+
+        .landing h1 { font-size: 3rem; color: #ff0000; text-shadow: 0 0 15px #ff0000; margin-bottom: 20px; }
         .landing button {
-            background: #ff0000;
-            color: #000;
-            font-size: 1.5rem;
-            padding: 15px 30px;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
+            background: #ff0000; color: #000; font-size: 1.5rem;
+            padding: 15px 30px; border: none; cursor: pointer; border-radius: 5px;
             transition: all 0.3s ease;
         }
-        .landing button:hover {
-            background: #ff4444;
-            box-shadow: 0 0 10px #ff0000;
-        }
+        .landing button:hover { background: #ff4444; box-shadow: 0 0 10px #ff0000; }
 
-        /* Hidden Sections */
-        .hidden {
-            display: none;
-        }
-        .fade-in {
-            animation: fadeIn 0.5s ease-in-out;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        /* Video Background */
-        .video-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -1;
-            opacity: 0.2;
-        }
-
-        /* Header */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 20px;
-            background: rgba(0, 0, 0, 0.9);
-            box-shadow: 0 2px 10px rgba(255, 0, 0, 0.5);
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-        }
-        .header h1 {
-            font-size: 1.8rem;
-            color: #ff0000;
-        }
-        .menu-toggle {
-            font-size: 2rem;
-            background: none;
-            border: none;
-            color: #fff;
-            cursor: pointer;
-        }
-
-        /* Sidebar */
-        .sidebar {
-            position: fixed;
-            top: 0;
-            left: -300px;
-            height: 100%;
-            width: 300px;
-            background: #1a0000;
-            padding: 20px;
-            box-shadow: 2px 0 15px rgba(255, 0, 0, 0.5);
-            transition: all 0.3s ease;
-            z-index: 999;
-        }
-        .sidebar.open {
-            left: 0;
-        }
-        .sidebar ul {
-            list-style: none;
-        }
-        .sidebar ul li {
-            margin: 15px 0;
-        }
-        .sidebar ul li a {
-            text-decoration: none;
-            color: #ddd;
-            font-size: 1.1rem;
-            padding: 10px 15px;
-            display: block;
-            border-radius: 5px;
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-        .sidebar ul li a:hover {
-            background: #ff0000;
-            color: #1a0000;
-        }
+        /* Main Page */
+        .hidden { display: none; }
 
         /* Floating Button */
         .floating-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #ff0000;
-            color: #000;
-            font-size: 1.5rem;
-            padding: 15px;
-            border-radius: 50%;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(255, 0, 0, 0.5);
+            position: fixed; bottom: 20px; right: 20px;
+            background: #ff0000; color: #fff; padding: 15px;
+            border-radius: 50%; font-size: 1.5rem; border: none;
+            cursor: pointer; box-shadow: 0 0 10px #ff0000;
         }
 
-        /* Main Content */
-        .main-content {
-            padding: 100px 20px;
-            text-align: center;
-        }
-        .api-output {
-            margin: 20px auto;
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.9);
-            border-radius: 10px;
+        /* API Boxes */
+        .api-container { display: flex; justify-content: center; flex-wrap: wrap; margin-top: 50px; }
+        .api-box {
+            background: #1a0000; color: #ff0000; padding: 20px;
+            margin: 10px; border-radius: 10px; cursor: pointer;
             box-shadow: 0 4px 10px rgba(255, 0, 0, 0.5);
-            color: #fff;
-            max-width: 600px;
+            transition: all 0.3s ease; width: 200px; text-align: center;
         }
-        .api-output pre {
-            text-align: left;
-            font-size: 1rem;
-            color: #ff0000;
+        .api-box:hover { background: #ff0000; color: #1a0000; }
+        
+        /* Transition Effect */
+        .fade-enter { opacity: 0; transform: scale(0.9); transition: opacity 0.5s, transform 0.5s; }
+        .fade-enter-active { opacity: 1; transform: scale(1); }
+
+        /* Back Button */
+        .back-btn {
+            position: fixed; top: 10px; left: 10px;
+            background: #ff0000; color: #fff; padding: 10px;
+            border: none; cursor: pointer; border-radius: 5px;
         }
     </style>
 </head>
@@ -178,50 +65,82 @@
         <button onclick="startWebsite()">ابدأ</button>
     </div>
 
-    <!-- Main Page -->
-    <div id="main-page" class="hidden fade-in">
-        <video class="video-bg" autoplay muted loop>
-            <source src="your-video-link.mp4" type="video/mp4">
-        </video>
+    <!-- Main Page (Hidden by Default) -->
+    <div id="main-page" class="hidden fade-enter">
+        <button class="floating-btn" onclick="goHome()">🏠</button>
 
         <div class="header">
             <h1>Dark Node API</h1>
-            <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
         </div>
 
-        <div class="sidebar" id="sidebar">
-            <h2>Menu</h2>
-            <ul>
-                <li><a onclick="openSection('/api/ai')">AI Tools</a></li>
-                <li><a onclick="openSection('/api/download')">Download</a></li>
-                <li><a onclick="openSection('/api/games')">Games</a></li>
-                <li><a onclick="openSection('/api/images')">Images</a></li>
-                <li><a onclick="openSection('/api/islamic')">Islamic</a></li>
-                <li><a onclick="openSection('/api/nsfw')">NSFW</a></li>
-                <li><a onclick="openSection('/api/search')">Search</a></li>
-            </ul>
-        </div>
-
-        <div class="main-content">
-            <h2>Welcome to Dark Node API</h2>
-            <div class="api-output" id="api-output">
-                <p>Select a menu option to display API data here.</p>
-            </div>
+        <!-- API Sections -->
+        <div class="api-container">
+            <div class="api-box" onclick="openPage('ai')">AI Tools</div>
+            <div class="api-box" onclick="openPage('download')">Download</div>
+            <div class="api-box" onclick="openPage('games')">Games</div>
+            <div class="api-box" onclick="openPage('images')">Images</div>
+            <div class="api-box" onclick="openPage('islamic')">Islamic</div>
+            <div class="api-box" onclick="openPage('tools')">Tools</div>
         </div>
     </div>
 
-    <button class="floating-btn" onclick="toggleSidebar()">☰</button>
+    <!-- API Pages (Initially Hidden) -->
+    <div id="api-page" class="hidden fade-enter">
+        <button class="back-btn" onclick="goBack()">🔙 رجوع</button>
+        <h2 id="api-title" style="text-align:center; margin-top: 50px;"></h2>
+        <div class="api-container" id="api-boxes"></div>
+    </div>
 
     <script>
         function startWebsite() {
             document.getElementById('landing').style.display = 'none';
             document.getElementById('main-page').classList.remove('hidden');
+            document.getElementById('main-page').classList.add('fade-enter-active');
         }
-        function toggleSidebar() {
-            document.getElementById('sidebar').classList.toggle('open');
+
+        function goHome() {
+            document.getElementById('api-page').classList.add('hidden');
+            document.getElementById('main-page').classList.remove('hidden');
+            document.getElementById('main-page').classList.add('fade-enter-active');
         }
-        function openSection(endpoint) {
-            window.location.href = endpoint;
+
+        function goBack() {
+            document.getElementById('api-page').classList.add('hidden');
+            document.getElementById('main-page').classList.remove('hidden');
+            document.getElementById('main-page').classList.add('fade-enter-active');
+        }
+
+        function openPage(api) {
+            const apiEndpoints = {
+                ai: ["/api/ai/text", "/api/ai/voice", "/api/ai/chat"],
+                download: ["/api/download/youtube", "/api/download/instagram", "/api/download/twitter"],
+                games: ["/api/games/rpg", "/api/games/shooter", "/api/games/puzzle"],
+                images: ["/api/images/random", "/api/images/hd", "/api/images/memes"],
+                islamic: ["/api/islamic/quran", "/api/islamic/hadith", "/api/islamic/prayer-times"],
+                tools: ["/api/tools/shorten-url", "/api/tools/qr-code", "/api/tools/password-generator"]
+            };
+
+            document.getElementById('main-page').classList.add('hidden');
+            document.getElementById('api-page').classList.remove('hidden');
+            document.getElementById('api-page').classList.add('fade-enter-active');
+
+            document.getElementById('api-title').innerText = api.toUpperCase() + " API";
+            const apiBoxes = document.getElementById('api-boxes');
+            apiBoxes.innerHTML = "";
+
+            apiEndpoints[api].forEach(endpoint => {
+                let box = document.createElement("div");
+                box.classList.add("api-box");
+                box.innerText = endpoint.split('/').pop().replace('-', ' ').toUpperCase();
+                box.onclick = () => copyToClipboard(endpoint);
+                apiBoxes.appendChild(box);
+            });
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert("تم نسخ API: " + text);
+            });
         }
     </script>
 </body>
