@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>🔗 الـ API</h1>
+        <p>يوجد هنا كمية الـ API التي تحتاجها</p>
+
+        <div class="api-box" onclick="copyToClipboard('/api/ai')">📜 AI API</div>
+        <div class="api-box" onclick="copyToClipboard('/api/download')">📜 Download API</div>
+        <div class="api-box" onclick="copyToClipboard('/api/tools')">📜 Tools API</div>
+
+        <h2>🛠 تجربة الـ API</h2>
+        <button onclick="fetchApi('/api/ai')">🔄 جلب بيانات AI</button>
+        <button onclick="fetchApi('/api/download')">🔄 جلب بيانات التحميل</button>
+        <button onclick="fetchApi('/api/tools')">🔄 جلب بيانات الأدوات</button>
+
+        <div id="api-output" class="api-output"></div>
+
+        <a href="index.html"><button class="back-btn">🔙 عودة</button></a>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="api-handler.js"></script>
+
+</body>
+</html>
