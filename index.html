@@ -26,17 +26,33 @@
             let url = document.getElementById("urlInput").value;
             if (!url) return alert("❌ الرجاء إدخال رابط!");
 
-            const proxyUrl = "https://api.allorigins.win/get?url=" + encodeURIComponent(url);
             document.getElementById("result").innerHTML = "⏳ جاري سحب البيانات...";
+            
+            // قائمة البروكسيات (جرب واحدة تلو الأخرى)
+            const proxies = [
+                "https://corsproxy.io/?", 
+                "https://api.allorigins.win/get?url=", 
+                "https://thingproxy.freeboard.io/fetch/"
+            ];
 
-            try {
-                let response = await fetch(proxyUrl);
-                let data = await response.json();
-                document.getElementById("result").innerHTML = data.contents;
-            } catch (error) {
-                console.error("❌ خطأ:", error);
-                document.getElementById("result").innerHTML = "❌ فشل سحب البيانات!";
+            for (let proxy of proxies) {
+                try {
+                    let response = await fetch(proxy + encodeURIComponent(url));
+                    let data = await response.json();
+                    
+                    if (data.contents) { 
+                        document.getElementById("result").innerHTML = data.contents;
+                        return; // إذا نجح، لا نكمل
+                    } else if (data) { 
+                        document.getElementById("result").innerHTML = JSON.stringify(data, null, 2);
+                        return;
+                    }
+                } catch (error) {
+                    console.warn(`🔴 فشل مع: ${proxy}`);
+                }
             }
+
+            document.getElementById("result").innerHTML = "❌ لم نتمكن من سحب البيانات!";
         }
     </script>
 
