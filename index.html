@@ -46,36 +46,11 @@
     <a href="https://wa.me/201063808608"><button class="btn">📩 للشراء</button></a>
 </div>
 
-<div id="apiAccess" class="container">
-    <h1>🔑 تشغيل الـ API</h1>
-    <input type="text" id="apiKeyInput" placeholder="أدخل الكود هنا..." style="padding: 10px; width: 80%; text-align: center; font-size: 18px;">
-    <button class="btn" onclick="fetchApiData()">🔓 تشغيل</button>
-    <div id="apiResult" style="margin-top: 20px; display: none;">
-        <h2>✅ البيانات المسترجعة:</h2>
-        <pre id="apiData" style="background: #111; padding: 10px; border-radius: 5px; text-align: left;"></pre>
-    </div>
-</div>
-
-<script>
-    async function fetchApiData() {
-        let userKey = document.getElementById("apiKeyInput").value;
-        let validKey = "DARKNODE2025"; // 🔥 الكود الصحيح
-
-        if (userKey === validKey) {
-            try {
-                let response = await fetch("https://api-streamline-pro.vercel.app/api/ai/chat-model"); // 🔥 استبدل برابط API الحقيقي
-                let data = await response.json();
-                document.getElementById("apiResult").style.display = "block";
-                document.getElementById("apiData").textContent = JSON.stringify(data, null, 2);
-            } catch (error) {
-                alert("❌ حدث خطأ أثناء جلب البيانات!");
-                console.error(error);
-            }
-        } else {
-            alert("❌ الكود غير صحيح، حاول مرة أخرى!");
-        }
-    }
-</script>
+<div id="api" class="container">
+    <h1>🛰 API</h1>
+    <div class="api-item">🚀 API الصور → <span id="api1" class="api-hidden">https://api.example.com/images</span> <button class="btn" onclick="copyToClipboard('api1')">📋 إظهار</button></div>
+    <div class="api-item">🎵 API الأغاني → <span id="api2" class="api-hidden">https://api.example.com/music</span> <button class="btn" onclick="copyToClipboard('api2')">📋 إظهار</button></div>
+    <div class="api-item">📄 API النصوص → <span id="api3" class="api-hidden">https://api.example.com/text</span> <button class="btn" onclick="copyToClipboard('api3')">📋 إظهار</button></div>
 </div>
 
 <div id="developer" class="container">
