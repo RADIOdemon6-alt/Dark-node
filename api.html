@@ -3,31 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>API</title>
-    <link rel="stylesheet" href="style.css">
+    <title>🛰 API - Dark Node</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
     <div class="container">
-        <h1>🔗 الـ API</h1>
-        <p>يوجد هنا كمية الـ API التي تحتاجها</p>
+        <h1>🛰 API</h1>
+        <div class="api-section">
+            <h2>🎮 ألعاب</h2>
+            <div class="api-item">🎲 لعبة 1 → <span id="game1">https://api.example.com/game1</span> <button class="btn" onclick="copyToClipboard('game1')">📋 نسخ</button></div>
+            <div class="api-item">🎯 لعبة 2 → <span id="game2">https://api.example.com/game2</span> <button class="btn" onclick="copyToClipboard('game2')">📋 نسخ</button></div>
+            <div class="api-item">🎰 لعبة 3 → <span id="game3">https://api.example.com/game3</span> <button class="btn" onclick="copyToClipboard('game3')">📋 نسخ</button></div>
+        </div>
 
-        <div class="api-box" onclick="copyToClipboard('/api/ai')">📜 AI API</div>
-        <div class="api-box" onclick="copyToClipboard('/api/download')">📜 Download API</div>
-        <div class="api-box" onclick="copyToClipboard('/api/tools')">📜 Tools API</div>
-
-        <h2>🛠 تجربة الـ API</h2>
-        <button onclick="fetchApi('/api/ai')">🔄 جلب بيانات AI</button>
-        <button onclick="fetchApi('/api/download')">🔄 جلب بيانات التحميل</button>
-        <button onclick="fetchApi('/api/tools')">🔄 جلب بيانات الأدوات</button>
-
-        <div id="api-output" class="api-output"></div>
-
-        <a href="index.html"><button class="back-btn">🔙 عودة</button></a>
+        <div class="api-section">
+            <h2>🤖 ذكاء اصطناعي</h2>
+            <div class="api-item">🧠 AI 1 → <span id="ai1">https://api.example.com/ai1</span> <button class="btn" onclick="copyToClipboard('ai1')">📋 نسخ</button></div>
+            <div class="api-item">🧠 AI 2 → <span id="ai2">https://api.example.com/ai2</span> <button class="btn" onclick="copyToClipboard('ai2')">📋 نسخ</button></div>
+            <div class="api-item">🧠 AI 3 → <span id="ai3">https://api.example.com/ai3</span> <button class="btn" onclick="copyToClipboard('ai3')">📋 نسخ</button></div>
+        </div>
     </div>
 
     <script src="script.js"></script>
-    <script src="api-handler.js"></script>
 
 </body>
 </html>
