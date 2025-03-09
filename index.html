@@ -6,20 +6,9 @@
     <title>Dark Node API</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Orbitron', sans-serif;
-            background: #000;
-            color: white;
-            text-align: center;
-            overflow: hidden;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Orbitron', sans-serif; background: #000; color: white; text-align: center; overflow: hidden; }
+        
         /* Neon Box */
         .neon-box {
             display: flex;
@@ -51,25 +40,11 @@
             box-shadow: 0 0 15px red;
         }
 
-        .start-btn:hover {
-            background: #ff4444;
-            box-shadow: 0 0 30px red;
-            transform: scale(1.1);
-        }
+        .start-btn:hover { background: #ff4444; box-shadow: 0 0 30px red; transform: scale(1.1); }
 
         /* Main Content */
-        .hidden {
-            display: none;
-        }
-
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px;
-            background: rgba(255, 0, 0, 0.2);
-            backdrop-filter: blur(10px);
-        }
+        .hidden { display: none; }
+        .header { padding: 20px; background: rgba(255, 0, 0, 0.2); backdrop-filter: blur(10px); }
 
         .sidebar {
             position: fixed;
@@ -82,21 +57,9 @@
             padding-top: 20px;
         }
 
-        .sidebar.open {
-            left: 0;
-        }
-
-        .sidebar h2 {
-            color: red;
-            text-shadow: 0 0 10px red;
-            margin-bottom: 10px;
-        }
-
-        .sidebar ul {
-            list-style: none;
-            padding: 0;
-        }
-
+        .sidebar.open { left: 0; }
+        .sidebar h2 { color: red; text-shadow: 0 0 10px red; margin-bottom: 10px; }
+        .sidebar ul { list-style: none; padding: 0; }
         .sidebar ul li {
             padding: 10px;
             text-align: center;
@@ -105,30 +68,38 @@
             font-size: 1.2rem;
         }
 
-        .sidebar ul li:hover {
-            background: red;
-            color: black;
-        }
+        .sidebar ul li:hover { background: red; color: black; }
 
         .main-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            transition: all 0.5s ease-in-out;
+            opacity: 0;
+            background: rgba(255, 0, 0, 0.1);
             padding: 20px;
-            margin-left: 260px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px red;
+            backdrop-filter: blur(10px);
         }
 
-        /* Glass Effect */
+        /* Glass Breaking Effect */
         .glass-effect {
             position: fixed;
             width: 100%;
             height: 100%;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(15px);
-            opacity: 1;
+            opacity: 0;
             transition: all 0.5s ease-in-out;
         }
 
         .glass-effect.shattered {
-            opacity: 0;
-            transform: scale(1.2);
+            opacity: 1;
+            transform: scale(1.1) rotate(10deg);
+            background: url('https://files.catbox.moe/nh8h8b.png') no-repeat center center/cover;
         }
 
         /* API Boxes */
@@ -150,10 +121,7 @@
             box-shadow: 0 0 10px red;
         }
 
-        .api-box:hover {
-            background: red;
-            transform: scale(1.1);
-        }
+        .api-box:hover { background: red; transform: scale(1.1); }
     </style>
 </head>
 <body>
@@ -184,7 +152,7 @@
             </ul>
         </div>
 
-        <div class="main-content">
+        <div class="main-content" id="category-section">
             <h2 id="category-title">🔥 أهلاً بك في Dark Node API 🔥</h2>
             <div class="glass-effect" id="glass"></div>
             <div class="api-container" id="api-list"></div>
@@ -225,6 +193,8 @@
             const glass = document.getElementById('glass');
             glass.classList.add('shattered');
             setTimeout(() => glass.classList.remove('shattered'), 500);
+
+            document.getElementById('category-section').style.opacity = "1";
         }
 
         function copyToClipboard(text) {
