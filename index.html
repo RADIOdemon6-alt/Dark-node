@@ -1,157 +1,86 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dark Node API</title>
+    <title>⚡ Api Dark Node</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background: url('https://qu.ax/WmCZr.jpg') no-repeat center center fixed;
-            background-size: cover;
-            color: white;
-            margin: 0;
-            padding: 0;
-        }
-        .hidden { display: none; }
-        .container { padding: 20px; }
-        .btn, .api-box {
-            background: #ff0077;
-            color: white;
-            padding: 10px;
-            margin: 10px;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-            border-radius: 5px;
-            display: block;
-            width: 80%;
-            max-width: 300px;
-            margin: 10px auto;
-        }
-        .api-box {
-            background: rgba(0, 0, 0, 0.7);
-            border: 1px solid white;
-            padding: 15px;
-            cursor: pointer;
-        }
-        .floating-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #ff0077;
-            color: white;
-            border-radius: 50%;
-            padding: 15px;
-        }
-        .back-btn {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            background: #444;
-            color: white;
-            padding: 10px;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Orbitron', sans-serif; }
+        body { background: url('https://files.catbox.moe/5o0hnu.jpg') no-repeat center center fixed; background-size: cover; color: #fff; text-align: center; overflow-y: auto; }
+        .sidebar { position: fixed; top: 0; left: -220px; width: 200px; height: 100%; background: rgba(0, 0, 0, 0.9); padding: 20px; box-shadow: 0px 0px 15px rgba(255, 0, 0, 0.7); transition: left 0.4s ease-in-out; z-index: 1000; }
+        .sidebar a { display: block; color: #ff0077; text-decoration: none; font-size: 18px; margin: 15px 0; transition: 0.3s; }
+        .sidebar a:hover { color: #00ffee; text-shadow: 0px 0px 10px #00ffee; }
+        .toggle-btn, .music-btn { position: fixed; bottom: 20px; right: 20px; background: #ff0077; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0px 0px 10px #ff0077; transition: 0.3s; }
+        .toggle-btn { top: 20px; }
+        .toggle-btn:hover, .music-btn:hover { background: #00ffee; box-shadow: 0px 0px 15px #00ffee; }
+        .container { max-width: 900px; margin: 50px auto; padding: 20px; border-radius: 10px; background: rgba(20, 20, 20, 0.9); box-shadow: 0px 0px 20px rgba(255, 0, 255, 0.7); display: none; }
+        .active { display: block; }
+        .api-box { background: #200000; padding: 15px; margin: 10px 0; border-radius: 5px; box-shadow: 0px 0px 15px red; color: #ff4444; font-size: 18px; font-weight: bold; display: flex; justify-content: space-between; align-items: center; }
+        .btn { background: #ff0077; padding: 10px 20px; border-radius: 5px; color: white; cursor: pointer; transition: 0.3s; box-shadow: 0px 0px 10px #ff0077; }
+        .btn:hover { background: #00ffee; box-shadow: 0px 0px 15px #00ffee; }
     </style>
 </head>
 <body>
+<div class="sidebar" id="sidebar">
+    <a href="#" onclick="showPage('home')">🏠 الرئيسية</a>
+    <a href="#" onclick="showPage('buy')">🛒 شراء السكريبت</a>
+    <a href="#" onclick="showPage('api')">🛰 API</a>
+    <a href="#" onclick="showPage('developer')">💻 معلومات المطور</a>
+</div>
 
-    <!-- الصفحة الترحيبية -->
-    <div id="welcome-screen">
-        <h1>مرحبا بك في Dark Node API</h1>
-        <button class="btn" onclick="startApp()">ابدأ</button>
-    </div>
+<div class="toggle-btn" onclick="toggleSidebar()">☰</div>
+<div class="music-btn" onclick="toggleMusic()">🎵</div>
 
-    <!-- الصفحة الرئيسية -->
-    <div id="main-page" class="hidden container">
-        <button class="floating-btn" onclick="toggleMenu()">☰</button>
-        <div id="menu" class="hidden">
-            <button class="btn" onclick="showPage('api')">📜 API</button>
-            <button class="btn" onclick="showPage('developer')">💻 المطور</button>
-            <button class="btn" onclick="showPage('contact')">📩 تواصل معانا</button>
-        </div>
-    </div>
+<div id="home" class="container active">
+    <h1>✨ مرحبًا بك في <span class="neon-text">API Dark Node</span> ✨</h1>
+</div>
 
-    <!-- صفحة API -->
-    <div id="api" class="hidden container">
-        <button class="back-btn" onclick="goBack()">🔙</button>
-        <h1>📜 قائمة API</h1>
-        <button class="btn" onclick="showApiPage('games')">🎮 العاب</button>
-        <button class="btn" onclick="showApiPage('religion')">🕌 ديني</button>
-        <button class="btn" onclick="showApiPage('download')">⬇️ تحميل</button>
-        <button class="btn" onclick="showApiPage('tools')">🛠 أدوات</button>
-        <button class="btn" onclick="showApiPage('search')">🔎 بحث</button>
-        <button class="btn" onclick="showApiPage('ai')">🤖 ذكاء اصطناعي</button>
-        <button class="btn" onclick="showApiPage('other')">📦 آخر</button>
-    </div>
+<div id="buy" class="container">
+    <h1 style="color: #ff0000; text-shadow: 0px 0px 10px red;">🍷 أسعار السكريبتات 🍷</h1>
+    <div class="api-box">⚜️ اسكريبت البوت دون مساعده → <span>150 جنيه</span></div>
+    <div class="api-box">⚜️ اسكريبت البوت مع المساعده في رفعه و تشغيله → <span>250 جنيه</span></div>
+    <p>الدفع عبر فودافون كاش او شحن ببجي او instapay</p>
+    <a href="https://wa.me/201063808608"><button class="btn">📩 للشراء</button></a>
+</div>
 
-    <!-- صفحة API الفردية -->
-    <div id="api-page" class="hidden container">
-        <button class="back-btn" onclick="showPage('api')">🔙</button>
-        <h1 id="api-title"></h1>
-        <div id="api-content"></div>
-    </div>
+<div id="api" class="container">
+    <h1>🛰 API</h1>
+    <button class="btn" onclick="showApiPage('api-images')">🚀 API الصور</button>
+    <button class="btn" onclick="showApiPage('api-music')">🎵 API الأغاني</button>
+    <button class="btn" onclick="showApiPage('api-text')">📄 API النصوص</button>
+</div>
 
-    <!-- صفحة المطور -->
-    <div id="developer" class="hidden container">
-        <button class="back-btn" onclick="goBack()">🔙</button>
-        <h1>💻 المطور</h1>
-        <p>👨‍💻 اسم المطور: 𝑅𝐴𝐷𝐼𝛩 𝐷𝐸𝑀𝛩𝑁</p>
-        <p>🤖 اسم البوت: 𝙱𝙾𝚃-𝙼𝚄𝙺𝙾</p>
-        <a href="https://wa.me/201063808608"><button class="btn">📩 واتساب</button></a>
-    </div>
+<div id="api-images" class="container">
+    <h1>🚀 API الصور</h1>
+    <div class="api-box">🌆 صور طبيعية → <span id="img1">https://api.example.com/nature</span> <button class="btn" onclick="copyToClipboard('img1')">📋 نسخ</button></div>
+    <div class="api-box">👤 صور شخصية → <span id="img2">https://api.example.com/avatars</span> <button class="btn" onclick="copyToClipboard('img2')">📋 نسخ</button></div>
+    <div class="api-box">🐾 صور حيوانات → <span id="img3">https://api.example.com/animals</span> <button class="btn" onclick="copyToClipboard('img3')">📋 نسخ</button></div>
+</div>
 
-    <!-- صفحة التواصل -->
-    <div id="contact" class="hidden container">
-        <button class="back-btn" onclick="goBack()">🔙</button>
-        <h1>📩 تواصل معانا</h1>
-        <a href="https://chat.whatsapp.com/BNARMEg1L87JOz8oSR9eFD"><button class="btn">🛠 دعم البوت</button></a>
-        <a href="https://whatsapp.com/channel/0029Vb2j3d6HVvTiMzx5QF13"><button class="btn">📢 قناة Dark-node</button></a>
-    </div>
+<div id="api-music" class="container">
+    <h1>🎵 API الأغاني</h1>
+    <div class="api-box">🎶 أغاني بوب → <span id="music1">https://api.example.com/pop</span> <button class="btn" onclick="copyToClipboard('music1')">📋 نسخ</button></div>
+    <div class="api-box">🎸 أغاني روك → <span id="music2">https://api.example.com/rock</span> <button class="btn" onclick="copyToClipboard('music2')">📋 نسخ</button></div>
+    <div class="api-box">🎵 أغاني راب → <span id="music3">https://api.example.com/rap</span> <button class="btn" onclick="copyToClipboard('music3')">📋 نسخ</button></div>
+</div>
 
-    <script>
-        function startApp() {
-            document.getElementById("welcome-screen").classList.add("hidden");
-            document.getElementById("main-page").classList.remove("hidden");
-        }
+<div id="api-text" class="container">
+    <h1>📄 API النصوص</h1>
+    <div class="api-box">📖 نصوص عامة → <span id="text1">https://api.example.com/general</span> <button class="btn" onclick="copyToClipboard('text1')">📋 نسخ</button></div>
+    <div class="api-box">📝 نصوص أدبية → <span id="text2">https://api.example.com/literature</span> <button class="btn" onclick="copyToClipboard('text2')">📋 نسخ</button></div>
+    <div class="api-box">📜 نصوص دينية → <span id="text3">https://api.example.com/religious</span> <button class="btn" onclick="copyToClipboard('text3')">📋 نسخ</button></div>
+</div>
 
-        function toggleMenu() {
-            document.getElementById("menu").classList.toggle("hidden");
-        }
-
-        function showPage(pageId) {
-            document.querySelectorAll(".container").forEach(div => div.classList.add("hidden"));
-            document.getElementById(pageId).classList.remove("hidden");
-        }
-
-        function goBack() {
-            showPage("main-page");
-        }
-
-        function showApiPage(category) {
-            let apiLinks = {
-                games: ["https://api.darknode/games1", "https://api.darknode/games2", "https://api.darknode/games3"],
-                religion: ["https://api.darknode/religion1", "https://api.darknode/religion2", "https://api.darknode/religion3"],
-                download: ["https://api.darknode/download1", "https://api.darknode/download2", "https://api.darknode/download3"],
-                tools: ["https://api.darknode/tools1", "https://api.darknode/tools2", "https://api.darknode/tools3"],
-                search: ["https://api.darknode/search1", "https://api.darknode/search2", "https://api.darknode/search3"],
-                ai: ["https://api.darknode/ai1", "https://api.darknode/ai2", "https://api.darknode/ai3"],
-                other: ["https://api.darknode/other1", "https://api.darknode/other2", "https://api.darknode/other3"]
-            };
-
-            document.getElementById("api-title").innerText = "📜 " + category.toUpperCase();
-            document.getElementById("api-content").innerHTML = apiLinks[category].map(link => 
-                `<div class="api-box" onclick="copyToClipboard('${link}')">${link}</div>`).join("");
-
-            showPage("api-page");
-        }
-
-        function copyToClipboard(text) {
-            navigator.clipboard.writeText(text);
-            alert("تم نسخ الرابط: " + text);
-        }
-    </script>
-
+<script>
+    function showPage(pageId) {
+        document.querySelectorAll('.container').forEach(page => page.classList.remove('active'));
+        document.getElementById(pageId).classList.add('active');
+    }
+    function copyToClipboard(id) {
+        navigator.clipboard.writeText(document.getElementById(id).textContent);
+        alert("تم نسخ الرابط!");
+    }
+</script>
 </body>
 </html>
