@@ -218,6 +218,30 @@
         <p>إذا كنت بحاجة إلى مساعدة أو استفسار، لا تتردد في الاتصال بنا.</p>
         <button onclick="location.href='mailto:support@darknode.com'">راسلنا الآن</button>
     </section>
+div class="api-categories">    
+        <button onclick="openCategory('games')">🎮 ألعاب</button>    
+        <button onclick="openCategory('ai')">🤖 ذكاء اصطناعي</button>    
+        <button onclick="openCategory('tools')">🛠️ أدوات</button>    
+        <button onclick="openCategory('religion')">🕌 دين</button>    
+        <button onclick="openCategory('download')">📥 تحميل</button>    
+        <button onclick="openCategory('search')">🔍 بحث</button>    
+    </div>  <div id="api-list"></div>    
+<button onclick="switchPage('home')">🔙 رجوع</button>  </div>  </div><script>    
+    function switchPage(pageId) {    
+        document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));    
+        document.getElementById(pageId).classList.add('active');    
+        adjustScrolling();    
+    }  function toggleSidebar() {    
+    const sidebar = document.getElementById("sidebar");    
+    sidebar.style.right = (sidebar.style.right === "0px") ? "-250px" : "0px";    
+}    const apiEndpoints = {
+games: ["https://api.example.com/game1", "https://api.example.com/game2", "https://api.example.com/game3"],
+ai: ["https://api.example.com/ai1", "https://api.example.com/ai2", "https://api.example.com/ai3"],
+tools: ["https://api.example.com/tool1", "https://api.example.com/tool2", "https://api.example.com/tool3"],
+religion: ["https://api.example.com/religion1", "https://api.example.com/religion2", "https://api.example.com/religion3"],
+download: ["https://api.example.com/download1", "https://api.example.com/download2", "https://api.example.com/download3"],
+search: ["https://api.example.com/search1", "https://api.example.com/search2", "https://api.example.com/search3"]
+};
 
     <script>
         // تأثيرات الظهور عند التمرير
