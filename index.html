@@ -3,203 +3,232 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dark Node API 🔥</title>
+    <title>DarkNode 🚀 | أقوى منصة APIs</title>
+    <meta property="og:title" content="DarkNode - منصة APIs متطورة">
+    <meta property="og:description" content="أفضل منصة لإنشاء وإدارة APIs البوتات والذكاء الاصطناعي.">
+    <meta property="og:image" content="https://yourimage.com/darknode_banner.jpg">
+    <link rel="shortcut icon" href="https://yourimage.com/darknode_icon.png">
+    
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap');
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: "Arial", sans-serif;
+            font-family: 'Tajawal', sans-serif;
+            scroll-behavior: smooth;
         }
+
         body {
-            background: #0d0d0d;
+            background-color: #0D0D2B;
             color: white;
             text-align: center;
-            overflow: hidden;
         }
-        #start-container {
+
+        /* شريط التنقل */
+        .navbar {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            height: 100vh;
-        }
-        #start-btn {
-            padding: 15px 30px;
-            font-size: 22px;
-            background: #8b0000;
-            color: white;
-            border: none;
-            cursor: pointer;
-            transition: 0.3s;
-            box-shadow: 0px 0px 15px #ff0000;
-        }
-        #start-btn:hover {
-            background: #660000;
-            box-shadow: 0px 0px 25px #ff0000;
-        }
-        #main-content {
-            display: none;
-            animation: fadeIn 1s ease-in-out;
-        }
-        #menu-btn {
-            display: none;
+            padding: 15px 10%;
+            background: rgba(0, 0, 0, 0.8);
             position: fixed;
-            top: 15px;
-            right: 15px;
-            padding: 10px 15px;
-            background: #8b0000;
-            color: white;
-            border: none;
-            cursor: pointer;
-            font-size: 22px;
-            transition: 0.3s;
-            box-shadow: 0px 0px 15px #ff0000;
-        }
-        #menu-btn:hover {
-            background: #660000;
-        }
-        #menu {
-            position: fixed;
+            width: 100%;
             top: 0;
-            right: -250px;
-            width: 250px;
-            height: 100%;
-            background: rgba(20, 0, 0, 0.9);
-            padding-top: 60px;
-            transition: 0.5s;
-            box-shadow: -5px 0 15px #ff0000;
-            border-left: 3px solid #ff0000;
+            left: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
         }
-        #menu.active {
-            right: 0;
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
         }
-        .menu-item {
-            padding: 15px;
-            font-size: 20px;
-            cursor: pointer;
-            transition: 0.3s;
+
+        .navbar ul li {
+            display: inline;
+        }
+
+        .navbar ul li a {
+            text-decoration: none;
             color: white;
+            font-size: 18px;
+            transition: 0.3s;
         }
-        .menu-item:hover {
-            background: #8b0000;
-            color: #ff0000;
+
+        .navbar ul li a:hover {
+            color: #FFEB3B;
         }
-        .container {
-            display: none;
-            padding: 20px;
+
+        /* قسم الهيدر */
+        .header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: url('https://files.catbox.moe/5o0hnu.jpg') no-repeat center center/cover;
+            text-align: center;
         }
-        .api-item {
-            padding: 15px;
-            background: #220000;
-            margin: 10px;
+
+        .header h1 {
+            font-size: 55px;
+            font-weight: bold;
+            background: linear-gradient(45deg, #FFEB3B, #FF4081);
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+        }
+
+        .header p {
+            font-size: 22px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* الأقسام */
+        .section {
+            padding: 80px 10%;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease-in-out;
+        }
+
+        .section.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .services, .features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .box {
+            background-color: #1A1A40;
+            padding: 30px;
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .box:hover {
+            transform: scale(1.05);
+            background-color: #25255A;
+        }
+
+        .box img {
+            width: 60px;
+            margin-bottom: 15px;
+        }
+
+        /* قسم الاتصال */
+        .contact {
+            background: linear-gradient(135deg, #1976D2, #512DA8);
+            padding: 60px 10%;
+            text-align: center;
+        }
+
+        .contact button {
+            padding: 12px 20px;
+            background: #FFEB3B;
+            color: black;
+            font-size: 18px;
+            border: none;
             cursor: pointer;
             transition: 0.3s;
             border-radius: 5px;
-            box-shadow: 0px 0px 10px #ff0000;
         }
-        .api-item:hover {
-            background: #8b0000;
-            box-shadow: 0px 0px 20px #ff0000;
+
+        .contact button:hover {
+            background: #FF4081;
+            transform: scale(1.05);
         }
-        .btn {
-            display: block;
-            width: 200px;
-            padding: 10px;
-            margin: 10px auto;
-            background: #8b0000;
-            color: white;
-            text-decoration: none;
-            border: none;
-            cursor: pointer;
-            transition: 0.3s;
-            box-shadow: 0px 0px 15px #ff0000;
-        }
-        .btn:hover {
-            background: #660000;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+
     </style>
 </head>
 <body>
 
-    <!-- زر البداية -->
-    <div id="start-container">
-        <button id="start-btn">🔥 ابدأ 🔥</button>
-    </div>
+    <!-- شريط التنقل -->
+    <nav class="navbar">
+        <ul>
+            <li><a href="#home">الرئيسية</a></li>
+            <li><a href="#services">الخدمات</a></li>
+            <li><a href="#features">المميزات</a></li>
+            <li><a href="#contact">اتصل بنا</a></li>
+        </ul>
+    </nav>
 
-    <!-- المحتوى الرئيسي -->
-    <div id="main-content">
-        <button id="menu-btn">☰ القائمة</button>
+    <!-- هيدر الصفحة -->
+    <header class="header" id="home">
+        <h1>مرحبًا بك في DarkNode 🚀</h1>
+        <p>أقوى منصة APIs لإنشاء وإدارة البوتات والذكاء الاصطناعي بسهولة وسرعة.</p>
+    </header>
 
-        <!-- القائمة الجانبية -->
-        <div id="menu">
-            <div class="menu-item" onclick="showSection('apiCategories')">🌐 API</div>
-            <div class="menu-item" onclick="showSection('developer')">💀 المطور</div>
-            <div class="menu-item" onclick="showSection('contact')">📞 التواصل</div>
+    <!-- قسم الخدمات -->
+    <section class="section" id="services">
+        <h2>خدماتنا</h2>
+        <div class="services">
+            <div class="box">
+                <img src="https://yourimage.com/api_icon.png" alt="API">
+                <h3>تطوير APIs</h3>
+                <p>أفضل الحلول لإنشاء APIs متطورة بسرعة.</p>
+            </div>
+            <div class="box">
+                <img src="https://yourimage.com/hosting_icon.png" alt="Hosting">
+                <h3>استضافة البوتات</h3>
+                <p>استضافة موثوقة للبوتات والذكاء الاصطناعي.</p>
+            </div>
+            <div class="box">
+                <img src="https://yourimage.com/security_icon.png" alt="Security">
+                <h3>أمان متقدم</h3>
+                <p>نظام حماية قوي ضد الهجمات والاختراقات.</p>
+            </div>
         </div>
+    </section>
 
-        <!-- قسم API -->
-        <div id="apiCategories" class="container">
-            <h1>⚡ اختر قسم API</h1>
-            <div class="api-item" onclick="showPage('games')">🎮 ألعاب</div>
-            <div class="api-item" onclick="showPage('tools')">🛠 أدوات</div>
-            <div class="api-item" onclick="showPage('ai')">🤖 ذكاء اصطناعي</div>
+    <!-- قسم المميزات -->
+    <section class="section" id="features">
+        <h2>لماذا DarkNode؟</h2>
+        <div class="features">
+            <div class="box">
+                <h3>سرعة فائقة ⚡</h3>
+                <p>أداء سريع جدًا لجميع الخدمات.</p>
+            </div>
+            <div class="box">
+                <h3>تقنيات حديثة 🛠</h3>
+                <p>ندعم أحدث التقنيات البرمجية.</p>
+            </div>
+            <div class="box">
+                <h3>دعم فني 24/7 📞</h3>
+                <p>متواجدون دائمًا لمساعدتك.</p>
+            </div>
         </div>
+    </section>
 
-        <!-- صفحة الألعاب -->
-        <div id="games" class="container">
-            <h1>🎮 API الألعاب</h1>
-            <div class="api-item" onclick="copyApi('https://api.example.com/games1')">🎲 API 1</div>
-            <div class="api-item" onclick="copyApi('https://api.example.com/games2')">🎯 API 2</div>
-            <div class="api-item" onclick="copyApi('https://api.example.com/games3')">🕹 API 3</div>
-        </div>
-
-        <!-- قسم المطور -->
-        <div id="developer" class="container">
-            <h1>💀 المطور</h1>
-            <p>👨‍💻 اسم المطور: 𝑅𝐴𝐷𝐼𝛩 𝐷𝐸𝑀𝛩𝑁</p>
-            <p>🤖 اسم البوت: 𝙱𝙾𝚃-𝙼𝚄𝙺𝙾</p>
-        </div>
-
-        <!-- قسم التواصل -->
-        <div id="contact" class="container">
-            <h1>📞 قسم التواصل</h1>
-            <a href="https://wa.me/201063808608"><button class="btn">📩 واتساب</button></a>
-            <a href="https://chat.whatsapp.com/BNARMEg1L87JOz8oSR9eFD"><button class="btn">🛠 دعم البوت</button></a>
-            <a href="https://whatsapp.com/channel/0029Vb2j3d6HVvTiMzx5QF13"><button class="btn">📢 قناة Dark-node</button></a>
-            <a href="https://whatsapp.com/channel/0029VaumDtWJZg4B8jLyMK2q"><button class="btn">📢 تابع قناتي لي معرفه كل جديد</button></a>
-        </div>
-
-    </div>
+    <!-- قسم الاتصال -->
+    <section class="contact" id="contact">
+        <h2>تواصل معنا</h2>
+        <p>إذا كنت بحاجة إلى مساعدة أو استفسار، لا تتردد في الاتصال بنا.</p>
+        <button onclick="location.href='mailto:https://wa.me/201063808608'">راسلنا الآن</button>
+    </section>
 
     <script>
-        document.getElementById("start-btn").addEventListener("click", function() {
-            document.getElementById("start-container").style.display = "none";
-            document.getElementById("main-content").style.display = "block";
-            document.getElementById("menu-btn").style.display = "block";
+        // تأثيرات الظهور عند التمرير
+        const sections = document.querySelectorAll('.section');
+
+        window.addEventListener('scroll', () => {
+            sections.forEach(section => {
+                if (section.getBoundingClientRect().top < window.innerHeight - 50) {
+                    section.classList.add('show');
+                }
+            });
         });
-
-        document.getElementById("menu-btn").addEventListener("click", function() {
-            document.getElementById("menu").classList.toggle("active");
-        });
-
-        function showSection(id) {
-            document.querySelectorAll(".container").forEach(section => section.style.display = "none");
-            document.getElementById(id).style.display = "block";
-            document.getElementById("menu").classList.remove("active");
-        }
-
-        function showPage(id) {
-            showSection(id);
-        }
-
-        function copyApi(apiUrl) {
-            navigator.clipboard.writeText(apiUrl);
-            alert("🔥 تم نسخ الرابط: " + apiUrl);
-        }
     </script>
 
 </body>
