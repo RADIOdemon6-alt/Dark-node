@@ -21,9 +21,26 @@
         }
 
         body {
-            background-color: #0D0D2B;
+            background-color: #08081A;
             color: white;
             text-align: center;
+        }
+
+        /* تأثير Glitch */
+        .glitch {
+            font-size: 55px;
+            font-weight: bold;
+            background: linear-gradient(45deg, #FFEB3B, #FF4081);
+            -webkit-background-clip: text;
+            color: transparent;
+            text-shadow: 2px 2px 15px rgba(255, 64, 129, 0.8);
+            animation: glitch 1s infinite;
+        }
+
+        @keyframes glitch {
+            0% { text-shadow: 2px 2px 15px rgba(255, 64, 129, 0.8); }
+            50% { text-shadow: -2px -2px 20px rgba(255, 255, 0, 0.8); }
+            100% { text-shadow: 2px 2px 15px rgba(255, 64, 129, 0.8); }
         }
 
         /* شريط التنقل */
@@ -62,30 +79,32 @@
             color: #FFEB3B;
         }
 
-        /* قسم الهيدر */
+        /* زر API */
+        .api-btn {
+            padding: 10px 20px;
+            background: #FFEB3B;
+            color: black;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+            border-radius: 5px;
+        }
+
+        .api-btn:hover {
+            background: #FF4081;
+            transform: scale(1.05);
+        }
+
+        /* هيدر الصفحة */
         .header {
             height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: url('https://files.catbox.moe/5o0hnu.jpg') no-repeat center center/cover;
+            background: url('https://yourimage.com/tech_bg.jpg') no-repeat center center/cover;
             text-align: center;
-        }
-
-        .header h1 {
-            font-size: 55px;
-            font-weight: bold;
-            background: linear-gradient(45deg, #FFEB3B, #FF4081);
-            -webkit-background-clip: text;
-            color: transparent;
-            margin-bottom: 20px;
-        }
-
-        .header p {
-            font-size: 22px;
-            max-width: 600px;
-            margin: 0 auto;
         }
 
         /* الأقسام */
@@ -101,53 +120,24 @@
             transform: translateY(0);
         }
 
-        .services, .features {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
+        /* صفحة API */
+        .api-page {
+            background: #0A0A2B;
+            padding: 80px 10%;
+            color: white;
         }
 
-        .box {
+        .api-section {
             background-color: #1A1A40;
             padding: 30px;
             border-radius: 10px;
-            width: 300px;
-            text-align: center;
+            margin-bottom: 20px;
             transition: 0.3s;
         }
 
-        .box:hover {
+        .api-section:hover {
             transform: scale(1.05);
             background-color: #25255A;
-        }
-
-        .box img {
-            width: 60px;
-            margin-bottom: 15px;
-        }
-
-        /* قسم الاتصال */
-        .contact {
-            background: linear-gradient(135deg, #1976D2, #512DA8);
-            padding: 60px 10%;
-            text-align: center;
-        }
-
-        .contact button {
-            padding: 12px 20px;
-            background: #FFEB3B;
-            color: black;
-            font-size: 18px;
-            border: none;
-            cursor: pointer;
-            transition: 0.3s;
-            border-radius: 5px;
-        }
-
-        .contact button:hover {
-            background: #FF4081;
-            transform: scale(1.05);
         }
 
     </style>
@@ -160,67 +150,56 @@
             <li><a href="#home">الرئيسية</a></li>
             <li><a href="#services">الخدمات</a></li>
             <li><a href="#features">المميزات</a></li>
+            <li><a href="#api">API</a></li>
             <li><a href="#contact">اتصل بنا</a></li>
         </ul>
     </nav>
 
     <!-- هيدر الصفحة -->
     <header class="header" id="home">
-        <h1>مرحبًا بك في DarkNode 🚀</h1>
+        <h1 class="glitch">مرحبًا بك في DarkNode 🚀</h1>
         <p>أقوى منصة APIs لإنشاء وإدارة البوتات والذكاء الاصطناعي بسهولة وسرعة.</p>
+        <button class="api-btn" onclick="location.href='#api'">استكشف الـ API</button>
     </header>
 
-    <!-- قسم الخدمات -->
-    <section class="section" id="services">
-        <h2>خدماتنا</h2>
-        <div class="services">
-            <div class="box">
-                <img src="https://yourimage.com/api_icon.png" alt="API">
-                <h3>تطوير APIs</h3>
-                <p>أفضل الحلول لإنشاء APIs متطورة بسرعة.</p>
-            </div>
-            <div class="box">
-                <img src="https://yourimage.com/hosting_icon.png" alt="Hosting">
-                <h3>استضافة البوتات</h3>
-                <p>استضافة موثوقة للبوتات والذكاء الاصطناعي.</p>
-            </div>
-            <div class="box">
-                <img src="https://yourimage.com/security_icon.png" alt="Security">
-                <h3>أمان متقدم</h3>
-                <p>نظام حماية قوي ضد الهجمات والاختراقات.</p>
-            </div>
+    <!-- صفحة API -->
+    <section class="api-page" id="api">
+        <h2>🚀 خدمات الـ API المتاحة</h2>
+        
+        <div class="api-section">
+            <h3>📌 إنشاء البوتات</h3>
+            <p>إنشاء بوتات متقدمة بسهولة عبر واجهتنا القوية.</p>
         </div>
-    </section>
 
-    <!-- قسم المميزات -->
-    <section class="section" id="features">
-        <h2>لماذا DarkNode؟</h2>
-        <div class="features">
-            <div class="box">
-                <h3>سرعة فائقة ⚡</h3>
-                <p>أداء سريع جدًا لجميع الخدمات.</p>
-            </div>
-            <div class="box">
-                <h3>تقنيات حديثة 🛠</h3>
-                <p>ندعم أحدث التقنيات البرمجية.</p>
-            </div>
-            <div class="box">
-                <h3>دعم فني 24/7 📞</h3>
-                <p>متواجدون دائمًا لمساعدتك.</p>
-            </div>
+        <div class="api-section">
+            <h3>🔗 الربط مع الذكاء الاصطناعي</h3>
+            <p>دعم دمج الذكاء الاصطناعي في تطبيقاتك.</p>
         </div>
-    </section>
 
-    <!-- قسم الاتصال -->
-    <section class="contact" id="contact">
-        <h2>تواصل معنا</h2>
-        <p>إذا كنت بحاجة إلى مساعدة أو استفسار، لا تتردد في الاتصال بنا.</p>
-        <button onclick="location.href='mailto:https://wa.me/201063808608'">راسلنا الآن</button>
+        <div class="api-section">
+            <h3>💾 إدارة البيانات</h3>
+            <p>تخزين واسترجاع البيانات بسرعة فائقة.</p>
+        </div>
+
+        <div class="api-section">
+            <h3>🛡️ الأمان المتقدم</h3>
+            <p>حماية بياناتك وضمان أمان النظام.</p>
+        </div>
+
+        <div class="api-section">
+            <h3>📊 تحليلات متقدمة</h3>
+            <p>تتبع بيانات المستخدم وتحليلها بذكاء.</p>
+        </div>
+
+        <div class="api-section">
+            <h3>⚡ تكامل مع الأنظمة الأخرى</h3>
+            <p>دعم التكامل مع العديد من الخدمات الأخرى.</p>
+        </div>
     </section>
 
     <script>
         // تأثيرات الظهور عند التمرير
-        const sections = document.querySelectorAll('.section');
+        const sections = document.querySelectorAll('.section, .api-section');
 
         window.addEventListener('scroll', () => {
             sections.forEach(section => {
