@@ -39,12 +39,6 @@
             display: none;
             animation: fadeIn 1s ease-in-out;
         }
-        #welcome-text {
-            font-size: 30px;
-            margin-top: 20vh;
-            opacity: 0;
-            animation: fadeIn 1s forwards 0.5s;
-        }
         #menu-btn {
             display: none;
             position: fixed;
@@ -86,6 +80,17 @@
             display: none;
             padding: 20px;
         }
+        .api-item {
+            padding: 10px;
+            background: #333;
+            margin: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+            border-radius: 5px;
+        }
+        .api-item:hover {
+            background: crimson;
+        }
         .btn {
             display: block;
             width: 200px;
@@ -117,12 +122,44 @@
     <!-- المحتوى الرئيسي -->
     <div id="main-content">
         <button id="menu-btn">☰ القائمة</button>
-        <h1 id="welcome-text">Welcome to Dark Node API</h1>
 
         <!-- القائمة الجانبية -->
         <div id="menu">
+            <div class="menu-item" onclick="showSection('apiCategories')">🌐 API</div>
             <div class="menu-item" onclick="showSection('developer')">المطور</div>
             <div class="menu-item" onclick="showSection('contact')">التواصل</div>
+        </div>
+
+        <!-- قسم API -->
+        <div id="apiCategories" class="container">
+            <h1>⚡ اختر قسم API</h1>
+            <div class="api-item" onclick="showPage('games')">🎮 ألعاب</div>
+            <div class="api-item" onclick="showPage('tools')">🛠 أدوات</div>
+            <div class="api-item" onclick="showPage('ai')">🤖 ذكاء اصطناعي</div>
+        </div>
+
+        <!-- صفحة الألعاب -->
+        <div id="games" class="container">
+            <h1>🎮 API الألعاب</h1>
+            <div class="api-item" onclick="copyApi('https://api.example.com/games1')">🎲 API 1</div>
+            <div class="api-item" onclick="copyApi('https://api.example.com/games2')">🎯 API 2</div>
+            <div class="api-item" onclick="copyApi('https://api.example.com/games3')">🕹 API 3</div>
+        </div>
+
+        <!-- صفحة الأدوات -->
+        <div id="tools" class="container">
+            <h1>🛠 API الأدوات</h1>
+            <div class="api-item" onclick="copyApi('https://api.example.com/tools1')">🔧 API 1</div>
+            <div class="api-item" onclick="copyApi('https://api.example.com/tools2')">🔨 API 2</div>
+            <div class="api-item" onclick="copyApi('https://api.example.com/tools3')">🛠 API 3</div>
+        </div>
+
+        <!-- صفحة الذكاء الاصطناعي -->
+        <div id="ai" class="container">
+            <h1>🤖 API الذكاء الاصطناعي</h1>
+            <div class="api-item" onclick="copyApi('https://api.example.com/ai1')">🧠 API 1</div>
+            <div class="api-item" onclick="copyApi('https://api.example.com/ai2')">🤯 API 2</div>
+            <div class="api-item" onclick="copyApi('https://api.example.com/ai3')">👾 API 3</div>
         </div>
 
         <!-- قسم المطور -->
@@ -155,11 +192,18 @@
         });
 
         function showSection(id) {
-            document.querySelectorAll(".container").forEach(function(section) {
-                section.style.display = "none";
-            });
+            document.querySelectorAll(".container").forEach(section => section.style.display = "none");
             document.getElementById(id).style.display = "block";
             document.getElementById("menu").classList.remove("active");
+        }
+
+        function showPage(id) {
+            showSection(id);
+        }
+
+        function copyApi(apiUrl) {
+            navigator.clipboard.writeText(apiUrl);
+            alert("تم نسخ الرابط: " + apiUrl);
         }
     </script>
 
