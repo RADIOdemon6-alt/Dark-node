@@ -3,174 +3,178 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚡ API Dark Node</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <title>DarkNode API</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Orbitron', sans-serif; }
-        body { background: #111; color: #fff; text-align: center; overflow-y: auto; position: relative; }
-        
-        /* تأثير الطرطشة */
-        body::before {
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #0a0a0a;
+            color: #fff;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            background: #121212;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #ddd;
+            font-size: 18px;
+            margin: 0 15px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #ffcc00;
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            background: url('https://source.unsplash.com/1600x900/?technology') no-repeat center;
+            background-size: cover;
+            position: relative;
+        }
+
+        .hero::before {
             content: "";
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('https://files.catbox.moe/tpfx87.png') no-repeat center center fixed;
-            background-size: cover;
-            opacity: 0.2;
-            pointer-events: none;
+            background: rgba(10, 10, 10, 0.8);
         }
 
-        .container { 
-            max-width: 900px; 
-            margin: 50px auto; 
-            padding: 20px; 
-            border-radius: 10px; 
-            background: rgba(20, 20, 20, 0.95); 
-            box-shadow: 0px 0px 20px rgba(255, 0, 0, 0.7);
-            display: none; 
+        .hero h1 {
+            font-size: 3.5em;
+            color: #ffcc00;
+            z-index: 1;
+            position: relative;
+            animation: fadeIn 1.5s ease-in-out;
         }
-
-        .active { display: block; }
 
         .btn {
-            background: #ff0000;
-            padding: 10px 20px;
-            border-radius: 5px;
-            color: white;
+            padding: 12px 25px;
+            background: #ffcc00;
+            border: none;
+            color: #000;
+            font-size: 1.2em;
             cursor: pointer;
+            margin-top: 20px;
             transition: 0.3s;
-            box-shadow: 0px 0px 10px red;
-            margin: 10px;
-            font-size: 18px;
-            font-weight: bold;
+            border-radius: 5px;
+            position: relative;
+            z-index: 1;
         }
 
         .btn:hover {
-            background: #660000;
-            box-shadow: 0px 0px 15px #660000;
+            background: #e6b800;
         }
 
-        /* زر القائمة */
-        .toggle-btn {
-            position: fixed;
-            top: 50%;
-            right: 20px;
-            transform: translateY(-50%);
-            background: #ff0000;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0px 0px 10px red;
-            transition: 0.3s;
-            font-size: 24px;
-            font-weight: bold;
+        .section {
+            padding: 60px 20px;
+            text-align: center;
+            max-width: 900px;
+            margin: auto;
         }
 
-        .toggle-btn:hover {
-            background: #660000;
-            box-shadow: 0px 0px 15px #660000;
+        .section h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #ffcc00;
         }
 
-        /* القائمة الجانبية */
-        .sidebar {
-            position: fixed;
-            top: 0;
-            left: -250px;
-            width: 250px;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.95);
+        .section p {
+            font-size: 1.2em;
+            color: #ddd;
+            line-height: 1.8;
+        }
+
+        footer {
+            background: #111;
             padding: 20px;
-            box-shadow: 0px 0px 15px rgba(255, 0, 0, 0.7);
-            transition: left 0.4s ease-in-out;
-            z-index: 1000;
+            text-align: center;
+            margin-top: 40px;
+            font-size: 1em;
         }
 
-        .sidebar a {
-            display: block;
-            color: #ff4444;
-            text-decoration: none;
-            font-size: 20px;
-            margin: 15px 0;
-            transition: 0.3s;
-            font-weight: bold;
-        }
-
-        .sidebar a:hover {
-            color: #ffffff;
-            text-shadow: 0px 0px 10px #ff0000;
-        }
-
-        /* المربعات */
-        .api-item {
-            background: #200000;
-            padding: 20px;
-            margin: 15px 0;
-            border-radius: 5px;
-            box-shadow: 0px 0px 15px red;
-            color: #ff4444;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .api-item:hover {
-            background: #660000;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
 
-<!-- صفحة البداية -->
-<div id="welcome" class="container active">
-    <h1 style="color: #ff4444;">⚡ مرحبًا بك في API Dark Node ⚡</h1>
-    <p>🔻 هذا الموقع يوفر لك مجموعة قوية من الـ APIs لمختلف المجالات 🔻</p>
-    <p>🎮 ألعاب - 🛠 أدوات - 🤖 ذكاء اصطناعي - 📥 تحميل - 🔍 بحث - 🕌 ديني - 🩸 أخرى</p>
-    <button class="btn" onclick="startSite()">ابدأ</button>
-</div>
+    <nav>
+        <a href="#home">الرئيسية</a>
+        <a href="#features">المميزات</a>
+        <a href="#pricing">التسعير</a>
+        <a href="#docs">التوثيق</a>
+    </nav>
 
-<!-- القائمة الجانبية -->
-<div class="sidebar" id="sidebar">
-    <a href="#" onclick="showPage('apiCategories')">⚡ قائمة الـ API</a>
-    <a href="#" onclick="showPage('developer')">💻 المطور</a>
-</div>
-<div class="toggle-btn" onclick="toggleSidebar()">☰</div>
+    <section id="home" class="hero">
+        <h1>DarkNode API</h1>
+        <button class="btn" onclick="scrollToSection('features')">اكتشف المميزات</button>
+    </section>
 
-<!-- صفحة الـ API -->
-<div id="apiCategories" class="container">
-    <h1>⚡ اختر قسم API</h1>
-    <div class="api-item" onclick="showPage('games')">🎮 ألعاب</div>
-    <div class="api-item" onclick="showPage('tools')">🛠 أدوات</div>
-    <div class="api-item" onclick="showPage('ai')">🤖 ذكاء اصطناعي</div>
-</div>
+    <section id="features" class="section">
+        <h2>🚀 المميزات</h2>
+        <p>🔥 سرعة استجابة خارقة</p>
+        <p>🔒 أمان متطور ضد الهجمات</p>
+        <p>📡 دعم REST و GraphQL</p>
+        <p>⚡️ تكامل مع جميع اللغات البرمجية</p>
+    </section>
 
-<!-- صفحة الألعاب -->
-<div id="games" class="container">
-    <h1>🎮 API الألعاب</h1>
-    <div class="api-item" onclick="copyApi('https://api.example.com/games1')">🎲 API 1</div>
-    <div class="api-item" onclick="copyApi('https://api.example.com/games2')">🎯 API 2</div>
-    <div class="api-item" onclick="copyApi('https://api.example.com/games3')">🕹 API 3</div>
-</div>
+    <section id="pricing" class="section">
+        <h2>💰 خطط الأسعار</h2>
+        <p>🚀 *الخطة المجاني* استجابة محدودة</p>
+        <p>🔥 *الخطة المتوسطة* - سرعة أعلى</p>
+        <p>💎 *الخطة الاحترافية* أقصى سرعة وأمان</p>
+    </section>
 
-<!-- صفحة المطور -->
-<div id="developer" class="container">
-    <h1>💻 المطور</h1>
-    <p>👨‍💻 اسم المطور: 𝑅𝐴𝐷𝐼𝛩 𝐷𝐸𝑀𝛩𝑁</p>
-    <p>📞 تواصل: <a href="https://wa.me/201063808608">اضغط هنا</a></p>
-</div>
+    <section id="docs" class="section">
+        <h2>📖 التوثيق</h2>
+        <p>🔹 *رابط API:* https://api.darknode.com</p>
+        <p>🔹 *طريقة الاستخدام:* إرسال طلب GET</p>
+        <p>🔹 *مثال كود:*</p>
+        <pre style="background:#222;padding:15px;border-radius:5px;color:#ffcc00;text-align:left;overflow:auto;">
+fetch('https://api.darknode.com/data')
+.then(response => response.json())
+.then(data => console.log(data));
+        </pre>
+    </section>
 
-<script>
-    function showPage(pageId) { document.querySelectorAll('.container').forEach(page => page.classList.remove('active')); document.getElementById(pageId).classList.add('active'); }
-    function startSite() { showPage('apiCategories'); }
-    function toggleSidebar() { let sidebar = document.getElementById("sidebar"); sidebar.style.left = sidebar.style.left === "0px" ? "-250px" : "0px"; }
-    function copyApi(url) { navigator.clipboard.writeText(url); alert("تم نسخ API!"); }
-</script>
+    <footer>
+        © 2025 جميع الحقوق محفوظة | DarkNode API
+    </footer>
+
+    <script>
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
 
 </body>
 </html>
