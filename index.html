@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dark Node API</title>
+    <title>Dark Node API 🔥</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, sans-serif;
+            font-family: "Arial", sans-serif;
         }
         body {
-            background-color: #111;
+            background: #0d0d0d;
             color: white;
             text-align: center;
             overflow: hidden;
@@ -25,15 +25,17 @@
         }
         #start-btn {
             padding: 15px 30px;
-            font-size: 20px;
-            background: crimson;
+            font-size: 22px;
+            background: #8b0000;
             color: white;
             border: none;
             cursor: pointer;
             transition: 0.3s;
+            box-shadow: 0px 0px 15px #ff0000;
         }
         #start-btn:hover {
-            background: darkred;
+            background: #660000;
+            box-shadow: 0px 0px 25px #ff0000;
         }
         #main-content {
             display: none;
@@ -42,69 +44,78 @@
         #menu-btn {
             display: none;
             position: fixed;
-            top: 10px;
+            top: 15px;
             right: 15px;
             padding: 10px 15px;
-            background: crimson;
+            background: #8b0000;
             color: white;
             border: none;
             cursor: pointer;
-            font-size: 18px;
+            font-size: 22px;
             transition: 0.3s;
+            box-shadow: 0px 0px 15px #ff0000;
         }
         #menu-btn:hover {
-            background: darkred;
+            background: #660000;
         }
         #menu {
             position: fixed;
-            top: -100%;
-            left: 0;
-            width: 100%;
-            background: #222;
-            padding: 15px;
+            top: 0;
+            right: -250px;
+            width: 250px;
+            height: 100%;
+            background: rgba(20, 0, 0, 0.9);
+            padding-top: 60px;
             transition: 0.5s;
+            box-shadow: -5px 0 15px #ff0000;
+            border-left: 3px solid #ff0000;
         }
         #menu.active {
-            top: 0;
+            right: 0;
         }
         .menu-item {
-            padding: 10px;
+            padding: 15px;
             font-size: 20px;
             cursor: pointer;
             transition: 0.3s;
+            color: white;
         }
         .menu-item:hover {
-            background: crimson;
+            background: #8b0000;
+            color: #ff0000;
         }
         .container {
             display: none;
             padding: 20px;
         }
         .api-item {
-            padding: 10px;
-            background: #333;
+            padding: 15px;
+            background: #220000;
             margin: 10px;
             cursor: pointer;
             transition: 0.3s;
             border-radius: 5px;
+            box-shadow: 0px 0px 10px #ff0000;
         }
         .api-item:hover {
-            background: crimson;
+            background: #8b0000;
+            box-shadow: 0px 0px 20px #ff0000;
         }
         .btn {
             display: block;
             width: 200px;
             padding: 10px;
             margin: 10px auto;
-            background: crimson;
+            background: #8b0000;
             color: white;
             text-decoration: none;
             border: none;
             cursor: pointer;
             transition: 0.3s;
+            box-shadow: 0px 0px 15px #ff0000;
         }
         .btn:hover {
-            background: darkred;
+            background: #660000;
         }
         @keyframes fadeIn {
             from { opacity: 0; }
@@ -116,7 +127,7 @@
 
     <!-- زر البداية -->
     <div id="start-container">
-        <button id="start-btn">ابدأ</button>
+        <button id="start-btn">🔥 ابدأ 🔥</button>
     </div>
 
     <!-- المحتوى الرئيسي -->
@@ -126,8 +137,8 @@
         <!-- القائمة الجانبية -->
         <div id="menu">
             <div class="menu-item" onclick="showSection('apiCategories')">🌐 API</div>
-            <div class="menu-item" onclick="showSection('developer')">المطور</div>
-            <div class="menu-item" onclick="showSection('contact')">التواصل</div>
+            <div class="menu-item" onclick="showSection('developer')">💀 المطور</div>
+            <div class="menu-item" onclick="showSection('contact')">📞 التواصل</div>
         </div>
 
         <!-- قسم API -->
@@ -146,25 +157,9 @@
             <div class="api-item" onclick="copyApi('https://api.example.com/games3')">🕹 API 3</div>
         </div>
 
-        <!-- صفحة الأدوات -->
-        <div id="tools" class="container">
-            <h1>🛠 API الأدوات</h1>
-            <div class="api-item" onclick="copyApi('https://api.example.com/tools1')">🔧 API 1</div>
-            <div class="api-item" onclick="copyApi('https://api.example.com/tools2')">🔨 API 2</div>
-            <div class="api-item" onclick="copyApi('https://api.example.com/tools3')">🛠 API 3</div>
-        </div>
-
-        <!-- صفحة الذكاء الاصطناعي -->
-        <div id="ai" class="container">
-            <h1>🤖 API الذكاء الاصطناعي</h1>
-            <div class="api-item" onclick="copyApi('https://api.example.com/ai1')">🧠 API 1</div>
-            <div class="api-item" onclick="copyApi('https://api.example.com/ai2')">🤯 API 2</div>
-            <div class="api-item" onclick="copyApi('https://api.example.com/ai3')">👾 API 3</div>
-        </div>
-
         <!-- قسم المطور -->
         <div id="developer" class="container">
-            <h1>💻 المطور</h1>
+            <h1>💀 المطور</h1>
             <p>👨‍💻 اسم المطور: 𝑅𝐴𝐷𝐼𝛩 𝐷𝐸𝑀𝛩𝑁</p>
             <p>🤖 اسم البوت: 𝙱𝙾𝚃-𝙼𝚄𝙺𝙾</p>
         </div>
@@ -203,7 +198,7 @@
 
         function copyApi(apiUrl) {
             navigator.clipboard.writeText(apiUrl);
-            alert("تم نسخ الرابط: " + apiUrl);
+            alert("🔥 تم نسخ الرابط: " + apiUrl);
         }
     </script>
 
