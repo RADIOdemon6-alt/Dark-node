@@ -7,51 +7,52 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Orbitron', sans-serif; }
         body { background: url('https://qu.ax/WmCZr.jpg') no-repeat center center fixed; background-size: cover; color: #fff; text-align: center; overflow-y: auto; }
+        
         .sidebar { position: fixed; top: 0; left: -220px; width: 200px; height: 100%; background: rgba(0, 0, 0, 0.9); padding: 20px; box-shadow: 0px 0px 15px rgba(255, 0, 0, 0.7); transition: left 0.4s ease-in-out; z-index: 1000; }
         .sidebar a { display: block; color: #ff0077; text-decoration: none; font-size: 18px; margin: 15px 0; transition: 0.3s; }
         .sidebar a:hover { color: #00ffee; text-shadow: 0px 0px 10px #00ffee; }
-        .toggle-btn, .music-btn { position: fixed; bottom: 20px; right: 20px; background: #ff0077; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0px 0px 10px #ff0077; transition: 0.3s; }
-        .toggle-btn { top: 20px; }
-        .toggle-btn:hover, .music-btn:hover { background: #00ffee; box-shadow: 0px 0px 15px #00ffee; }
+
+        .toggle-btn { position: fixed; top: 20px; right: 20px; background: #ff0077; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0px 0px 10px #ff0077; transition: 0.3s; }
+        .toggle-btn:hover { background: #00ffee; box-shadow: 0px 0px 15px #00ffee; }
+
         .container { max-width: 900px; margin: 50px auto; padding: 20px; border-radius: 10px; background: rgba(20, 20, 20, 0.9); box-shadow: 0px 0px 20px rgba(255, 0, 255, 0.7); display: none; }
         .active { display: block; }
-        .api-item { display: flex; justify-content: space-between; align-items: center; background: #200000; padding: 10px; margin: 10px 0; border-radius: 5px; box-shadow: 0px 0px 15px red; color: #ff4444; font-size: 18px; font-weight: bold; }
-        .api-hidden { display: none; }
-        .btn { background: #ff0077; padding: 10px 20px; border-radius: 5px; color: white; cursor: pointer; transition: 0.3s; box-shadow: 0px 0px 10px #ff0077; }
+
+        .btn { background: #ff0077; padding: 15px 30px; border-radius: 5px; color: white; cursor: pointer; transition: 0.3s; font-size: 20px; box-shadow: 0px 0px 10px #ff0077; }
         .btn:hover { background: #00ffee; box-shadow: 0px 0px 15px #00ffee; }
+
+        .api-item { background: #200000; padding: 15px; margin: 10px 0; border-radius: 5px; box-shadow: 0px 0px 15px red; color: #ff4444; font-size: 18px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .api-item:hover { background: #550000; color: #ffffff; box-shadow: 0px 0px 15px #ff4444; }
     </style>
 </head>
 <body>
 
+    <!-- 🌀 صفحة البداية -->
+    <div id="welcome" class="container active">
+        <h1>✨ مرحبًا بك في <span style="color:#ff0077;">Dark Node API</span> ✨</h1>
+        <button class="btn" onclick="startSite()">🚀 ابدأ</button>
+    </div>
+
+    <!-- 🎭 القائمة الجانبية -->
     <div class="sidebar" id="sidebar">
         <a href="#" onclick="showPage('home')">🏠 الرئيسية</a>
-        <a href="#" onclick="showPage('api')">🛰 API</a>
-        <a href="#" onclick="showPage('developer')">💻 معلومات المطور</a>
+        <a href="#" onclick="showApiPage()">🛰 API</a>
+        <a href="#" onclick="showPage('developer')">💻 المطور</a>
     </div>
     <div class="toggle-btn" onclick="toggleSidebar()">☰</div>
 
-    <div id="home" class="container active">
-        <h1>🎭 مرحبا بك في Dark Node API</h1>
-        <button class="btn" onclick="showPage('api')">🚀 استكشاف API</button>
-        <button class="btn" onclick="showPage('developer')">👨‍💻 المطور</button>
+    <!-- 🏠 الصفحة الرئيسية -->
+    <div id="home" class="container">
+        <h1>🎭 مرحبًا بك في Dark Node API</h1>
     </div>
 
+    <!-- 📜 قائمة API -->
     <div id="api" class="container">
         <h1>📜 قائمة API</h1>
-        <button class="btn" onclick="showApiPage('games')">🎮 العاب</button>
-        <button class="btn" onclick="showApiPage('religion')">🕌 ديني</button>
-        <button class="btn" onclick="showApiPage('download')">⬇️ تحميل</button>
-        <button class="btn" onclick="showApiPage('tools')">🛠 أدوات</button>
-        <button class="btn" onclick="showApiPage('search')">🔎 بحث</button>
-        <button class="btn" onclick="showApiPage('ai')">🤖 ذكاء اصطناعي</button>
-        <button class="btn" onclick="showApiPage('other')">📦 آخر</button>
-    </div>
-
-    <div id="api-page" class="container">
-        <h1 id="api-title"></h1>
         <div id="api-content"></div>
     </div>
 
+    <!-- 💻 صفحة المطور -->
     <div id="developer" class="container">
         <h1>💻 المطور</h1>
         <p>👨‍💻 اسم المطور: 𝑅𝐴𝐷𝐼𝛩 𝐷𝐸𝑀𝛩𝑁</p>
@@ -65,27 +66,31 @@
             sidebar.style.left = sidebar.style.left === "0px" ? "-220px" : "0px";
         }
 
+        function startSite() {
+            document.getElementById("welcome").classList.remove("active");
+            document.getElementById("home").classList.add("active");
+        }
+
         function showPage(pageId) {
             document.querySelectorAll(".container").forEach(div => div.classList.remove("active"));
             document.getElementById(pageId).classList.add("active");
         }
 
-        function showApiPage(category) {
-            let apiLinks = {
-                games: ["https://api.darknode/games1", "https://api.darknode/games2", "https://api.darknode/games3"],
-                religion: ["https://api.darknode/religion1", "https://api.darknode/religion2", "https://api.darknode/religion3"],
-                download: ["https://api.darknode/download1", "https://api.darknode/download2", "https://api.darknode/download3"],
-                tools: ["https://api.darknode/tools1", "https://api.darknode/tools2", "https://api.darknode/tools3"],
-                search: ["https://api.darknode/search1", "https://api.darknode/search2", "https://api.darknode/search3"],
-                ai: ["https://api.darknode/ai1", "https://api.darknode/ai2", "https://api.darknode/ai3"],
-                other: ["https://api.darknode/other1", "https://api.darknode/other2", "https://api.darknode/other3"]
-            };
+        function showApiPage() {
+            let apiLinks = [
+                "https://api.darknode/games",
+                "https://api.darknode/religion",
+                "https://api.darknode/download",
+                "https://api.darknode/tools",
+                "https://api.darknode/search",
+                "https://api.darknode/ai",
+                "https://api.darknode/other"
+            ];
 
-            document.getElementById("api-title").innerText = "📜 " + category.toUpperCase();
-            document.getElementById("api-content").innerHTML = apiLinks[category].map(link => 
+            document.getElementById("api-content").innerHTML = apiLinks.map(link =>
                 `<div class="api-item" onclick="copyToClipboard('${link}')">${link}</div>`).join("");
 
-            showPage("api-page");
+            showPage("api");
         }
 
         function copyToClipboard(text) {
