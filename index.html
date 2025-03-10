@@ -1,142 +1,62 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dark Node API</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
-        body {
-            font-family: 'Cairo', sans-serif;
-            margin: 0;
-            padding: 0;
-            background: url('https://qu.ax/WmCZr.jpg') no-repeat center center fixed;
-            background-size: cover;
-            color: white;
-            text-align: center;
-        }
-        .overlay {
-            background: rgba(0, 0, 0, 0.6);
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-        button {
-            background: gold;
-            color: black;
-            border: none;
-            padding: 10px 20px;
-            font-size: 18px;
-            margin: 10px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-        .floating-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: gold;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            font-size: 24px;
-        }
-        .menu {
-            display: none;
-            position: fixed;
-            bottom: 80px;
-            right: 20px;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 10px;
-            border-radius: 10px;
-        }
-        .menu button {
-            display: block;
-            margin: 5px;
-        }
-        .back-btn {
-            position: fixed;
-            top: 10px;
-            left: 10px;
-            font-size: 16px;
-        }
-        .side-btn {
-            position: fixed;
-            top: 50px;
-            left: 10px;
-            font-size: 18px;
-        }
-        .side-menu {
-            display: none;
-            position: fixed;
-            top: 90px;
-            left: 10px;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 10px;
-            border-radius: 10px;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <div id="welcome" class="overlay">
+    <!-- الصفحة الترحيبية -->
+    <div id="welcome-screen">
         <h1>مرحبا بك في Dark Node API</h1>
-        <button onclick="showMain()">ابدأ</button>
+        <button onclick="startApp()">ابدأ</button>
     </div>
 
-    <div id="main" style="display: none;">
+    <!-- الصفحة الرئيسية -->
+    <div id="main-page" class="hidden">
         <button class="floating-btn" onclick="toggleMenu()">☰</button>
-        <div id="menu" class="menu">
-            <button onclick="showAPI()">API</button>
-            <button>المطور</button>
-            <button>تواصل معنا</button>
+        <div id="menu" class="hidden">
+            <button onclick="showPage('api')">📜 API</button>
+            <button onclick="showPage('developer')">💻 المطور</button>
+            <button onclick="showPage('contact')">📩 تواصل معانا</button>
         </div>
-        <button class="back-btn" onclick="showWelcome()">← رجوع</button>
     </div>
 
-    <div id="api" style="display: none;">
-        <button class="side-btn" onclick="toggleSideMenu()">☰ الأقسام</button>
-        <div id="side-menu" class="side-menu">
-            <button>ألعاب</button>
-            <button>ديني</button>
-            <button>تحميل</button>
-            <button>أدوات</button>
-            <button>بحث</button>
-            <button>ذكاء اصطناعي</button>
-            <button>آخر</button>
+    <!-- صفحة API -->
+    <div id="api" class="hidden">
+        <button class="back-btn" onclick="goBack()">🔙</button>
+        <button class="floating-btn" onclick="toggleApiMenu()">☰</button>
+        <div id="api-menu" class="hidden">
+            <button onclick="showApiSection('games')">🎮 العاب</button>
+            <button onclick="showApiSection('religion')">🕌 ديني</button>
+            <button onclick="showApiSection('download')">⬇️ تحميل</button>
+            <button onclick="showApiSection('tools')">🛠 أدوات</button>
+            <button onclick="showApiSection('search')">🔎 بحث</button>
+            <button onclick="showApiSection('ai')">🤖 ذكاء اصطناعي</button>
+            <button onclick="showApiSection('other')">📦 آخر</button>
         </div>
-        <button class="back-btn" onclick="showMain()">← رجوع</button>
+        <div id="api-content"></div>
     </div>
 
-    <script>
-        function showMain() {
-            document.getElementById('welcome').style.display = 'none';
-            document.getElementById('main').style.display = 'block';
-        }
+    <!-- صفحة المطور -->
+    <div id="developer" class="hidden">
+        <button class="back-btn" onclick="goBack()">🔙</button>
+        <h1>💻 المطور</h1>
+        <p>👨‍💻 اسم المطور: 𝑅𝐴𝐷𝐼𝛩 𝐷𝐸𝑀𝛩𝑁</p>
+        <p>🤖 اسم البوت: 𝙱𝙾𝚃-𝙼𝚄𝙺𝙾</p>
+        <a href="https://wa.me/201063808608"><button class="btn">📩 واتساب</button></a>
+    </div>
 
-        function showAPI() {
-            document.getElementById('main').style.display = 'none';
-            document.getElementById('api').style.display = 'block';
-        }
+    <!-- صفحة التواصل -->
+    <div id="contact" class="hidden">
+        <button class="back-btn" onclick="goBack()">🔙</button>
+        <h1>📩 تواصل معانا</h1>
+        <a href="https://chat.whatsapp.com/BNARMEg1L87JOz8oSR9eFD"><button class="btn">🛠 دعم البوت</button></a>
+        <a href="https://whatsapp.com/channel/0029Vb2j3d6HVvTiMzx5QF13"><button class="btn">📢 قناة Dark-node</button></a>
+    </div>
 
-        function showWelcome() {
-            document.getElementById('main').style.display = 'none';
-            document.getElementById('welcome').style.display = 'flex';
-        }
-
-        function toggleMenu() {
-            var menu = document.getElementById('menu');
-            menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
-        }
-
-        function toggleSideMenu() {
-            var sideMenu = document.getElementById('side-menu');
-            sideMenu.style.display = (sideMenu.style.display === 'block') ? 'none' : 'block';
-        }
-    </script>
-
+    <script src="script.js"></script>
 </body>
 </html>
