@@ -62,32 +62,6 @@
             color: #FFEB3B;
         }
 
-        /* قسم الهيدر */
-        .header {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: url('https://yourimage.com/tech_bg.jpg') no-repeat center center/cover;
-            text-align: center;
-        }
-
-        .header h1 {
-            font-size: 55px;
-            font-weight: bold;
-            background: linear-gradient(45deg, #FFEB3B, #FF4081);
-            -webkit-background-clip: text;
-            color: transparent;
-            margin-bottom: 20px;
-        }
-
-        .header p {
-            font-size: 22px;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
         /* الأقسام */
         .section {
             padding: 80px 10%;
@@ -149,7 +123,6 @@
             background: #FF4081;
             transform: scale(1.05);
         }
-
     </style>
 </head>
 <body>
@@ -161,99 +134,75 @@
             <li><a href="#services">الخدمات</a></li>
             <li><a href="#features">المميزات</a></li>
             <li><a href="#contact">اتصل بنا</a></li>
-            <li><a href="#contact">الAPI</a></li> 
+            <li><a href="#apis">الـ APIs</a></li> 
         </ul>
     </nav>
 
-    <!-- هيدر الصفحة -->
-    <header class="header" id="home">
-        <h1>مرحبًا بك في DarkNode 🚀</h1>
-        <p>أقوى منصة APIs لإنشاء وإدارة البوتات والذكاء الاصطناعي بسهولة وسرعة.</p>
-    </header>
-
-    <!-- قسم الخدمات -->
-    <section class="section" id="services">
-        <h2>خدماتنا</h2>
-        <div class="services">
-            <div class="box">
-                <img src="https://yourimage.com/api_icon.png" alt="API">
-                <h3>تطوير APIs</h3>
-                <p>أفضل الحلول لإنشاء APIs متطورة بسرعة.</p>
-            </div>
-            <div class="box">
-                <img src="https://yourimage.com/hosting_icon.png" alt="Hosting">
-                <h3>استضافة البوتات</h3>
-                <p>استضافة موثوقة للبوتات والذكاء الاصطناعي.</p>
-            </div>
-            <div class="box">
-                <img src="https://yourimage.com/security_icon.png" alt="Security">
-                <h3>أمان متقدم</h3>
-                <p>نظام حماية قوي ضد الهجمات والاختراقات.</p>
-            </div>
+    <!-- قسم الـ APIs -->
+    <section class="section" id="apis">
+        <h2>الـ APIs المتاحة</h2>
+        <div class="api-categories">    
+            <button onclick="openCategory('games')">🎮 ألعاب</button>    
+            <button onclick="openCategory('ai')">🤖 ذكاء اصطناعي</button>    
+            <button onclick="openCategory('tools')">🛠️ أدوات</button>    
+            <button onclick="openCategory('religion')">🕌 دين</button>    
+            <button onclick="openCategory('download')">📥 تحميل</button>    
+            <button onclick="openCategory('search')">🔍 بحث</button>    
         </div>
+        <div id="api-list"></div>    
     </section>
 
-    <!-- قسم المميزات -->
-    <section class="section" id="features">
-        <h2>لماذا DarkNode؟</h2>
-        <div class="features">
-            <div class="box">
-                <h3>سرعة فائقة ⚡</h3>
-                <p>أداء سريع جدًا لجميع الخدمات.</p>
-            </div>
-            <div class="box">
-                <h3>تقنيات حديثة 🛠</h3>
-                <p>ندعم أحدث التقنيات البرمجية.</p>
-            </div>
-            <div class="box">
-                <h3>دعم فني 24/7 📞</h3>
-                <p>متواجدون دائمًا لمساعدتك.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- قسم الاتصال -->
-    <section class="contact" id="contact">
-        <h2>تواصل معنا</h2>
-        <p>إذا كنت بحاجة إلى مساعدة أو استفسار، لا تتردد في الاتصال بنا.</p>
-        <button onclick="location.href='mailto:support@darknode.com'">راسلنا الآن</button>
-    </section>
-div class="api-categories">    
-        <button onclick="openCategory('games')">🎮 ألعاب</button>    
-        <button onclick="openCategory('ai')">🤖 ذكاء اصطناعي</button>    
-        <button onclick="openCategory('tools')">🛠️ أدوات</button>    
-        <button onclick="openCategory('religion')">🕌 دين</button>    
-        <button onclick="openCategory('download')">📥 تحميل</button>    
-        <button onclick="openCategory('search')">🔍 بحث</button>    
-    </div>  <div id="api-list"></div>    
-<button onclick="switchPage('home')">🔙 رجوع</button>  </div>  </div><script>    
-    function switchPage(pageId) {    
-        document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));    
-        document.getElementById(pageId).classList.add('active');    
-        adjustScrolling();    
-    }  function toggleSidebar() {    
-    const sidebar = document.getElementById("sidebar");    
-    sidebar.style.right = (sidebar.style.right === "0px") ? "-250px" : "0px";    
-}    const apiEndpoints = {
-games: ["https://api.example.com/game1", "https://api.example.com/game2", "https://api.example.com/game3"],
-ai: ["https://api.example.com/ai1", "https://api.example.com/ai2", "https://api.example.com/ai3"],
-tools: ["https://api.example.com/tool1", "https://api.example.com/tool2", "https://api.example.com/tool3"],
-religion: ["https://api.example.com/religion1", "https://api.example.com/religion2", "https://api.example.com/religion3"],
-download: ["https://api.example.com/download1", "https://api.example.com/download2", "https://api.example.com/download3"],
-search: ["https://api.example.com/search1", "https://api.example.com/search2", "https://api.example.com/search3"]
-};
+    <!-- زر الرجوع -->
+    <button onclick="switchPage('home')">🔙 رجوع</button>
 
     <script>
         // تأثيرات الظهور عند التمرير
-        const sections = document.querySelectorAll('.section');
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('.section');
 
-        window.addEventListener('scroll', () => {
-            sections.forEach(section => {
-                if (section.getBoundingClientRect().top < window.innerHeight - 50) {
-                    section.classList.add('show');
-                }
+            window.addEventListener('scroll', () => {
+                sections.forEach(section => {
+                    if (section.getBoundingClientRect().top < window.innerHeight - 50) {
+                        section.classList.add('show');
+                    }
+                });
             });
         });
+
+        // قائمة الـ API
+        const apiEndpoints = {
+            games: ["https://api.example.com/game1", "https://api.example.com/game2", "https://api.example.com/game3"],
+            ai: ["https://api.example.com/ai1", "https://api.example.com/ai2", "https://api.example.com/ai3"],
+            tools: ["https://api.example.com/tool1", "https://api.example.com/tool2", "https://api.example.com/tool3"],
+            religion: ["https://api.example.com/religion1", "https://api.example.com/religion2", "https://api.example.com/religion3"],
+            download: ["https://api.example.com/download1", "https://api.example.com/download2", "https://api.example.com/download3"],
+            search: ["https://api.example.com/search1", "https://api.example.com/search2", "https://api.example.com/search3"]
+        };
+
+        function openCategory(category) {
+            const apiList = document.getElementById("api-list");
+            apiList.innerHTML = "<h3>روابط APIs - " + category + "</h3>";
+
+            if (apiEndpoints[category]) {
+                apiEndpoints[category].forEach(api => {
+                    let link = document.createElement("a");
+                    link.href = api;
+                    link.target = "_blank";
+                    link.innerText = api;
+                    link.style.display = "block";
+                    link.style.color = "#FFEB3B";
+                    link.style.margin = "10px 0";
+                    apiList.appendChild(link);
+                });
+            } else {
+                apiList.innerHTML += "<p>لا يوجد APIs متاحة لهذا القسم حاليًا.</p>";
+            }
+        }
+
+        function switchPage(pageId) {
+            document.querySelectorAll('.section').forEach(page => page.classList.remove('show'));
+            document.getElementById(pageId).classList.add('show');
+        }
     </script>
 
 </body>
