@@ -3,292 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DarkNode 🚀 | أقوى منصة APIs</title>
-    <meta property="og:title" content="DarkNode - منصة APIs متطورة">
-    <meta property="og:description" content="أفضل منصة لإنشاء وإدارة APIs البوتات والذكاء الاصطناعي.">
-    <meta property="og:image" content="https://yourimage.com/darknode_banner.jpg">
-    <link rel="shortcut icon" href="https://yourimage.com/darknode_icon.png">
-    
+    <title>Dark Node API</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap');
-
-        * {
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+        body {
+            font-family: 'Cairo', sans-serif;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: 'Tajawal', sans-serif;
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background-color: #0D0D2B;
+            background: url('https://qu.ax/WmCZr.jpg') no-repeat center center fixed;
+            background-size: cover;
             color: white;
             text-align: center;
         }
-
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 10%;
-            background: rgba(0, 0, 0, 0.8);
-            position: fixed;
+        .overlay {
+            background: rgba(0, 0, 0, 0.6);
             width: 100%;
-            top: 0;
-            left: 0;
-            z-index: 1000;
-            backdrop-filter: blur(10px);
-        }
-
-        .navbar ul {
-            list-style: none;
-            display: flex;
-            gap: 20px;
-        }
-
-        .navbar ul li {
-            display: inline;
-        }
-
-        .navbar ul li a {
-            text-decoration: none;
-            color: white;
-            font-size: 18px;
-            transition: 0.3s;
-        }
-
-        .navbar ul li a:hover {
-            color: #FFEB3B;
-        }
-
-        .header {
             height: 100vh;
             display: flex;
             flex-direction: column;
+            justify-content: center;
             align-items: center;
-            justify-content: center;
-            background: url('https://yourimage.com/tech_bg.jpg') no-repeat center center/cover;
-            text-align: center;
         }
-
-        .header h1 {
-            font-size: 55px;
-            font-weight: bold;
-            background: linear-gradient(45deg, #FFEB3B, #FF4081);
-            -webkit-background-clip: text;
-            color: transparent;
-            margin-bottom: 20px;
-        }
-
-        .header p {
-            font-size: 22px;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .section {
-            padding: 80px 10%;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease-in-out;
-        }
-
-        .section.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .api-categories {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            justify-content: center;
-            margin: 30px 0;
-        }
-
-        .api-categories button {
-            padding: 12px 18px;
-            font-size: 16px;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: 0.3s;
-            background: #FFEB3B;
+        button {
+            background: gold;
             color: black;
-        }
-
-        .api-categories button:hover {
-            background: #FF4081;
-        }
-
-        .api-list {
-            margin-top: 20px;
-            padding: 20px;
-        }
-
-        .api-list a {
-            display: block;
-            padding: 10px;
-            margin: 5px;
-            background: #25255A;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: 0.3s;
-        }
-
-        .api-list a:hover {
-            background: #1A1A40;
-        }
-
-        .back-btn {
-            margin-top: 20px;
-            padding: 10px 20px;
-            background: #FF4081;
-            color: white;
-            font-size: 16px;
             border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            margin: 10px;
             cursor: pointer;
             border-radius: 5px;
-            transition: 0.3s;
         }
-
-        .back-btn:hover {
-            background: #D81B60;
+        .floating-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: gold;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 24px;
         }
-
+        .menu {
+            display: none;
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            border-radius: 10px;
+        }
+        .menu button {
+            display: block;
+            margin: 5px;
+        }
+        .back-btn {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            font-size: 16px;
+        }
+        .side-btn {
+            position: fixed;
+            top: 50px;
+            left: 10px;
+            font-size: 18px;
+        }
+        .side-menu {
+            display: none;
+            position: fixed;
+            top: 90px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            border-radius: 10px;
+        }
     </style>
 </head>
 <body>
 
-    <nav class="navbar">
-        <ul>
-            <li><a href="#home">الرئيسية</a></li>
-            <li><a href="#services">الخدمات</a></li>
-            <li><a href="#features">المميزات</a></li>
-            <li><a href="#contact">اتصل بنا</a></li>
-            <li><a href="#api-section">الـ API</a></li> 
-        </ul>
-    </nav>
+    <div id="welcome" class="overlay">
+        <h1>مرحبا بك في Dark Node API</h1>
+        <button onclick="showMain()">ابدأ</button>
+    </div>
 
-    <header class="header" id="home">
-        <h1>مرحبًا بك في DarkNode 🚀</h1>
-        <p>أقوى منصة APIs لإنشاء وإدارة البوتات والذكاء الاصطناعي بسهولة وسرعة.</p>
-    </header>
-
-section class="section" id="services">
-        <h2>خدماتنا</h2>
-        <div class="services">
-            <div class="box">
-                <img src="https://yourimage.com/api_icon.png" alt="API">
-                <h3>تطوير APIs</h3>
-                <p>أفضل الحلول لإنشاء APIs متطورة بسرعة</p>
-            </div>
-            <div class="box">
-                <img src="https://yourimage.com/hosting_icon.png" alt="Hosting">
-                <h3>استضافة البوتات</h3>
-                <p>استضافة موثوقة للبوتات والذكاء الاصطناعي</p>
-            </div>
-            <div class="box">
-                <img src="https://yourimage.com/security_icon.png" alt="Security">
-                <h3>أمان متقدم</h3>
-                <p>نظام حماية قوي ضد الهجمات والاختراقات.</p>
-            </div>
+    <div id="main" style="display: none;">
+        <button class="floating-btn" onclick="toggleMenu()">☰</button>
+        <div id="menu" class="menu">
+            <button onclick="showAPI()">API</button>
+            <button>المطور</button>
+            <button>تواصل معنا</button>
         </div>
-    </section>
+        <button class="back-btn" onclick="showWelcome()">← رجوع</button>
+    </div>
 
-    <section class="section" id="features">
-        <h2>لماذا DarkNode ?</h2>
-        <div class="features">
-            <div class="box">
-                <h3>سرعة فائقة ⚡</h3>
-                <p>أداء سريع جدًا لجميع الخدمات</p>
-            </div>
-            <div class="box">
-                <h3>تقنيات حديثة 🛠</h3>
-                <p>ندعم أحدث التقنيات البرمجية</p>
-            </div>
-            <div class="box">
-                <h3>دعم فني 24/7 📞</h3>
-                <p>متواجدون دائمًا لمساعدتك</p>
-            </div>
+    <div id="api" style="display: none;">
+        <button class="side-btn" onclick="toggleSideMenu()">☰ الأقسام</button>
+        <div id="side-menu" class="side-menu">
+            <button>ألعاب</button>
+            <button>ديني</button>
+            <button>تحميل</button>
+            <button>أدوات</button>
+            <button>بحث</button>
+            <button>ذكاء اصطناعي</button>
+            <button>آخر</button>
         </div>
-    </section>
-
-    <section class="section" id="api-list">
-        <h2>قائمة الـ API</h2>
-        <div class="apis">
-            <div class="box">
-                <h3>API الذكاء الاصطناعي 🤖</h3>
-                <p>تقديم خدمات تحليل البيانات والتعلم الآلي.</p>
-            </div>
-            <div class="box">
-                <h3>API استخراج البيانات 📊</h3>
-                <p>يتيح لك استخراج وتحليل البيانات بسهولة.</p>
-            </div>
-            <div class="box">
-                <h3>API إدارة المستخدمين 👤</h3>
-                <p>خدمات تسجيل الدخول وإدارة الحسابات.</p>
-            </div>
-            <div class="box">
-                <h3>API الأمان 🔐</h3>
-                <p>حماية ضد الاختراقات وتأمين البيانات.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="contact" id="contact">
-        <h2>تواصل معنا</h2>
-        <p>إذا كنت بحاجة إلى مساعدة أو استفسار، لا تتردد في الاتصال بنا</p>
-        <button onclick="location.href='https://wa.me/201063808608'">راسلنا الآن</button>
-
-    <section class="section" id="api-section">
-        <h2>استكشاف الـ APIs</h2>
-        <div class="api-categories">
-            <button onclick="openCategory('games')">🎮 ألعاب</button>
-            <button onclick="openCategory('ai')">🤖 ذكاء اصطناعي</button>
-            <button onclick="openCategory('tools')">🛠️ أدوات</button>
-            <button onclick="openCategory('religion')">🕌 دين</button>
-            <button onclick="openCategory('download')">📥 تحميل</button>
-            <button onclick="openCategory('search')">🔍 بحث</button>
-        </div>
-        <div class="api-list" id="api-list"></div>
-        <button class="back-btn" onclick="clearCategory()">🔙 رجوع</button>
-    </section>
+        <button class="back-btn" onclick="showMain()">← رجوع</button>
+    </div>
 
     <script>
-        const apiEndpoints = {
-            games: ["https://api.example.com/game1", "https://api.example.com/game2"],
-            ai: ["https://api.example.com/ai1", "https://api.example.com/ai2"],
-            tools: ["https://api.example.com/tool1", "https://api.example.com/tool2"],
-            religion: ["https://api.example.com/religion1", "https://api.example.com/religion2"],
-            download: ["https://api.example.com/download1", "https://api.example.com/download2"],
-            search: ["https://api.example.com/search1", "https://api.example.com/search2"]
-        };
-
-        function openCategory(category) {
-            const apiListDiv = document.getElementById("api-list");
-            apiListDiv.innerHTML = "";
-            apiEndpoints[category].forEach(api => {
-                let link = document.createElement("a");
-                link.href = api;
-                link.textContent = api;
-                link.target = "_blank";
-                apiListDiv.appendChild(link);
-            });
+        function showMain() {
+            document.getElementById('welcome').style.display = 'none';
+            document.getElementById('main').style.display = 'block';
         }
 
-        function clearCategory() {
-            document.getElementById("api-list").innerHTML = "";
+        function showAPI() {
+            document.getElementById('main').style.display = 'none';
+            document.getElementById('api').style.display = 'block';
         }
 
-        window.addEventListener("scroll", () => {
-            document.querySelectorAll('.section').forEach(section => {
-                if (section.getBoundingClientRect().top < window.innerHeight - 50) {
-                    section.classList.add('show');
-                }
-            });
-        });
+        function showWelcome() {
+            document.getElementById('main').style.display = 'none';
+            document.getElementById('welcome').style.display = 'flex';
+        }
+
+        function toggleMenu() {
+            var menu = document.getElementById('menu');
+            menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+        }
+
+        function toggleSideMenu() {
+            var sideMenu = document.getElementById('side-menu');
+            sideMenu.style.display = (sideMenu.style.display === 'block') ? 'none' : 'block';
+        }
     </script>
 
 </body>
