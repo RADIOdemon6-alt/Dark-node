@@ -4,44 +4,97 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dark Node API</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: url('https://qu.ax/WmCZr.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+        .hidden { display: none; }
+        .container { padding: 20px; }
+        .btn, .api-box {
+            background: #ff0077;
+            color: white;
+            padding: 10px;
+            margin: 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+            display: block;
+            width: 80%;
+            max-width: 300px;
+            margin: 10px auto;
+        }
+        .api-box {
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid white;
+            padding: 15px;
+            cursor: pointer;
+        }
+        .floating-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #ff0077;
+            color: white;
+            border-radius: 50%;
+            padding: 15px;
+        }
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: #444;
+            color: white;
+            padding: 10px;
+        }
+    </style>
 </head>
 <body>
 
     <!-- الصفحة الترحيبية -->
     <div id="welcome-screen">
         <h1>مرحبا بك في Dark Node API</h1>
-        <button onclick="startApp()">ابدأ</button>
+        <button class="btn" onclick="startApp()">ابدأ</button>
     </div>
 
     <!-- الصفحة الرئيسية -->
-    <div id="main-page" class="hidden">
+    <div id="main-page" class="hidden container">
         <button class="floating-btn" onclick="toggleMenu()">☰</button>
         <div id="menu" class="hidden">
-            <button onclick="showPage('api')">📜 API</button>
-            <button onclick="showPage('developer')">💻 المطور</button>
-            <button onclick="showPage('contact')">📩 تواصل معانا</button>
+            <button class="btn" onclick="showPage('api')">📜 API</button>
+            <button class="btn" onclick="showPage('developer')">💻 المطور</button>
+            <button class="btn" onclick="showPage('contact')">📩 تواصل معانا</button>
         </div>
     </div>
 
     <!-- صفحة API -->
-    <div id="api" class="hidden">
+    <div id="api" class="hidden container">
         <button class="back-btn" onclick="goBack()">🔙</button>
-        <button class="floating-btn" onclick="toggleApiMenu()">☰</button>
-        <div id="api-menu" class="hidden">
-            <button onclick="showApiSection('games')">🎮 العاب</button>
-            <button onclick="showApiSection('religion')">🕌 ديني</button>
-            <button onclick="showApiSection('download')">⬇️ تحميل</button>
-            <button onclick="showApiSection('tools')">🛠 أدوات</button>
-            <button onclick="showApiSection('search')">🔎 بحث</button>
-            <button onclick="showApiSection('ai')">🤖 ذكاء اصطناعي</button>
-            <button onclick="showApiSection('other')">📦 آخر</button>
-        </div>
+        <h1>📜 قائمة API</h1>
+        <button class="btn" onclick="showApiPage('games')">🎮 العاب</button>
+        <button class="btn" onclick="showApiPage('religion')">🕌 ديني</button>
+        <button class="btn" onclick="showApiPage('download')">⬇️ تحميل</button>
+        <button class="btn" onclick="showApiPage('tools')">🛠 أدوات</button>
+        <button class="btn" onclick="showApiPage('search')">🔎 بحث</button>
+        <button class="btn" onclick="showApiPage('ai')">🤖 ذكاء اصطناعي</button>
+        <button class="btn" onclick="showApiPage('other')">📦 آخر</button>
+    </div>
+
+    <!-- صفحة API الفردية -->
+    <div id="api-page" class="hidden container">
+        <button class="back-btn" onclick="showPage('api')">🔙</button>
+        <h1 id="api-title"></h1>
         <div id="api-content"></div>
     </div>
 
     <!-- صفحة المطور -->
-    <div id="developer" class="hidden">
+    <div id="developer" class="hidden container">
         <button class="back-btn" onclick="goBack()">🔙</button>
         <h1>💻 المطور</h1>
         <p>👨‍💻 اسم المطور: 𝑅𝐴𝐷𝐼𝛩 𝐷𝐸𝑀𝛩𝑁</p>
@@ -50,13 +103,55 @@
     </div>
 
     <!-- صفحة التواصل -->
-    <div id="contact" class="hidden">
+    <div id="contact" class="hidden container">
         <button class="back-btn" onclick="goBack()">🔙</button>
         <h1>📩 تواصل معانا</h1>
         <a href="https://chat.whatsapp.com/BNARMEg1L87JOz8oSR9eFD"><button class="btn">🛠 دعم البوت</button></a>
         <a href="https://whatsapp.com/channel/0029Vb2j3d6HVvTiMzx5QF13"><button class="btn">📢 قناة Dark-node</button></a>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        function startApp() {
+            document.getElementById("welcome-screen").classList.add("hidden");
+            document.getElementById("main-page").classList.remove("hidden");
+        }
+
+        function toggleMenu() {
+            document.getElementById("menu").classList.toggle("hidden");
+        }
+
+        function showPage(pageId) {
+            document.querySelectorAll(".container").forEach(div => div.classList.add("hidden"));
+            document.getElementById(pageId).classList.remove("hidden");
+        }
+
+        function goBack() {
+            showPage("main-page");
+        }
+
+        function showApiPage(category) {
+            let apiLinks = {
+                games: ["https://api.darknode/games1", "https://api.darknode/games2", "https://api.darknode/games3"],
+                religion: ["https://api.darknode/religion1", "https://api.darknode/religion2", "https://api.darknode/religion3"],
+                download: ["https://api.darknode/download1", "https://api.darknode/download2", "https://api.darknode/download3"],
+                tools: ["https://api.darknode/tools1", "https://api.darknode/tools2", "https://api.darknode/tools3"],
+                search: ["https://api.darknode/search1", "https://api.darknode/search2", "https://api.darknode/search3"],
+                ai: ["https://api.darknode/ai1", "https://api.darknode/ai2", "https://api.darknode/ai3"],
+                other: ["https://api.darknode/other1", "https://api.darknode/other2", "https://api.darknode/other3"]
+            };
+
+            document.getElementById("api-title").innerText = "📜 " + category.toUpperCase();
+            document.getElementById("api-content").innerHTML = apiLinks[category].map(link => 
+                `<div class="api-box" onclick="copyToClipboard('${link}')">${link}</div>`).join("");
+
+            showPage("api-page");
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text);
+            alert("تم نسخ الرابط: " + text);
+        }
+    </script>
+
 </body>
 </html>
