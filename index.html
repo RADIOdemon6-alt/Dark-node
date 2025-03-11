@@ -1,33 +1,42 @@
-<!DOCTYPE html>
-<html lang="ar">
+<!DOCTYPE html><html lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚡ API Dark Node</title>
+    <title>⚡ Api Dark Node</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Orbitron', sans-serif; }
         body { background: url('https://files.catbox.moe/5o0hnu.jpg') no-repeat center center fixed; background-size: cover; color: #fff; text-align: center; overflow-y: auto; }
+        .sidebar { position: fixed; top: 0; left: -220px; width: 200px; height: 100%; background: rgba(0, 0, 0, 0.9); padding: 20px; box-shadow: 0px 0px 15px rgba(255, 0, 0, 0.7); transition: left 0.4s ease-in-out; z-index: 1000; }
+        .sidebar a { display: block; color: #ff0077; text-decoration: none; font-size: 18px; margin: 15px 0; transition: 0.3s; }
+        .sidebar a:hover { color: #00ffee; text-shadow: 0px 0px 10px #00ffee; }
+        .toggle-btn, .music-btn { position: fixed; bottom: 20px; right: 20px; background: #ff0077; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0px 0px 10px #ff0077; transition: 0.3s; }
+        .toggle-btn { top: 20px; }
+        .toggle-btn:hover, .music-btn:hover { background: #00ffee; box-shadow: 0px 0px 15px #00ffee; }
         .container { max-width: 900px; margin: 50px auto; padding: 20px; border-radius: 10px; background: rgba(20, 20, 20, 0.9); box-shadow: 0px 0px 20px rgba(255, 0, 255, 0.7); display: none; }
         .active { display: block; }
-        .btn { background: #ff0077; padding: 10px 20px; border-radius: 5px; color: white; cursor: pointer; transition: 0.3s; box-shadow: 0px 0px 10px #ff0077; margin: 10px; }
+        .api-item { display: flex; justify-content: space-between; align-items: center; background: #200000; padding: 10px; margin: 10px 0; border-radius: 5px; box-shadow: 0px 0px 15px red; color: #ff4444; font-size: 18px; font-weight: bold; }
+        .api-hidden { display: none; }
+        .btn { background: #ff0077; padding: 10px 20px; border-radius: 5px; color: white; cursor: pointer; transition: 0.3s; box-shadow: 0px 0px 10px #ff0077; }
         .btn:hover { background: #00ffee; box-shadow: 0px 0px 15px #00ffee; }
-        .api-item { background: #200000; padding: 15px; margin: 10px 0; border-radius: 5px; box-shadow: 0px 0px 15px red; color: #ff4444; font-size: 18px; font-weight: bold; cursor: pointer; }
-        .api-links { display: none; margin-top: 10px; }
-        .api-link { background: #333; padding: 10px; display: flex; justify-content: space-between; align-items: center; margin: 5px 0; border-radius: 5px; box-shadow: 0px 0px 10px #555; }
-        .copy-btn { background: #ff0077; padding: 5px 10px; border: none; color: white; cursor: pointer; border-radius: 5px; }
-        .copy-btn:hover { background: #00ffee; }
     </style>
 </head>
-<body>
-
-<!-- صفحة الترحيب -->
-<div id="welcome" class="container active">
-    <h1 style="color: #ff0077; text-shadow: 0px 0px 10px pink;">🎉 مرحبًا بك في API Dark Node 🎉</h1>
-    <button class="btn" onclick="startSite()">ابدأ</button>
-</div>
-
-<!-- صفحة أقسام API -->
+<body><div class="sidebar" id="sidebar">
+    <a href="#" onclick="showPage('home')">🏠 الرئيسية</a>
+    <a href="#" onclick="showPage('buy')">🛒 شراء السكريبت</a>
+    <a href="#" onclick="showPage('api')">🛰 API</a>
+    <a href="#" onclick="showPage('developer')">💻 معلومات المطور</a>
+</div><div class="toggle-btn" onclick="toggleSidebar()">☰</div>
+<div class="music-btn" onclick="toggleMusic()">🎵</div><div id="home" class="container active">
+    <h1>✨ مرحبًا بك في <span class="neon-text">API Dark Node</span> ✨</h1>
+</div><div id="buy" class="container">
+    <h1 style="color: #ff0000; text-shadow: 0px 0px 10px red;">🍷 أسعار السكريبتات 🍷</h1>
+    <div class="api-item">⚜️اسكريبت البوت دون مساعده → <span>150 جنيه</span></div>
+    <div class="api-item">⚜️ اسكريبت البوت مع المساعده في رفعه و تشغيله → <span>250 جنيه</span></div>
+    <p>الدفع عبر فودافون كاش او شحن ببجي او instapay</p>
+    <a href="https://wa.me/201063808608"><button class="btn">📩 للشراء</button></a>
+</div><div id="api" class="container">
+    !-- صفحة أقسام API -->
 <div id="apiCategories" class="container">
     <h1>🛰 اختر قسم API</h1>
     <div class="api-item" onclick="toggleLinks('gamesLinks')">🎮 ألعاب</div>
@@ -64,35 +73,34 @@
         <div class="api-link"><span>📺 API YouTube Download</span><button class="copy-btn" onclick="copyApi('https://api.example.com/ytdl')">📋 نسخ</button></div>
         <div class="api-link"><span>🎵 API MP3 Download</span><button class="copy-btn" onclick="copyApi('https://api.example.com/mp3dl')">📋 نسخ</button></div>
     </div>
-
-    <div class="api-item" onclick="toggleLinks('searchLinks')">🔍 بحث</div>
-    <div id="searchLinks" class="api-links">
-        <div class="api-link"><span>🔎 API Google Search</span><button class="copy-btn" onclick="copyApi('https://api.example.com/google')">📋 نسخ</button></div>
-        <div class="api-link"><span>🔎 API Image Search</span><button class="copy-btn" onclick="copyApi('https://api.example.com/image')">📋 نسخ</button></div>
-    </div>
-
-    <button class="btn" onclick="showPage('welcome')">🔙 رجوع</button>
-</div>
-
-<!-- سكريبت التحكم -->
-<script>
-    function startSite() { showPage('apiCategories'); }
-    
+</div><div id="developer" class="container">
+    <h1>💻 المطور</h1>
+    <p>👨‍💻 اسم المطور: 𝑅𝐴𝐷𝐼𝛩 𝐷𝐸𝑀𝛩𝑁</p>
+    <p>🤖 اسم البوت: 𝙱𝙾𝚃-𝙼𝚄𝙺𝙾</p>
+    <a href="https://wa.me/201063808608"><button class="btn">📩 واتساب</button></a>
+    <a href="https://chat.whatsapp.com/BNARMEg1L87JOz8oSR9eFD"><button class="btn">🛠 دعم البوت</button></a>
+    <a href="https://whatsapp.com/channel/0029Vb2j3d6HVvTiMzx5QF13"><button class="btn">📢 قناة Dark-node</button></a>
+    <a href="https://whatsapp.com/channel/0029VaumDtWJZg4B8jLyMK2q"><button class="btn">📢 تابع قناتي لي معرفه كل جديد</button></a>
+</div><audio id="bgMusic" loop>
+    <source src="https://files.catbox.moe/yaq5lw.opus" type="audio/ogg">
+</audio><script>
     function showPage(pageId) {
         document.querySelectorAll('.container').forEach(page => page.classList.remove('active'));
         document.getElementById(pageId).classList.add('active');
     }
-
-    function toggleLinks(sectionId) {
-        let section = document.getElementById(sectionId);
-        section.style.display = section.style.display === "block" ? "none" : "block";
+    function toggleSidebar() {
+        let sidebar = document.getElementById("sidebar");
+        sidebar.style.left = sidebar.style.left === "0px" ? "-220px" : "0px";
     }
-
-    function copyApi(url) { 
-        navigator.clipboard.writeText(url); 
-        alert("✅ تم نسخ الرابط!"); 
+    function copyToClipboard(id) {
+        let element = document.getElementById(id);
+        element.style.display = "inline";
+        navigator.clipboard.writeText(element.textContent);
+        alert("تم نسخ الرابط!");
     }
-</script>
-
-</body>
+    function toggleMusic() {
+        let music = document.getElementById("bgMusic");
+        music.paused ? music.play() : music.pause();
+    }
+</script></body>
 </html>
