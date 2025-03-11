@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Orbitron', sans-serif; }
-        body { background: url('https://files.catbox.moe/oriq4t.jpg') no-repeat center center fixed; background-size: cover; color: #fff; text-align: center; }
+        body { background: url('https://files.catbox.moe/oriq4t.jpg') no-repeat center center fixed; background-size: cover; }
 
         /* زر القائمة */
         .toggle-btn {
@@ -144,7 +144,7 @@
 
     <!-- القائمة الجانبية -->
     <div class="sidebar" id="sidebar">
-        <a href="#" onclick="showPage('home')">🏠 الرئيسية</a>
+        <a href="#" onclick="showPage('home'); toggleSidebar()">🏠 الرئيسية</a>
         <a href="#" onclick="showPage('api')">🛠 API</a>
         <a href="#" onclick="showPage('buy')">🛒 شراء السكريبت</a>
         <a href="#" onclick="showPage('contact')">📩 تواصل معنا</a>
@@ -198,28 +198,33 @@
 
 <script>
     function startWebsite() {
-        document.getElementById("startPage").style.display = "none";
-        document.querySelector(".main-content").style.display = "block";
-    }
+    document.getElementById("startPage").style.display = "none";
+    document.querySelector(".main-content").style.display = "block";
+    document.querySelector(".main-content").classList.add('active'); // جعل الصفحة الرئيسية مرئية
+}
 
     function showPage(pageId) {
-        document.querySelectorAll('.container').forEach(page => page.classList.remove('active'));
-        document.getElementById(pageId).classList.add('active');
-    }
+    document.querySelectorAll('.container').forEach(page => page.style.display = "none");
+    document.getElementById(pageId).style.display = "block";
+}
 
     function toggleSidebar() {
         let sidebar = document.getElementById("sidebar");
         sidebar.style.right = sidebar.style.right === "0px" ? "-220px" : "0px";
     }
 
-    function toggleMusic() {
-        let music = document.getElementById("backgroundMusic");
-        if (music.paused) {
-            music.play();
-        } else {
-            music.pause();
-        }
+function toggleMusic() {
+    let music = document.getElementById("backgroundMusic");
+    let btn = document.querySelector(".toggle-btn");
+    
+    if (music.paused) {
+        music.play();
+        btn.innerHTML = "🔇"; // تغيير الأيقونة عند التشغيل
+    } else {
+        music.pause();
+        btn.innerHTML = "🎵"; // تغيير الأيقونة عند الإيقاف
     }
+}
 </script>
 
 </body>
