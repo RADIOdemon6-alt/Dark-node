@@ -21,6 +21,22 @@
             z-index: 10001;
             box-shadow: 0px 0px 10px #ff0077;
         }
+/* تنسيق قسم الـ API */
+.api-item {
+    background: linear-gradient(45deg, #ff0077, #7700ff);
+    color: white;
+    font-size: 20px;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+    text-shadow: 0px 0px 10px #fff;
+    box-shadow: 0px 0px 20px rgba(255, 0, 255, 0.7);
+    transition: 0.3s;
+    cursor: pointer;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
 
         /* القائمة الجانبية */
         .sidebar {
@@ -102,11 +118,18 @@
 <body>
 
 <!-- صفحة البداية -->
-<div id="startPage" class="container active" style="background: none; box-shadow: none;">
-    <img src="https://files.catbox.moe/4tx1wp.jpg" alt="صفحة البداية" style="width: 100%; border-radius: 10px;">
-    <br><br>
-    <button class="box" onclick="startWebsite()">بدء 🚀</button>
-</div>
+.start-page {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;  /* يجعل الصورة تمتد لكامل الشاشة */
+    background: url('https://files.catbox.moe/4tx1wp.jpg') no-repeat center center;
+    background-size: cover; /* يجعل الصورة تغطي الشاشة بالكامل */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 <!-- المحتوى الرئيسي -->
 <div class="main-content">
@@ -147,13 +170,21 @@
         </div>
     </div>
 </div>
+<div id="buy" class="container">
+    <h1 style="color: #ff0000; text-shadow: 0px 0px 10px red;">🍷 أسعار السكريبتات 🍷</h1>
+    <div class="api-item">⚜️ اسكريبت البوت دون مساعده → <span>150 جنيه</span></div>
+    <div class="api-item">⚜️ اسكريبت البوت مع المساعده في رفعه و تشغيله → <span>250 جنيه</span></div>
+    <p>الدفع عبر فودافون كاش او شحن ببجي او instapay</p>
+    <a href="https://wa.me/201063808608"><button class="btn">📩 للشراء</button></a>
+</div>
+
     <!-- قسم التواصل معنا -->
     <div id="contact" class="container">
         <h1>📩 تواصل معنا</h1>
-        <div class="box" onclick="window.open('https://wa.me/201063808608')">📱 واتساب 1</div>
-        <div class="box" onclick="window.open('https://wa.me/201063808608')">📱 واتساب 2</div>
-        <div class="box" onclick="window.open('https://wa.me/201063808608')">📱 واتساب 3</div>
-        <div class="box" onclick="window.open('https://wa.me/201063808608')">📱 واتساب 4</div>
+        <div class="box" onclick="window.open('https://chat.whatsapp.com/KEkiMFc8Y0S6YgOFFzsuzg')">📱 شات البوت 1</div>
+        <div class="box" onclick="window.open('https://whatsapp.com/channel/0029VaumDtWJZg4B8jLyMK2q')">📱 قناتي الرسميه 2</div>
+        <div class="box" onclick="window.open('https://whatsapp.com/channel/0029Vb2j3d6HVvTiMzx5QF13')">📱 قنات Darknode الرسميه 3</div>
+        <div class="box" onclick="window.open('https://wa.me/201063808608')">📱 شاتي 4</div>
     </div>
 
     <!-- قسم المطور -->
