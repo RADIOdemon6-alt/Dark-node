@@ -46,35 +46,6 @@
             color: #00ffee;
             text-shadow: 0px 0px 10px #00ffee;
         }
-
-        /* تنسيق الصفحة */
-        .container {
-            max-width: 900px;
-            margin: 50px auto;
-            padding: 20px;
-            border-radius: 10px;
-            background: rgba(20, 20, 20, 0.9);
-            box-shadow: 0px 0px 20px rgba(255, 0, 255, 0.7);
-            display: none;
-        }
-        .active { display: block; }
-
-        /* مربعات الـ API */
-        .api-category {
-            background: rgba(255, 0, 119, 0.5);
-            padding: 15px;
-            margin: 10px 0;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 18px;
-            box-shadow: 0px 0px 10px #ff0077;
-        }
-        .api-category:hover {
-            background: rgba(0, 255, 255, 0.5);
-            box-shadow: 0px 0px 15px #00ffee;
-        }
-        .api-links { display: none; margin-top: 10px; }
-
         /* مربعات الروابط */
         .api-link-box {
             background: rgba(30, 30, 30, 0.8);
@@ -97,16 +68,34 @@
         }
         .copy-btn:hover { background: #00ffee; }
 
-        /* زر تشغيل الأغنية */
-        .music-btn {
-            position: fixed;
-            bottom: 15px;
-            right: 15px;
-            background: #ff0077;
-            padding: 10px;
-            border-radius: 50%;
+        /* إخفاء الصفحة الرئيسية حتى يتم الضغط على "بدء" */
+        .main-content { display: none; }
+
+        /* تنسيق الصفحة */
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 10px;
+            background: rgba(20, 20, 20, 0.9);
+            box-shadow: 0px 0px 20px rgba(255, 0, 255, 0.7);
+            display: none;
+        }
+        .active { display: block; }
+
+        /* مربعات */
+        .box {
+            background: rgba(255, 0, 119, 0.5);
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
             cursor: pointer;
+            font-size: 18px;
             box-shadow: 0px 0px 10px #ff0077;
+        }
+        .box:hover {
+            background: rgba(0, 255, 255, 0.5);
+            box-shadow: 0px 0px 15px #00ffee;
         }
     </style>
 </head>
@@ -115,26 +104,29 @@
 <!-- صفحة البداية -->
 <div id="startPage" class="container active" style="background: none; box-shadow: none;">
     <img src="https://files.catbox.moe/4tx1wp.jpg" alt="صفحة البداية" style="width: 100%; border-radius: 10px;">
+    <br><br>
+    <button class="box" onclick="startWebsite()">بدء 🚀</button>
 </div>
 
-<!-- زر تشغيل الأغنية -->
-<button class="music-btn" onclick="toggleMusic()">🎵</button>
-<audio id="backgroundMusic" loop>
-    <source src="https://files.catbox.moe/kb3lc8.mp3" type="audio/mpeg">
-</audio>
+<!-- المحتوى الرئيسي -->
+<div class="main-content">
+    <!-- زر تشغيل الأغنية -->
+    <button class="toggle-btn" onclick="toggleMusic()">🎵</button>
+    <audio id="backgroundMusic" loop>
+        <source src="https://files.catbox.moe/kb3lc8.mp3" type="audio/mpeg">
+    </audio>
 
-<!-- زر القائمة -->
-<div class="toggle-btn" onclick="toggleSidebar()">☰</div>
+    <!-- زر القائمة -->
+    <div class="toggle-btn" onclick="toggleSidebar()">☰</div>
 
-<!-- القائمة الجانبية -->
-<div class="sidebar" id="sidebar">
-    <a href="#" onclick="showPage('home')">🏠 الرئيسية</a>
-    <a href="#" onclick="showPage('api')">🛠 API</a>
-    <a href="#" onclick="showPage('buy')">🛒 شراء السكريبت</a>
-    <a href="#" onclick="showPage('contact')">📩 تواصل معنا</a>
-    <a href="#" onclick="showPage('developer')">💻 المطور</a>
-</div>
-
+    <!-- القائمة الجانبية -->
+    <div class="sidebar" id="sidebar">
+        <a href="#" onclick="showPage('home')">🏠 الرئيسية</a>
+        <a href="#" onclick="showPage('api')">🛠 API</a>
+        <a href="#" onclick="showPage('buy')">🛒 شراء السكريبت</a>
+        <a href="#" onclick="showPage('contact')">📩 تواصل معنا</a>
+        <a href="#" onclick="showPage('developer')">💻 المطور</a>
+    </div>
 <!-- الصفحات -->
 <div id="api" class="container">
     <h1>🛰 اختر فئة API</h1>
@@ -155,18 +147,30 @@
         </div>
     </div>
 </div>
+    <!-- قسم التواصل معنا -->
+    <div id="contact" class="container">
+        <h1>📩 تواصل معنا</h1>
+        <div class="box" onclick="window.open('https://wa.me/201063808608')">📱 واتساب 1</div>
+        <div class="box" onclick="window.open('https://wa.me/201063808608')">📱 واتساب 2</div>
+        <div class="box" onclick="window.open('https://wa.me/201063808608')">📱 واتساب 3</div>
+        <div class="box" onclick="window.open('https://wa.me/201063808608')">📱 واتساب 4</div>
+    </div>
 
-<div id="contact" class="container">
-    <h1>📩 تواصل معنا</h1>
-    <p>💬 واتساب: <a href="https://wa.me/123456789" target="_blank">اضغط هنا</a></p>
-</div>
-
-<div id="developer" class="container">
-    <h1>💻 المطور</h1>
-    <p>🛠 تم تطوير هذا السكريبت بواسطة <b>Dark Node</b></p>
+    <!-- قسم المطور -->
+    <div id="developer" class="container">
+        <h1>💻 المطور</h1>
+        <div class="box">👤 المطور: 𝑅𝐴𝐷𝐼𝛩 𝐷𝐸𝑀𝛩𝑁</div>
+        <div class="box">🤖 البوت: 𝙱𝙾𝚃-𝙼𝚄𝙺𝙾</div>
+        <div class="box" onclick="window.open('https://wa.me/201063808608')">📩 تواصل مع المطور</div>
+    </div>
 </div>
 
 <script>
+    function startWebsite() {
+        document.getElementById("startPage").style.display = "none";
+        document.querySelector(".main-content").style.display = "block";
+    }
+
     function showPage(pageId) {
         document.querySelectorAll('.container').forEach(page => page.classList.remove('active'));
         document.getElementById(pageId).classList.add('active');
@@ -175,15 +179,6 @@
     function toggleSidebar() {
         let sidebar = document.getElementById("sidebar");
         sidebar.style.right = sidebar.style.right === "0px" ? "-220px" : "0px";
-    }
-
-    function toggleLinks(id) {
-        let links = document.getElementById(id);
-        links.style.display = links.style.display === "block" ? "none" : "block";
-    }
-
-    function copyText(text) {
-        navigator.clipboard.writeText(text).then(() => alert("تم النسخ!"));
     }
 
     function toggleMusic() {
