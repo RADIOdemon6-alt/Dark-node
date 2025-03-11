@@ -7,27 +7,39 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Orbitron', sans-serif; }
-        body { background: url('https://files.catbox.moe/oriq4t.jpg') no-repeat center center fixed; background-size: cover; color: #fff; text-align: center; overflow-y: auto; }
+        body { background: url('https://files.catbox.moe/oriq4t.jpg') no-repeat center center fixed; background-size: cover; color: #fff; text-align: center; }
+
+        /* زر القائمة */
+        .toggle-btn {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            background: #ff0077;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 10001;
+            box-shadow: 0px 0px 10px #ff0077;
+        }
 
         /* القائمة الجانبية */
         .sidebar {
             position: fixed;
             top: 0;
-            left: -220px;
+            right: -220px;
             width: 200px;
             height: 100%;
             background: rgba(0, 0, 0, 0.9);
             padding: 20px;
-            box-shadow: 0px 0px 15px rgba(255, 0, 0, 0.7);
-            transition: left 0.4s ease-in-out;
+            transition: right 0.4s ease-in-out;
             z-index: 10000;
         }
         .sidebar a {
             display: block;
             color: #ff0077;
-            text-decoration: none;
             font-size: 18px;
             margin: 15px 0;
+            text-decoration: none;
             transition: 0.3s;
         }
         .sidebar a:hover {
@@ -47,29 +59,72 @@
         }
         .active { display: block; }
 
-        /* الأزرار */
-        .btn {
-            background: #ff0077;
-            padding: 10px 20px;
+        /* مربعات الـ API */
+        .api-category {
+            background: rgba(255, 0, 119, 0.5);
+            padding: 15px;
+            margin: 10px 0;
             border-radius: 5px;
-            color: white;
             cursor: pointer;
-            transition: 0.3s;
+            font-size: 18px;
             box-shadow: 0px 0px 10px #ff0077;
         }
-        .btn:hover {
-            background: #00ffee;
+        .api-category:hover {
+            background: rgba(0, 255, 255, 0.5);
             box-shadow: 0px 0px 15px #00ffee;
+        }
+        .api-links { display: none; margin-top: 10px; }
+
+        /* مربعات الروابط */
+        .api-link-box {
+            background: rgba(30, 30, 30, 0.8);
+            padding: 10px;
+            border-radius: 5px;
+            margin: 5px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0px 0px 10px #ff0077;
+        }
+        .copy-btn {
+            background: #ff0077;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 14px;
+            color: white;
+        }
+        .copy-btn:hover { background: #00ffee; }
+
+        /* زر تشغيل الأغنية */
+        .music-btn {
+            position: fixed;
+            bottom: 15px;
+            right: 15px;
+            background: #ff0077;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0px 0px 10px #ff0077;
         }
     </style>
 </head>
 <body>
 
 <!-- صفحة البداية -->
-<div id="startPage" class="container active">
-    <h1>🔥 مرحبًا بك في <span class="neon-text">API Dark Node</span> 🔥</h1>
-    <button class="btn" onclick="startWebsite()">🚀 ابدأ</button>
+<div id="startPage" class="container active" style="background: none; box-shadow: none;">
+    <img src="https://files.catbox.moe/4tx1wp.jpg" alt="صفحة البداية" style="width: 100%; border-radius: 10px;">
 </div>
+
+<!-- زر تشغيل الأغنية -->
+<button class="music-btn" onclick="toggleMusic()">🎵</button>
+<audio id="backgroundMusic" loop>
+    <source src="https://files.catbox.moe/kb3lc8.mp3" type="audio/mpeg">
+</audio>
+
+<!-- زر القائمة -->
+<div class="toggle-btn" onclick="toggleSidebar()">☰</div>
 
 <!-- القائمة الجانبية -->
 <div class="sidebar" id="sidebar">
@@ -80,44 +135,35 @@
     <a href="#" onclick="showPage('developer')">💻 المطور</a>
 </div>
 
-<!-- زر القائمة -->
-<div class="toggle-btn" onclick="toggleSidebar()">☰</div>
-
 <!-- الصفحات -->
-<div id="home" class="container">
-    <h1>✨ مرحبًا بك في <span class="neon-text">API Dark Node</span> ✨</h1>
-</div>
-
 <div id="api" class="container">
-    <h1>🛰 اختر قسم API</h1>
-    <div class="api-item" onclick="toggleLinks('gamesLinks')">🎮 ألعاب</div>
+    <h1>🛰 اختر فئة API</h1>
+
+    <div class="api-category" onclick="toggleLinks('gamesLinks')">🎮 ألعاب</div>
     <div id="gamesLinks" class="api-links">
-        <div class="api-link">
-            <span>🎲 API الألعاب 1</span>
-            <button onclick="copyToClipboard('https://api.example.com/game1')">📋 نسخ</button>
+        <div class="api-link-box">
+            <span>🔹 API 1</span>
+            <button class="copy-btn" onclick="copyText('https://example.com/game1')">نسخ</button>
         </div>
-        <div class="api-link">
-            <span>🎯 API الألعاب 2</span>
-            <button onclick="copyToClipboard('https://api.example.com/game2')">📋 نسخ</button>
+    </div>
+
+    <div class="api-category" onclick="toggleLinks('toolsLinks')">🛠 أدوات</div>
+    <div id="toolsLinks" class="api-links">
+        <div class="api-link-box">
+            <span>🔹 API 2</span>
+            <button class="copy-btn" onclick="copyText('https://example.com/tool1')">نسخ</button>
         </div>
     </div>
 </div>
 
-<!-- صفحة التواصل -->
 <div id="contact" class="container">
     <h1>📩 تواصل معنا</h1>
-    <p>🔹 إذا كنت بحاجة إلى الدعم، يمكنك الانضمام إلى مجموعتنا أو متابعتنا على القنوات الرسمية.</p>
-    <a href="https://chat.whatsapp.com/BNARMEg1L87JOz8oSR9eFD"><button class="btn">🛠 دعم البوت</button></a>
-    <a href="https://whatsapp.com/channel/0029Vb2j3d6HVvTiMzx5QF13"><button class="btn">📢 قناة Dark-node</button></a>
-    <a href="https://whatsapp.com/channel/0029VaumDtWJZg4B8jLyMK2q"><button class="btn">📢 تابع قناتي لي معرفه كل جديد</button></a>
+    <p>💬 واتساب: <a href="https://wa.me/123456789" target="_blank">اضغط هنا</a></p>
 </div>
 
-<!-- صفحة المطور -->
 <div id="developer" class="container">
     <h1>💻 المطور</h1>
-    <p>👨‍💻 اسم المطور: 𝑅𝐴𝐷𝐼𝛩 𝐷𝐸𝑀𝛩𝑁</p>
-    <p>🤖 اسم البوت: 𝙱𝙾𝚃-𝙼𝚄𝙺𝙾</p>
-    <a href="https://wa.me/201063808608"><button class="btn">📩 واتساب</button></a>
+    <p>🛠 تم تطوير هذا السكريبت بواسطة <b>Dark Node</b></p>
 </div>
 
 <script>
@@ -128,12 +174,7 @@
 
     function toggleSidebar() {
         let sidebar = document.getElementById("sidebar");
-        sidebar.style.left = sidebar.style.left === "0px" ? "-220px" : "0px";
-    }
-
-    function startWebsite() {
-        document.getElementById("startPage").style.display = "none";
-        document.getElementById("home").classList.add("active");
+        sidebar.style.right = sidebar.style.right === "0px" ? "-220px" : "0px";
     }
 
     function toggleLinks(id) {
@@ -141,9 +182,17 @@
         links.style.display = links.style.display === "block" ? "none" : "block";
     }
 
-    function copyToClipboard(text) {
-        navigator.clipboard.writeText(text);
-        alert("تم النسخ: " + text);
+    function copyText(text) {
+        navigator.clipboard.writeText(text).then(() => alert("تم النسخ!"));
+    }
+
+    function toggleMusic() {
+        let music = document.getElementById("backgroundMusic");
+        if (music.paused) {
+            music.play();
+        } else {
+            music.pause();
+        }
     }
 </script>
 
