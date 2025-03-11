@@ -8,12 +8,12 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Orbitron', sans-serif; }
         body { background: url('https://files.catbox.moe/oriq4t.jpg') no-repeat center center fixed; background-size: cover; color: #fff; text-align: center; overflow-y: auto; }
-        
+
         /* القائمة الجانبية */
         .sidebar {
             position: fixed;
             top: 0;
-            left: -220px; /* مخفية افتراضيًا */
+            left: -220px;
             width: 200px;
             height: 100%;
             background: rgba(0, 0, 0, 0.9);
@@ -34,84 +34,8 @@
             color: #00ffee;
             text-shadow: 0px 0px 10px #00ffee;
         }
-/* تنسيق قسم الـ API */
-.api-item {
-    background: linear-gradient(45deg, #ff0077, #7700ff);
-    color: white;
-    font-size: 20px;
-    padding: 15px;
-    margin: 10px 0;
-    border-radius: 10px;
-    text-align: center;
-    font-weight: bold;
-    text-shadow: 0px 0px 10px #fff;
-    box-shadow: 0px 0px 20px rgba(255, 0, 255, 0.7);
-    transition: 0.3s;
-    cursor: pointer;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-}
 
-.api-item:hover {
-    background: linear-gradient(45deg, #00ffee, #ff0077);
-    box-shadow: 0px 0px 30px rgba(0, 255, 255, 0.9);
-    transform: scale(1.05);
-}
-
-.api-links {
-    display: none;
-    padding: 10px;
-}
-
-.api-link {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: 10px;
-    border-radius: 8px;
-    margin: 5px 0;
-    box-shadow: 0px 0px 15px rgba(255, 0, 255, 0.5);
-}
-
-.api-link button {
-    background: #ff0077;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.api-link button:hover {
-    background: #00ffee;
-    box-shadow: 0px 0px 10px #00ffee;
-}
-        /* أزرار القائمة والموسيقى */
-        .toggle-btn, .music-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #ff0077;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0px 0px 10px #ff0077;
-            transition: 0.3s;
-            z-index: 11000;
-        }
-        .toggle-btn { top: 20px; }
-        .toggle-btn:hover, .music-btn:hover {
-            background: #00ffee;
-            box-shadow: 0px 0px 15px #00ffee;
-        }
-
-        /* الصفحات */
+        /* تنسيق الصفحة */
         .container {
             max-width: 900px;
             margin: 50px auto;
@@ -123,7 +47,7 @@
         }
         .active { display: block; }
 
-        /* أزرار */
+        /* الأزرار */
         .btn {
             background: #ff0077;
             padding: 10px 20px;
@@ -159,9 +83,6 @@
 <!-- زر القائمة -->
 <div class="toggle-btn" onclick="toggleSidebar()">☰</div>
 
-<!-- زر الموسيقى -->
-<div class="music-btn" onclick="toggleMusic()">🎵</div>
-
 <!-- الصفحات -->
 <div id="home" class="container">
     <h1>✨ مرحبًا بك في <span class="neon-text">API Dark Node</span> ✨</h1>
@@ -169,7 +90,6 @@
 
 <div id="api" class="container">
     <h1>🛰 اختر قسم API</h1>
-    
     <div class="api-item" onclick="toggleLinks('gamesLinks')">🎮 ألعاب</div>
     <div id="gamesLinks" class="api-links">
         <div class="api-link">
@@ -183,33 +103,22 @@
     </div>
 </div>
 
-<div id="buy" class="container">
-    <h1 style="color: #ff0000; text-shadow: 0px 0px 10px red;">🍷 أسعار السكريبتات 🍷</h1>
-    <div class="api-item">⚜️ اسكريبت البوت دون مساعده → <span>150 جنيه</span></div>
-    <div class="api-item">⚜️ اسكريبت البوت مع المساعده في رفعه و تشغيله → <span>250 جنيه</span></div>
-    <p>الدفع عبر فودافون كاش او شحن ببجي او instapay</p>
-    <a href="https://wa.me/201063808608"><button class="btn">📩 للشراء</button></a>
-</div>
-
+<!-- صفحة التواصل -->
 <div id="contact" class="container">
     <h1>📩 تواصل معنا</h1>
-    <p>📧 الإيميل: support@darknode.com</p>
-    <p>📞 الهاتف: +201063808608</p>
-    <p>📢 مجموعتنا على واتساب:</p>
-    <a href="https://chat.whatsapp.com/BNARMEg1L87JOz8oSR9eFD"><button class="btn">💬 انضم إلينا</button></a>
+    <p>🔹 إذا كنت بحاجة إلى الدعم، يمكنك الانضمام إلى مجموعتنا أو متابعتنا على القنوات الرسمية.</p>
+    <a href="https://chat.whatsapp.com/BNARMEg1L87JOz8oSR9eFD"><button class="btn">🛠 دعم البوت</button></a>
+    <a href="https://whatsapp.com/channel/0029Vb2j3d6HVvTiMzx5QF13"><button class="btn">📢 قناة Dark-node</button></a>
+    <a href="https://whatsapp.com/channel/0029VaumDtWJZg4B8jLyMK2q"><button class="btn">📢 تابع قناتي لي معرفه كل جديد</button></a>
 </div>
 
+<!-- صفحة المطور -->
 <div id="developer" class="container">
     <h1>💻 المطور</h1>
     <p>👨‍💻 اسم المطور: 𝑅𝐴𝐷𝐼𝛩 𝐷𝐸𝑀𝛩𝑁</p>
     <p>🤖 اسم البوت: 𝙱𝙾𝚃-𝙼𝚄𝙺𝙾</p>
     <a href="https://wa.me/201063808608"><button class="btn">📩 واتساب</button></a>
 </div>
-
-<!-- الموسيقى -->
-<audio id="bgMusic" loop>
-    <source src="https://files.catbox.moe/kb3lc8.mp3" type="audio/mpeg">
-</audio>
 
 <script>
     function showPage(pageId) {
@@ -222,30 +131,19 @@
         sidebar.style.left = sidebar.style.left === "0px" ? "-220px" : "0px";
     }
 
-    function toggleMusic() {
-        let music = document.getElementById("bgMusic");
-        music.paused ? music.play() : music.pause();
-    }
-
     function startWebsite() {
         document.getElementById("startPage").style.display = "none";
         document.getElementById("home").classList.add("active");
     }
-    
-<!-- سكريبت جافا سكريبت لإدارة عرض الأقسام ونسخ الروابط -->
-<script>
-    function toggleLinks(sectionId) {
-        let section = document.getElementById(sectionId);
-        if (section.style.display === "block") {
-            section.style.display = "none";
-        } else {
-            section.style.display = "block";
-        }
+
+    function toggleLinks(id) {
+        let links = document.getElementById(id);
+        links.style.display = links.style.display === "block" ? "none" : "block";
     }
 
     function copyToClipboard(text) {
         navigator.clipboard.writeText(text);
-        alert("📋 تم نسخ الرابط بنجاح!");
+        alert("تم النسخ: " + text);
     }
 </script>
 
