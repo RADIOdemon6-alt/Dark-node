@@ -21,22 +21,6 @@
             z-index: 10001;
             box-shadow: 0px 0px 10px #ff0077;
         }
-/* تنسيق قسم الـ API */
-.api-item {
-    background: linear-gradient(45deg, #ff0077, #7700ff);
-    color: white;
-    font-size: 20px;
-    padding: 15px;
-    margin: 10px 0;
-    border-radius: 10px;
-    text-align: center;
-    font-weight: bold;
-    text-shadow: 0px 0px 10px #fff;
-    box-shadow: 0px 0px 20px rgba(255, 0, 255, 0.7);
-    transition: 0.3s;
-    cursor: pointer;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-}
 
         /* القائمة الجانبية */
         .sidebar {
@@ -62,32 +46,41 @@
             color: #00ffee;
             text-shadow: 0px 0px 10px #00ffee;
         }
-        /* مربعات الروابط */
-        .api-link-box {
-            background: rgba(30, 30, 30, 0.8);
-            padding: 10px;
-            border-radius: 5px;
-            margin: 5px 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0px 0px 10px #ff0077;
-        }
-        .copy-btn {
-            background: #ff0077;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 3px;
-            cursor: pointer;
-            font-size: 14px;
-            color: white;
-        }
-        .copy-btn:hover { background: #00ffee; }
 
-        /* إخفاء الصفحة الرئيسية حتى يتم الضغط على "بدء" */
+        /* الصفحة الرئيسية حتى يتم الضغط على "بدء" */
+        .start-page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: url('https://files.catbox.moe/4tx1wp.jpg') no-repeat center center;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+        .start-btn {
+            padding: 15px 30px;
+            font-size: 22px;
+            font-weight: bold;
+            background: #ff0077;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0px 0px 15px #ff0077;
+        }
+        .start-btn:hover {
+            background: #00ffee;
+            box-shadow: 0px 0px 15px #00ffee;
+        }
+
+        /* المحتوى الرئيسي */
         .main-content { display: none; }
 
-        /* تنسيق الصفحة */
+        /* تنسيق الصفحات */
         .container {
             max-width: 900px;
             margin: 50px auto;
@@ -118,18 +111,9 @@
 <body>
 
 <!-- صفحة البداية -->
-.start-page {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;  /* يجعل الصورة تمتد لكامل الشاشة */
-    background: url('https://files.catbox.moe/4tx1wp.jpg') no-repeat center center;
-    background-size: cover; /* يجعل الصورة تغطي الشاشة بالكامل */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+<div class="start-page" id="startPage">
+    <button class="start-btn" onclick="startWebsite()">🚀 اضغط للبدء</button>
+</div>
 
 <!-- المحتوى الرئيسي -->
 <div class="main-content">
@@ -144,87 +128,61 @@
 
     <!-- القائمة الجانبية -->
     <div class="sidebar" id="sidebar">
-        <a href="#" onclick="showPage('home'); toggleSidebar()">🏠 الرئيسية</a>
-        <a href="#" onclick="showPage('api')">🛠 API</a>
+        <a href="#" onclick="showPage('api'); toggleSidebar()">🛠 API</a>
         <a href="#" onclick="showPage('buy')">🛒 شراء السكريبت</a>
         <a href="#" onclick="showPage('contact')">📩 تواصل معنا</a>
         <a href="#" onclick="showPage('developer')">💻 المطور</a>
     </div>
-<!-- الصفحات -->
-<div id="api" class="container">
-    <h1>🛰 اختر فئة API</h1>
 
-    <div class="api-category" onclick="toggleLinks('gamesLinks')">🎮 ألعاب</div>
-    <div id="gamesLinks" class="api-links">
-        <div class="api-link-box">
-            <span>🔹 API 1</span>
-            <button class="copy-btn" onclick="copyText('https://example.com/game1')">نسخ</button>
+    <!-- الصفحات -->
+    <div id="api" class="container">
+        <h1>🛰 اختر فئة API</h1>
+        <div class="box" onclick="toggleLinks('gamesLinks')">🎮 ألعاب</div>
+        <div id="gamesLinks" class="api-links">
+            <div class="box" onclick="copyText('https://example.com/game1')">🔹 API 1</div>
+        </div>
+
+        <div class="box" onclick="toggleLinks('toolsLinks')">🛠 أدوات</div>
+        <div id="toolsLinks" class="api-links">
+            <div class="box" onclick="copyText('https://example.com/tool1')">🔹 API 2</div>
         </div>
     </div>
 
-    <div class="api-category" onclick="toggleLinks('toolsLinks')">🛠 أدوات</div>
-    <div id="toolsLinks" class="api-links">
-        <div class="api-link-box">
-            <span>🔹 API 2</span>
-            <button class="copy-btn" onclick="copyText('https://example.com/tool1')">نسخ</button>
-        </div>
+    <div id="buy" class="container">
+        <h1>🍷 أسعار السكريبتات 🍷</h1>
+        <div class="box">⚜️ اسكريبت البوت دون مساعده → 150 جنيه</div>
+        <div class="box">⚜️ اسكريبت البوت مع المساعده في رفعه وتشغيله → 250 جنيه</div>
+        <p>الدفع عبر فودافون كاش او شحن ببجي او instapay</p>
+        <a href="https://wa.me/201063808608"><button class="box">📩 للشراء</button></a>
     </div>
-</div>
-<div id="buy" class="container">
-    <h1 style="color: #ff0000; text-shadow: 0px 0px 10px red;">🍷 أسعار السكريبتات 🍷</h1>
-    <div class="api-item">⚜️ اسكريبت البوت دون مساعده → <span>150 جنيه</span></div>
-    <div class="api-item">⚜️ اسكريبت البوت مع المساعده في رفعه و تشغيله → <span>250 جنيه</span></div>
-    <p>الدفع عبر فودافون كاش او شحن ببجي او instapay</p>
-    <a href="https://wa.me/201063808608"><button class="btn">📩 للشراء</button></a>
-</div>
 
-    <!-- قسم التواصل معنا -->
     <div id="contact" class="container">
         <h1>📩 تواصل معنا</h1>
-        <div class="box" onclick="window.open('https://chat.whatsapp.com/KEkiMFc8Y0S6YgOFFzsuzg')">📱 شات البوت 1</div>
-        <div class="box" onclick="window.open('https://whatsapp.com/channel/0029VaumDtWJZg4B8jLyMK2q')">📱 قناتي الرسميه 2</div>
-        <div class="box" onclick="window.open('https://whatsapp.com/channel/0029Vb2j3d6HVvTiMzx5QF13')">📱 قنات Darknode الرسميه 3</div>
-        <div class="box" onclick="window.open('https://wa.me/201063808608')">📱 شاتي 4</div>
+        <div class="box" onclick="window.open('https://wa.me/201063808608')">📱 واتساب</div>
     </div>
 
-    <!-- قسم المطور -->
     <div id="developer" class="container">
         <h1>💻 المطور</h1>
-        <div class="box">👤 المطور: 𝑅𝐴𝐷𝐼𝛩 𝐷𝐸𝑀𝛩𝑁</div>
-        <div class="box">🤖 البوت: 𝙱𝙾𝚃-𝙼𝚄𝙺𝙾</div>
-        <div class="box" onclick="window.open('https://wa.me/201063808608')">📩 تواصل مع المطور</div>
+        <div class="box">👤 𝑅𝐴𝐷𝐼𝛩 𝐷𝐸𝑀𝛩𝑁</div>
+        <div class="box">🤖 𝙱𝙾𝚃-𝙼𝚄𝙺𝙾</div>
     </div>
 </div>
 
 <script>
     function startWebsite() {
-    document.getElementById("startPage").style.display = "none";
-    document.querySelector(".main-content").style.display = "block";
-    document.querySelector(".main-content").classList.add('active'); // جعل الصفحة الرئيسية مرئية
-}
+        document.getElementById("startPage").style.display = "none";
+        document.querySelector(".main-content").style.display = "block";
+    }
 
     function showPage(pageId) {
-    document.querySelectorAll('.container').forEach(page => page.style.display = "none");
-    document.getElementById(pageId).style.display = "block";
-}
+        document.querySelectorAll('.container').forEach(page => page.style.display = "none");
+        document.getElementById(pageId).style.display = "block";
+    }
 
     function toggleSidebar() {
         let sidebar = document.getElementById("sidebar");
         sidebar.style.right = sidebar.style.right === "0px" ? "-220px" : "0px";
     }
-
-function toggleMusic() {
-    let music = document.getElementById("backgroundMusic");
-    let btn = document.querySelector(".toggle-btn");
-    
-    if (music.paused) {
-        music.play();
-        btn.innerHTML = "🔇"; // تغيير الأيقونة عند التشغيل
-    } else {
-        music.pause();
-        btn.innerHTML = "🎵"; // تغيير الأيقونة عند الإيقاف
-    }
-}
 </script>
 
 </body>
