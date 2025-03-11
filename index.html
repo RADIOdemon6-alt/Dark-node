@@ -169,9 +169,17 @@
 
 <div id="api" class="container">
     <h1>🛰 اختر قسم API</h1>
+    
     <div class="api-item" onclick="toggleLinks('gamesLinks')">🎮 ألعاب</div>
     <div id="gamesLinks" class="api-links">
-        <div class="api-link"><span>🎲 API الألعاب 1</span><button onclick="copyToClipboard('https://api.example.com/game1')">📋 نسخ</button></div>
+        <div class="api-link">
+            <span>🎲 API الألعاب 1</span>
+            <button onclick="copyToClipboard('https://api.example.com/game1')">📋 نسخ</button>
+        </div>
+        <div class="api-link">
+            <span>🎯 API الألعاب 2</span>
+            <button onclick="copyToClipboard('https://api.example.com/game2')">📋 نسخ</button>
+        </div>
     </div>
 </div>
 
@@ -222,6 +230,22 @@
     function startWebsite() {
         document.getElementById("startPage").style.display = "none";
         document.getElementById("home").classList.add("active");
+    }
+    
+<!-- سكريبت جافا سكريبت لإدارة عرض الأقسام ونسخ الروابط -->
+<script>
+    function toggleLinks(sectionId) {
+        let section = document.getElementById(sectionId);
+        if (section.style.display === "block") {
+            section.style.display = "none";
+        } else {
+            section.style.display = "block";
+        }
+    }
+
+    function copyToClipboard(text) {
+        navigator.clipboard.writeText(text);
+        alert("📋 تم نسخ الرابط بنجاح!");
     }
 </script>
 
