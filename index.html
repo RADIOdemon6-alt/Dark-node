@@ -6,10 +6,20 @@
     <title>⚡ Api Dark Node</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Orbitron', sans-serif; }
-        body { background: url('https://files.catbox.moe/oriq4t.jpg') no-repeat center center fixed; background-size: cover; }
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            font-family: 'Orbitron', sans-serif; 
+            color: #ff0077; /* لون الخط وردي نيون */
+        }
 
-        /* زر القائمة في الأسفل */
+        body { 
+            background: url('https://files.catbox.moe/oriq4t.jpg') no-repeat center center fixed; 
+            background-size: cover; 
+        }
+
+        /* زر القائمة */
         .toggle-btn {
             position: fixed;
             bottom: 15px;
@@ -22,11 +32,11 @@
             box-shadow: 0px 0px 10px #ff0077;
         }
 
-        /* القائمة الجانبية تأتي من اليسار */
+        /* القائمة الجانبية */
         .sidebar {
             position: fixed;
             top: 0;
-            left: -220px;
+            left: -220px; /* جعل القائمة تأتي من اليسار */
             width: 200px;
             height: 100%;
             background: rgba(0, 0, 0, 0.9);
@@ -47,7 +57,7 @@
             text-shadow: 0px 0px 10px #00ffee;
         }
 
-        /* الصفحة الرئيسية حتى يتم الضغط على "بدء" */
+        /* صفحة البداية */
         .start-page {
             position: fixed;
             top: 0;
@@ -107,42 +117,9 @@
             box-shadow: 0px 0px 15px #00ffee;
         }
 
-        /* تصميم روابط الـ API */
-        .api-category {
-            background: rgba(255, 0, 119, 0.7);
-            padding: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            text-align: center;
-            font-size: 20px;
-            margin-top: 10px;
-            color: white;
-        }
-        .api-links {
-            display: none;
-            margin-top: 10px;
-        }
-        .api-link-box {
-            display: flex;
-            justify-content: space-between;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 10px;
-            border-radius: 5px;
-            margin-top: 5px;
-            box-shadow: 0px 0px 10px #ff0077;
-        }
-        .copy-btn {
-            background: #ff0077;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            cursor: pointer;
-            border-radius: 3px;
-            font-size: 16px;
-        }
-        .copy-btn:hover {
-            background: #00ffee;
-            box-shadow: 0px 0px 10px #00ffee;
+        /* تعديل لون الخط لكل النصوص */
+        h1, h2, h3, h4, h5, h6, p, .box, .toggle-btn, .api-category, .api-link-box span {
+            color: #ff0077;
         }
     </style>
 </head>
@@ -155,6 +132,12 @@
 
 <!-- المحتوى الرئيسي -->
 <div class="main-content">
+    <!-- زر تشغيل الأغنية -->
+    <button class="toggle-btn" onclick="toggleMusic()">🎵</button>
+    <audio id="backgroundMusic" loop>
+        <source src="https://files.catbox.moe/kb3lc8.mp3" type="audio/mpeg">
+    </audio>
+
     <!-- زر القائمة -->
     <div class="toggle-btn" onclick="toggleSidebar()">☰</div>
 
@@ -166,7 +149,8 @@
         <a href="#" onclick="showPage('developer')">💻 المطور</a>
     </div>
 
-    <!-- صفحة API -->
+    <!-- الصفحات -->
+
     <div id="api" class="container">
         <h1>🛰 اختر فئة API</h1>
 
@@ -186,6 +170,25 @@
             </div>
         </div>
     </div>
+
+    <div id="buy" class="container">
+        <h1>🍷 أسعار السكريبتات 🍷</h1>
+        <div class="box">⚜️ اسكريبت البوت دون مساعده → 150 جنيه</div>
+        <div class="box">⚜️ اسكريبت البوت مع المساعده في رفعه وتشغيله → 250 جنيه</div>
+        <p>الدفع عبر فودافون كاش او شحن ببجي او instapay</p>
+        <a href="https://wa.me/201063808608"><button class="box">📩 للشراء</button></a>
+    </div>
+
+    <div id="contact" class="container">
+        <h1>📩 تواصل معنا</h1>
+        <div class="box" onclick="window.open('https://wa.me/201063808608')">📱 واتساب</div>
+    </div>
+
+    <div id="developer" class="container">
+        <h1>💻 المطور</h1>
+        <div class="box">👤 𝑅𝐴𝐷𝐼𝛩 𝐷𝐸𝑀𝛩𝑁</div>
+        <div class="box">🤖 𝙱𝙾𝚃-𝙼𝚄𝙺𝙾</div>
+    </div>
 </div>
 
 <script>
@@ -194,24 +197,9 @@
         document.querySelector(".main-content").style.display = "block";
     }
 
-    function showPage(pageId) {
-        document.querySelectorAll('.container').forEach(page => page.style.display = "none");
-        document.getElementById(pageId).style.display = "block";
-    }
-
     function toggleSidebar() {
         let sidebar = document.getElementById("sidebar");
         sidebar.style.left = sidebar.style.left === "0px" ? "-220px" : "0px";
-    }
-
-    function toggleLinks(id) {
-        let links = document.getElementById(id);
-        links.style.display = links.style.display === "block" ? "none" : "block";
-    }
-
-    function copyText(text) {
-        navigator.clipboard.writeText(text);
-        alert("تم النسخ: " + text);
     }
 </script>
 
