@@ -19,6 +19,33 @@
             background-size: cover; 
         }
 
+        /* القائمة الجانبية */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -220px; 
+            width: 200px;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 20px;
+            transition: left 0.4s ease-in-out;
+            z-index: 10000;
+        }
+
+        .sidebar a {
+            display: block;
+            color: #ff0077;
+            font-size: 18px;
+            margin: 15px 0;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .sidebar a:hover {
+            color: #00ffee;
+            text-shadow: 0px 0px 10px #00ffee;
+        }
+
         /* زر القائمة */
         .toggle-btn {
             position: fixed;
@@ -32,65 +59,7 @@
             box-shadow: 0px 0px 10px #ff0077;
         }
 
-        /* القائمة الجانبية */
-        .sidebar {
-            position: fixed;
-            top: 0;
-            left: -220px; /* جعل القائمة تأتي من اليسار */
-            width: 200px;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            padding: 20px;
-            transition: left 0.4s ease-in-out;
-            z-index: 10000;
-        }
-        .sidebar a {
-            display: block;
-            color: #ff0077;
-            font-size: 18px;
-            margin: 15px 0;
-            text-decoration: none;
-            transition: 0.3s;
-        }
-        .sidebar a:hover {
-            color: #00ffee;
-            text-shadow: 0px 0px 10px #00ffee;
-        }
-
-        /* صفحة البداية */
-        .start-page {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: url('https://files.catbox.moe/4tx1wp.jpg') no-repeat center center;
-            background-size: cover;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-        }
-        .start-btn {
-            padding: 15px 30px;
-            font-size: 22px;
-            font-weight: bold;
-            background: #ff0077;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            box-shadow: 0px 0px 15px #ff0077;
-        }
-        .start-btn:hover {
-            background: #00ffee;
-            box-shadow: 0px 0px 15px #00ffee;
-        }
-
         /* المحتوى الرئيسي */
-        .main-content { display: none; }
-
-        /* تنسيق الصفحات */
         .container {
             max-width: 900px;
             margin: 50px auto;
@@ -100,7 +69,19 @@
             box-shadow: 0px 0px 20px rgba(255, 0, 255, 0.7);
             display: none;
         }
-        .active { display: block; }
+
+        .active { 
+            display: block; 
+        }
+
+        /* تصميم الزخارف */
+        .decor {
+            text-align: center;
+            font-size: 24px;
+            color: #ff0077;
+            text-shadow: 0px 0px 15px #ff0077;
+            margin-bottom: 20px;
+        }
 
         /* مربعات */
         .box {
@@ -112,94 +93,91 @@
             font-size: 18px;
             box-shadow: 0px 0px 10px #ff0077;
         }
+
         .box:hover {
             background: rgba(0, 255, 255, 0.5);
             box-shadow: 0px 0px 15px #00ffee;
         }
 
-        /* تعديل لون الخط لكل النصوص */
-        h1, h2, h3, h4, h5, h6, p, .box, .toggle-btn, .api-category, .api-link-box span {
+        /* تعديل لون الخط */
+        h1, h2, h3, h4, h5, h6, p, .box, .toggle-btn, .sidebar a {
             color: #ff0077;
         }
     </style>
 </head>
 <body>
 
-<!-- صفحة البداية -->
-<div class="start-page" id="startPage">
-    <button class="start-btn" onclick="startWebsite()">🚀 اضغط للبدء</button>
+<!-- زر القائمة -->
+<div class="toggle-btn" onclick="toggleSidebar()">☰</div>
+
+<!-- القائمة الجانبية -->
+<div class="sidebar" id="sidebar">
+    <a href="#" onclick="showPage('api')">🛠 API</a>
+    <a href="#" onclick="showPage('buy')">🛒 شراء السكريبت</a>
+    <a href="#" onclick="showPage('contact')">📩 تواصل معنا</a>
+    <a href="#" onclick="showPage('developer')">💻 المطور</a>
 </div>
 
-<!-- المحتوى الرئيسي -->
-<div class="main-content">
-    <!-- زر تشغيل الأغنية -->
-    <button class="toggle-btn" onclick="toggleMusic()">🎵</button>
-    <audio id="backgroundMusic" loop>
-        <source src="https://files.catbox.moe/kb3lc8.mp3" type="audio/mpeg">
-    </audio>
+<!-- الصفحات -->
 
-    <!-- زر القائمة -->
-    <div class="toggle-btn" onclick="toggleSidebar()">☰</div>
+<div id="api" class="container">
+    <div class="decor">✦━❀🎮 API 🎮❀━✦</div>
+    <h1>🛰 اختر فئة API</h1>
 
-    <!-- القائمة الجانبية -->
-    <div class="sidebar" id="sidebar">
-        <a href="#" onclick="showPage('api'); toggleSidebar()">🛠 API</a>
-        <a href="#" onclick="showPage('buy')">🛒 شراء السكريبت</a>
-        <a href="#" onclick="showPage('contact')">📩 تواصل معنا</a>
-        <a href="#" onclick="showPage('developer')">💻 المطور</a>
+    <div class="box" onclick="toggleLinks('gamesLinks')">🎮 ألعاب</div>
+    <div id="gamesLinks" class="api-links" style="display: none;">
+        <div class="box">🔹 API 1 - <button onclick="copyText('https://example.com/game1')">نسخ</button></div>
     </div>
 
-    <!-- الصفحات -->
-
-    <div id="api" class="container">
-        <h1>🛰 اختر فئة API</h1>
-
-        <div class="api-category" onclick="toggleLinks('gamesLinks')">🎮 ألعاب</div>
-        <div id="gamesLinks" class="api-links">
-            <div class="api-link-box">
-                <span>🔹 API 1</span>
-                <button class="copy-btn" onclick="copyText('https://example.com/game1')">نسخ</button>
-            </div>
-        </div>
-
-        <div class="api-category" onclick="toggleLinks('toolsLinks')">🛠 أدوات</div>
-        <div id="toolsLinks" class="api-links">
-            <div class="api-link-box">
-                <span>🔹 API 2</span>
-                <button class="copy-btn" onclick="copyText('https://example.com/tool1')">نسخ</button>
-            </div>
-        </div>
+    <div class="box" onclick="toggleLinks('toolsLinks')">🛠 أدوات</div>
+    <div id="toolsLinks" class="api-links" style="display: none;">
+        <div class="box">🔹 API 2 - <button onclick="copyText('https://example.com/tool1')">نسخ</button></div>
     </div>
+</div>
 
-    <div id="buy" class="container">
-        <h1>🍷 أسعار السكريبتات 🍷</h1>
-        <div class="box">⚜️ اسكريبت البوت دون مساعده → 150 جنيه</div>
-        <div class="box">⚜️ اسكريبت البوت مع المساعده في رفعه وتشغيله → 250 جنيه</div>
-        <p>الدفع عبر فودافون كاش او شحن ببجي او instapay</p>
-        <a href="https://wa.me/201063808608"><button class="box">📩 للشراء</button></a>
-    </div>
+<div id="buy" class="container">
+    <div class="decor">✦━❀💰 شراء السكريبت 💰❀━✦</div>
+    <h1>🍷 أسعار السكريبتات 🍷</h1>
+    <div class="box">⚜️ اسكريبت البوت دون مساعده → 150 جنيه</div>
+    <div class="box">⚜️ اسكريبت البوت مع المساعده في رفعه وتشغيله → 250 جنيه</div>
+    <p>الدفع عبر فودافون كاش او شحن ببجي او instapay</p>
+    <a href="https://wa.me/201063808608"><button class="box">📩 للشراء</button></a>
+</div>
 
-    <div id="contact" class="container">
-        <h1>📩 تواصل معنا</h1>
-        <div class="box" onclick="window.open('https://wa.me/201063808608')">📱 واتساب</div>
-    </div>
+<div id="contact" class="container">
+    <div class="decor">✦━❀📩 تواصل معنا 📩❀━✦</div>
+    <h1>📩 تواصل معنا</h1>
+    <div class="box" onclick="window.open('https://wa.me/201063808608')">📱 واتساب</div>
+</div>
 
-    <div id="developer" class="container">
-        <h1>💻 المطور</h1>
-        <div class="box">👤 𝑅𝐴𝐷𝐼𝛩 𝐷𝐸𝑀𝛩𝑁</div>
-        <div class="box">🤖 𝙱𝙾𝚃-𝙼𝚄𝙺𝙾</div>
-    </div>
+<div id="developer" class="container">
+    <div class="decor">✦━❀💻 المطور 💻❀━✦</div>
+    <h1>💻 المطور</h1>
+    <div class="box">👤 𝑅𝐴𝐷𝐼𝛩 𝐷𝐸𝑀𝛩𝑁</div>
+    <div class="box">🤖 𝙱𝙾𝚃-𝙼𝚄𝙺𝙾</div>
 </div>
 
 <script>
-    function startWebsite() {
-        document.getElementById("startPage").style.display = "none";
-        document.querySelector(".main-content").style.display = "block";
-    }
-
     function toggleSidebar() {
         let sidebar = document.getElementById("sidebar");
         sidebar.style.left = sidebar.style.left === "0px" ? "-220px" : "0px";
+    }
+
+    function showPage(pageId) {
+        let pages = document.querySelectorAll('.container');
+        pages.forEach(page => page.style.display = 'none');
+        
+        document.getElementById(pageId).style.display = 'block';
+        toggleSidebar();
+    }
+
+    function toggleLinks(linkId) {
+        let links = document.getElementById(linkId);
+        links.style.display = links.style.display === "none" ? "block" : "none";
+    }
+
+    function copyText(text) {
+        navigator.clipboard.writeText(text).then(() => alert("تم النسخ!"));
     }
 </script>
 
