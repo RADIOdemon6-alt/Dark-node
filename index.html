@@ -15,8 +15,8 @@
         /* زر القائمة */
         .toggle-btn {
             position: fixed;
-            top: 15px;
-            left: 15px;
+            bottom: 15px;
+            right: 15px;
             background: #ff0077;
             padding: 10px 15px;
             border-radius: 5px;
@@ -104,9 +104,17 @@
             background: rgba(20, 20, 20, 0.9);
             box-shadow: 0px 0px 20px rgba(255, 0, 255, 0.7);
             display: none;
+            text-align: center;
         }
 
         .active { display: block; }
+
+        /* نص الترحيب */
+        .welcome-text {
+            font-size: 32px;
+            color: #ff0077;
+            text-shadow: 0px 0px 15px #ff0077, 0px 0px 30px #00ffee;
+        }
 
         /* مربعات الفئات */
         .box {
@@ -138,10 +146,6 @@
             padding: 10px;
             margin: 5px 0;
             border-radius: 5px;
-        }
-
-        .hidden-link {
-            display: none;
         }
 
         .copy-btn {
@@ -177,31 +181,35 @@
 
     <!-- القائمة الجانبية -->
     <div class="sidebar" id="sidebar">
+        <a href="#" onclick="showPage('home'); toggleSidebar()">🏠 الصفحة الرئيسية</a>
         <a href="#" onclick="showPage('api'); toggleSidebar()">🛠 API</a>
         <a href="#" onclick="showPage('buy')">🛒 شراء السكريبت</a>
         <a href="#" onclick="showPage('contact')">📩 تواصل معنا</a>
         <a href="#" onclick="showPage('developer')">💻 المطور</a>
     </div>
 
-    <!-- الصفحات -->
+    <!-- الصفحة الرئيسية -->
+    <div id="home" class="container active">
+        <h1 class="welcome-text">✨ Welcome to Dark Node API ✨</h1>
+    </div>
+
+    <!-- الصفحات الأخرى -->
     <div id="api" class="container">
         <h1>🛰 اختر فئة API</h1>
 
         <div class="box" onclick="toggleLinks('gamesLinks')">🎮 ألعاب</div>
         <div id="gamesLinks" class="api-links">
             <div class="api-item">
-                <span>لعبة 1</span>
-                <span class="hidden-link">https://example.com/game1</span>
-                <button class="copy-btn" onclick="copyText(this)">📋 نسخ</button>
+                <span>🎮 Game API</span>
+                <button class="copy-btn" onclick="copyText('https://example.com/game1')">📋 نسخ</button>
             </div>
         </div>
 
         <div class="box" onclick="toggleLinks('toolsLinks')">🛠 أدوات</div>
         <div id="toolsLinks" class="api-links">
             <div class="api-item">
-                <span>أداة 1</span>
-                <span class="hidden-link">https://example.com/tool1</span>
-                <button class="copy-btn" onclick="copyText(this)">📋 نسخ</button>
+                <span>🛠 Tool API</span>
+                <button class="copy-btn" onclick="copyText('https://example.com/tool1')">📋 نسخ</button>
             </div>
         </div>
 
@@ -213,6 +221,7 @@
     function startWebsite() {
         document.getElementById("startPage").style.display = "none";
         document.querySelector(".main-content").style.display = "block";
+        showPage('home');
     }
 
     function showPage(pageId) {
@@ -225,15 +234,9 @@
         sidebar.style.left = sidebar.style.left === "0px" ? "-220px" : "0px";
     }
 
-    function toggleLinks(id) {
-        let section = document.getElementById(id);
-        section.style.display = section.style.display === "block" ? "none" : "block";
-    }
-
-    function copyText(button) {
-        let link = button.previousElementSibling.innerText;
-        navigator.clipboard.writeText(link).then(() => {
-            alert("تم نسخ الرابط: " + link);
+    function copyText(text) {
+        navigator.clipboard.writeText(text).then(() => {
+            alert("تم نسخ الرابط: " + text);
         });
     }
 </script>
