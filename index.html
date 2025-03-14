@@ -7,10 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Orbitron', sans-serif; }
-        body { 
-            background: url('https://files.catbox.moe/365r3a.jpg') no-repeat center center fixed; 
-            background-size: cover; 
-        }
+        body { background: url('https://files.catbox.moe/365r3a.jpg') no-repeat center center fixed; background-size: cover; }
 
         /* زر القائمة */
         .toggle-btn {
@@ -55,7 +52,7 @@
         /* المحتوى الرئيسي */
         .main-content { display: none; }
 
-        /* تنسيق الصفحات */
+        /* الصفحة الرئيسية */
         .container {
             max-width: 900px;
             margin: 50px auto;
@@ -69,33 +66,28 @@
 
         .active { display: block; }
 
-        /* نص الترحيب */
-        .welcome-text {
-            font-size: 32px;
-            color: #ff0077;
-            text-shadow: 0px 0px 15px #ff0077, 0px 0px 30px #00ffee;
+        /* زر ابدأ */
+        .start-screen {
+            text-align: center;
+            margin-top: 20%;
         }
 
-        /* مربعات الفئات */
-        .box {
-            background: rgba(255, 0, 119, 0.5);
-            padding: 15px;
-            margin: 10px 0;
+        .start-btn {
+            background: #ff0077;
+            padding: 15px 30px;
+            font-size: 20px;
+            border: none;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 18px;
-            box-shadow: 0px 0px 10px #ff0077;
+            box-shadow: 0px 0px 15px #ff0077;
         }
 
-        .box:hover {
-            background: rgba(0, 255, 255, 0.5);
-            box-shadow: 0px 0px 15px #00ffee;
-        }
+        .start-btn:hover { background: #00ffee; }
 
         /* روابط API */
         .api-links {
             display: none;
-            margin-left: 20px;
+            margin-top: 10px;
         }
 
         .api-item {
@@ -117,16 +109,20 @@
             cursor: pointer;
         }
 
-        .copy-btn:hover {
-            background: #00ffee;
-        }
+        .copy-btn:hover { background: #00ffee; }
 
     </style>
 </head>
 <body>
 
+<!-- شاشة البداية -->
+<div class="start-screen" id="startPage">
+    <h1 class="welcome-text">✨ Welcome to Dark Node API ✨</h1>
+    <button class="start-btn" onclick="startWebsite()">ابدأ</button>
+</div>
+
 <!-- المحتوى الرئيسي -->
-<div class="main-content">
+<div class="main-content" id="mainContent">
 
     <!-- زر القائمة -->
     <div class="toggle-btn" onclick="toggleSidebar()">☰</div>
@@ -172,7 +168,7 @@
 <script>
     function startWebsite() {
         document.getElementById("startPage").style.display = "none";
-        document.querySelector(".main-content").style.display = "block";
+        document.getElementById("mainContent").style.display = "block";
         showPage('home');
     }
 
