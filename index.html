@@ -6,8 +6,24 @@
     <title>⚡ Api Dark Node</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Orbitron', sans-serif; }
-        body { background: url('https://files.catbox.moe/365r3a.jpg') no-repeat center center fixed; background-size: cover; }
+        * { 
+            margin: 0; padding: 0; box-sizing: border-box; 
+            font-family: 'Orbitron', sans-serif; 
+        }
+        body { 
+            background: black; 
+            color: #fff;
+            overflow: hidden;
+        }
+
+        /* فيديو الخلفية */
+        .background-video {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
 
         /* زر القائمة */
         .toggle-btn {
@@ -15,35 +31,39 @@
             bottom: 15px;
             right: 15px;
             background: #ff0077;
-            padding: 10px 15px;
-            border-radius: 5px;
+            padding: 12px 18px;
+            border-radius: 8px;
             cursor: pointer;
             z-index: 10001;
-            box-shadow: 0px 0px 10px #ff0077;
+            box-shadow: 0px 0px 15px #ff0077;
+            transition: 0.3s;
+        }
+        .toggle-btn:hover {
+            background: #00ffee;
+            box-shadow: 0px 0px 15px #00ffee;
         }
 
         /* القائمة الجانبية */
         .sidebar {
             position: fixed;
             top: 0;
-            left: -220px;
-            width: 200px;
+            left: -250px;
+            width: 220px;
             height: 100%;
             background: rgba(0, 0, 0, 0.9);
             padding: 20px;
             transition: left 0.4s ease-in-out;
             z-index: 10000;
+            box-shadow: 0px 0px 15px rgba(255, 0, 255, 0.7);
         }
-
         .sidebar a {
             display: block;
             color: #ff0077;
-            font-size: 18px;
+            font-size: 20px;
             margin: 15px 0;
             text-decoration: none;
             transition: 0.3s;
         }
-
         .sidebar a:hover {
             color: #00ffee;
             text-shadow: 0px 0px 10px #00ffee;
@@ -52,42 +72,48 @@
         /* المحتوى الرئيسي */
         .main-content { display: none; }
 
-        /* الصفحة الرئيسية */
+        /* الصفحات */
         .container {
             max-width: 900px;
             margin: 50px auto;
             padding: 20px;
-            border-radius: 10px;
+            border-radius: 12px;
             background: rgba(20, 20, 20, 0.9);
-            box-shadow: 0px 0px 20px rgba(255, 0, 255, 0.7);
+            box-shadow: 0px 0px 25px rgba(255, 0, 255, 0.7);
             display: none;
             text-align: center;
         }
 
         .active { display: block; }
 
-        /* زر ابدأ */
-        .start-screen {
-            text-align: center;
-            margin-top: 20%;
+        /* نص الترحيب */
+        .welcome-text {
+            font-size: 36px;
+            color: #ff0077;
+            text-shadow: 0px 0px 15px #ff0077, 0px 0px 30px #00ffee;
         }
 
-        .start-btn {
-            background: #ff0077;
-            padding: 15px 30px;
-            font-size: 20px;
-            border: none;
-            border-radius: 5px;
+        /* مربعات الفئات */
+        .box {
+            background: rgba(255, 0, 119, 0.5);
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
             cursor: pointer;
-            box-shadow: 0px 0px 15px #ff0077;
+            font-size: 20px;
+            box-shadow: 0px 0px 12px #ff0077;
+            transition: 0.3s;
         }
-
-        .start-btn:hover { background: #00ffee; }
+        .box:hover {
+            background: rgba(0, 255, 255, 0.5);
+            box-shadow: 0px 0px 20px #00ffee;
+            transform: scale(1.05);
+        }
 
         /* روابط API */
         .api-links {
             display: none;
-            margin-top: 10px;
+            margin-left: 20px;
         }
 
         .api-item {
@@ -95,34 +121,37 @@
             justify-content: space-between;
             align-items: center;
             background: rgba(255, 255, 255, 0.1);
-            padding: 10px;
+            padding: 12px;
             margin: 5px 0;
-            border-radius: 5px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(255, 0, 255, 0.5);
         }
 
         .copy-btn {
             background: #ff0077;
             color: white;
             border: none;
-            padding: 5px 10px;
-            border-radius: 5px;
+            padding: 8px 12px;
+            border-radius: 6px;
             cursor: pointer;
+            transition: 0.3s;
         }
-
-        .copy-btn:hover { background: #00ffee; }
+        .copy-btn:hover {
+            background: #00ffee;
+            box-shadow: 0px 0px 10px #00ffee;
+        }
 
     </style>
 </head>
 <body>
 
-<!-- شاشة البداية -->
-<div class="start-screen" id="startPage">
-    <h1 class="welcome-text">✨ Welcome to Dark Node API ✨</h1>
-    <button class="start-btn" onclick="startWebsite()">ابدأ</button>
-</div>
+<!-- فيديو الخلفية -->
+<video class="background-video" autoplay loop muted>
+    <source src="https://files.catbox.moe/6vapvs.mp4" type="video/mp4">
+</video>
 
 <!-- المحتوى الرئيسي -->
-<div class="main-content" id="mainContent">
+<div class="main-content">
 
     <!-- زر القائمة -->
     <div class="toggle-btn" onclick="toggleSidebar()">☰</div>
@@ -166,12 +195,6 @@
 </div>
 
 <script>
-    function startWebsite() {
-        document.getElementById("startPage").style.display = "none";
-        document.getElementById("mainContent").style.display = "block";
-        showPage('home');
-    }
-
     function showPage(pageId) {
         document.querySelectorAll('.container').forEach(page => page.style.display = "none");
         document.getElementById(pageId).style.display = "block";
@@ -179,7 +202,7 @@
 
     function toggleSidebar() {
         let sidebar = document.getElementById("sidebar");
-        sidebar.style.left = sidebar.style.left === "0px" ? "-220px" : "0px";
+        sidebar.style.left = sidebar.style.left === "0px" ? "-250px" : "0px";
     }
 
     function toggleLinks(id) {
