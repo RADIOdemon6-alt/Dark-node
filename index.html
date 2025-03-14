@@ -135,18 +135,26 @@
     </div>
 
     <!-- الصفحات -->
-    <div id="api" class="container">
-        <h1>🛰 اختر فئة API</h1>
-        <div class="box" onclick="toggleLinks('gamesLinks')">🎮 ألعاب</div>
-        <div id="gamesLinks" class="api-links">
-            <div class="box" onclick="copyText('https://example.com/game1')">🔹 API 1</div>
-        </div>
 
-        <div class="box" onclick="toggleLinks('toolsLinks')">🛠 أدوات</div>
-        <div id="toolsLinks" class="api-links">
-            <div class="box" onclick="copyText('https://example.com/tool1')">🔹 API 2</div>
+<div id="api" class="container">
+    <h1>🛰 اختر فئة API</h1>
+
+    <div class="api-category" onclick="toggleLinks('gamesLinks')">🎮 ألعاب</div>
+    <div id="gamesLinks" class="api-links">
+        <div class="api-link-box">
+            <span>🔹 API 1</span>
+            <button class="copy-btn" onclick="copyText('https://example.com/game1')">نسخ</button>
         </div>
     </div>
+
+    <div class="api-category" onclick="toggleLinks('toolsLinks')">🛠 أدوات</div>
+    <div id="toolsLinks" class="api-links">
+        <div class="api-link-box">
+            <span>🔹 API 2</span>
+            <button class="copy-btn" onclick="copyText('https://example.com/tool1')">نسخ</button>
+        </div>
+    </div>
+</div>
 
     <div id="buy" class="container">
         <h1>🍷 أسعار السكريبتات 🍷</h1>
