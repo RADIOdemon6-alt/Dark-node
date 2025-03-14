@@ -16,7 +16,7 @@
         .toggle-btn {
             position: fixed;
             top: 15px;
-            right: 15px;
+            left: 15px;
             background: #ff0077;
             padding: 10px 15px;
             border-radius: 5px;
@@ -29,12 +29,12 @@
         .sidebar {
             position: fixed;
             top: 0;
-            right: -220px;
+            left: -220px;
             width: 200px;
             height: 100%;
             background: rgba(0, 0, 0, 0.9);
             padding: 20px;
-            transition: right 0.4s ease-in-out;
+            transition: left 0.4s ease-in-out;
             z-index: 10000;
         }
 
@@ -140,6 +140,10 @@
             border-radius: 5px;
         }
 
+        .hidden-link {
+            display: none;
+        }
+
         .copy-btn {
             background: #ff0077;
             color: white;
@@ -186,16 +190,18 @@
         <div class="box" onclick="toggleLinks('gamesLinks')">🎮 ألعاب</div>
         <div id="gamesLinks" class="api-links">
             <div class="api-item">
-                <span>https://example.com/game1</span>
-                <button class="copy-btn" onclick="copyText('https://example.com/game1')">📋 نسخ</button>
+                <span>لعبة 1</span>
+                <span class="hidden-link">https://example.com/game1</span>
+                <button class="copy-btn" onclick="copyText(this)">📋 نسخ</button>
             </div>
         </div>
 
         <div class="box" onclick="toggleLinks('toolsLinks')">🛠 أدوات</div>
         <div id="toolsLinks" class="api-links">
             <div class="api-item">
-                <span>https://example.com/tool1</span>
-                <button class="copy-btn" onclick="copyText('https://example.com/tool1')">📋 نسخ</button>
+                <span>أداة 1</span>
+                <span class="hidden-link">https://example.com/tool1</span>
+                <button class="copy-btn" onclick="copyText(this)">📋 نسخ</button>
             </div>
         </div>
 
@@ -216,7 +222,7 @@
 
     function toggleSidebar() {
         let sidebar = document.getElementById("sidebar");
-        sidebar.style.right = sidebar.style.right === "0px" ? "-220px" : "0px";
+        sidebar.style.left = sidebar.style.left === "0px" ? "-220px" : "0px";
     }
 
     function toggleLinks(id) {
@@ -224,9 +230,10 @@
         section.style.display = section.style.display === "block" ? "none" : "block";
     }
 
-    function copyText(text) {
-        navigator.clipboard.writeText(text).then(() => {
-            alert("تم نسخ الرابط: " + text);
+    function copyText(button) {
+        let link = button.previousElementSibling.innerText;
+        navigator.clipboard.writeText(link).then(() => {
+            alert("تم نسخ الرابط: " + link);
         });
     }
 </script>
