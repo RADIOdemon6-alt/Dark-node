@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🏎️ Dark Speed API</title>
+    <title>🚗 API Car Zone</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Orbitron', sans-serif; direction: rtl; }
-        body { background: url('https://files.catbox.moe/0y3h84.jpg') no-repeat center center fixed; background-size: cover; }
+        body { background: url('https://files.catbox.moe/365r3a.jpg') no-repeat center center fixed; background-size: cover; }
 
         /* صفحة البداية */
         .start-page {
@@ -23,13 +23,6 @@
             background: black;
             z-index: 9999;
         }
-        .start-page video {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -1;
-        }
         .start-btn {
             padding: 15px 30px;
             font-size: 22px;
@@ -41,27 +34,10 @@
             cursor: pointer;
             box-shadow: 0px 0px 15px rgba(255, 0, 0, 0.8);
         }
-        .start-btn:hover {
-            background: rgba(0, 183, 255, 0.8);
-        }
+        .start-btn:hover { background: rgba(0, 255, 255, 0.8); }
 
         /* المحتوى الرئيسي */
         .main-content { display: none; }
-
-        /* زر تشغيل/إيقاف الموسيقى */
-        .music-btn {
-            position: fixed;
-            top: 15px;
-            right: 15px;
-            background: rgba(0, 183, 255, 0.8);
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            z-index: 10001;
-            box-shadow: 0px 0px 10px rgba(0, 183, 255, 0.8);
-            color: white;
-            font-size: 18px;
-        }
 
         /* زر القائمة */
         .toggle-btn {
@@ -96,10 +72,7 @@
             text-decoration: none;
             transition: 0.3s;
         }
-        .sidebar a:hover {
-            color: #00b7ff;
-            text-shadow: 0px 0px 10px #00b7ff;
-        }
+        .sidebar a:hover { color: #00ffee; text-shadow: 0px 0px 10px #00ffee; }
 
         /* الصفحات */
         .container {
@@ -123,15 +96,10 @@
             font-size: 18px;
             box-shadow: 0px 0px 10px #ff0000;
         }
-        .box:hover {
-            background: rgba(0, 183, 255, 0.5);
-        }
+        .box:hover { background: rgba(0, 255, 255, 0.5); }
 
         /* روابط الـ API */
-        .api-links {
-            display: none;
-            margin-top: 10px;
-        }
+        .api-links { display: none; margin-top: 10px; }
         .api-item {
             display: flex;
             justify-content: space-between;
@@ -141,17 +109,29 @@
             border-radius: 5px;
             margin: 5px 0;
             color: white;
-            box-shadow: 0px 0px 10px rgba(0, 183, 255, 0.5);
+            box-shadow: 0px 0px 10px rgba(0, 255, 255, 0.5);
         }
         .copy-btn {
-            background: rgba(0, 183, 255, 0.7);
+            background: rgba(0, 255, 255, 0.7);
             padding: 5px 10px;
             border-radius: 5px;
             cursor: pointer;
             font-size: 14px;
         }
-        .copy-btn:hover {
-            background: rgba(0, 183, 255, 1);
+        .copy-btn:hover { background: rgba(0, 255, 255, 1); }
+
+        /* زر تشغيل/إيقاف الموسيقى */
+        .music-btn {
+            position: fixed;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 0, 0.8);
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10001;
+            box-shadow: 0px 0px 10px rgba(255, 255, 0, 0.8);
         }
     </style>
 </head>
@@ -159,22 +139,15 @@
 
 <!-- صفحة البداية -->
 <div class="start-page" id="startPage">
-    <video autoplay muted loop>
-        <source src="https://files.catbox.moe/6vapvs.mp4" type="video/mp4">
-    </video>
     <button class="start-btn" onclick="startWebsite()">🚀 اضغط للبدء</button>
 </div>
 
 <!-- المحتوى الرئيسي -->
 <div class="main-content">
-    <!-- زر تشغيل الموسيقى -->
-    <div class="music-btn" onclick="toggleMusic()">🔊 تشغيل الموسيقى</div>
-    <audio id="bgMusic" loop>
-        <source src="https://files.catbox.moe/9mfb2j.mp4" type="audio/mp4">
-    </audio>
-
-    <!-- زر القائمة -->
     <div class="toggle-btn" onclick="toggleSidebar()">☰</div>
+
+    <!-- زر تشغيل/إيقاف الموسيقى -->
+    <div class="music-btn" onclick="toggleMusic()">🔊</div>
 
     <!-- القائمة الجانبية -->
     <div class="sidebar" id="sidebar">
@@ -183,26 +156,44 @@
 
     <!-- صفحة API -->
     <div id="api" class="container">
-        <h1>🏎️ اختر فئة API</h1>
+        <h1>🚗 اختر فئة API</h1>
         <div class="box" onclick="toggleLinks('gamesLinks')">🎮 ألعاب</div>
         <div id="gamesLinks" class="api-links">
             <div class="api-item">
                 <span>🔹 API 1</span>
-                <button class="copy-btn">📋 نسخ</button>
+                <button class="copy-btn" onclick="copyText('https://example.com/game1')">📋 نسخ</button>
             </div>
         </div>
     </div>
 </div>
 
+<!-- تشغيل الفيديو -->
+<video id="backgroundVideo" loop autoplay muted>
+    <source src="https://files.catbox.moe/6vapvs.mp4" type="video/mp4">
+</video>
+
 <script>
+    let isMusicPlaying = false;
+    const music = new Audio("https://files.catbox.moe/9mfb2j.mp4");
+
     function startWebsite() {
         document.getElementById("startPage").style.display = "none";
         document.querySelector(".main-content").style.display = "block";
     }
 
+    function toggleSidebar() {
+        let sidebar = document.getElementById("sidebar");
+        sidebar.style.left = sidebar.style.left === "0px" ? "-220px" : "0px";
+    }
+
+    function toggleLinks(sectionId) {
+        let section = document.getElementById(sectionId);
+        section.style.display = section.style.display === "block" ? "none" : "block";
+    }
+
     function toggleMusic() {
-        let music = document.getElementById("bgMusic");
-        music.paused ? music.play() : music.pause();
+        isMusicPlaying ? music.pause() : music.play();
+        isMusicPlaying = !isMusicPlaying;
     }
 </script>
 
