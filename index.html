@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚡ Api Dark Node</title>
+    <title>⛧ 𝘿𝙖𝙧𝙠 𝙉𝙤𝙙𝙚 ⛧</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <style>
         * { 
@@ -16,7 +16,7 @@
         body { 
             background: url('https://files.catbox.moe/oriq4t.jpg') no-repeat center center fixed; 
             background-size: cover; 
-            color: #fff;
+            color: #ff0000;
         }
 
         /* القائمة الجانبية */
@@ -26,16 +26,16 @@
             left: -220px; 
             width: 200px;
             height: 100%;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.95);
             padding: 20px;
             transition: left 0.4s ease-in-out;
             z-index: 1000;
-            box-shadow: 3px 0px 10px rgba(255, 0, 119, 0.5);
+            box-shadow: 3px 0px 10px rgba(255, 0, 0, 0.7);
         }
 
         .sidebar a {
             display: block;
-            color: #ff0077;
+            color: #ff0000;
             font-size: 18px;
             margin: 15px 0;
             text-decoration: none;
@@ -45,9 +45,9 @@
         }
 
         .sidebar a:hover {
-            background: rgba(255, 0, 119, 0.2);
-            color: #00ffee;
-            text-shadow: 0px 0px 10px #00ffee;
+            background: rgba(255, 0, 0, 0.2);
+            color: #ff5500;
+            text-shadow: 0px 0px 10px #ff5500;
         }
 
         /* زر القائمة */
@@ -55,19 +55,20 @@
             position: fixed;
             bottom: 15px;
             right: 15px;
-            background: #ff0077;
+            background: #8b0000;
             padding: 12px 18px;
             border-radius: 8px;
             cursor: pointer;
             z-index: 1001;
-            box-shadow: 0px 0px 10px #ff0077;
+            box-shadow: 0px 0px 10px #ff0000;
             font-size: 20px;
             transition: 0.3s;
+            color: #ff0000;
         }
 
         .toggle-btn:hover {
-            background: #00ffee;
-            box-shadow: 0px 0px 15px #00ffee;
+            background: #550000;
+            box-shadow: 0px 0px 15px #ff5500;
         }
 
         /* المحتوى الرئيسي */
@@ -76,8 +77,8 @@
             margin: 50px auto;
             padding: 20px;
             border-radius: 10px;
-            background: rgba(20, 20, 20, 0.95);
-            box-shadow: 0px 0px 20px rgba(255, 0, 255, 0.7);
+            background: rgba(20, 20, 20, 0.98);
+            box-shadow: 0px 0px 20px rgba(255, 0, 0, 0.7);
             display: none;
             text-align: center;
             transition: 0.3s;
@@ -87,42 +88,57 @@
             display: block; 
         }
 
-        /* الزخارف */
+        /* زخرفة العناوين */
         .decor {
             font-size: 26px;
-            color: #ff0077;
-            text-shadow: 0px 0px 15px #ff0077;
+            color: #ff0000;
+            text-shadow: 0px 0px 15px #ff0000;
             margin-bottom: 20px;
         }
 
         /* مربعات القوائم */
         .box {
-            background: linear-gradient(135deg, rgba(255, 0, 119, 0.6), rgba(0, 255, 255, 0.4));
+            background: linear-gradient(135deg, rgba(139, 0, 0, 0.7), rgba(255, 0, 0, 0.5));
             padding: 15px;
             margin: 10px 0;
             border-radius: 8px;
             cursor: pointer;
             font-size: 18px;
-            box-shadow: 0px 0px 10px #ff0077;
+            box-shadow: 0px 0px 10px #8b0000;
             transition: 0.3s;
             text-align: center;
         }
 
         .box:hover {
-            background: linear-gradient(135deg, rgba(0, 255, 255, 0.6), rgba(255, 0, 119, 0.4));
-            box-shadow: 0px 0px 15px #00ffee;
+            background: linear-gradient(135deg, rgba(255, 0, 0, 0.7), rgba(139, 0, 0, 0.5));
+            box-shadow: 0px 0px 15px #ff5500;
         }
 
-        /* تعديل لون الخط */
-        h1, h2, h3, h4, h5, h6, p, .box, .toggle-btn, .sidebar a {
-            color: #ff0077;
+        /* زر النسخ */
+        .copy-btn {
+            background: #8b0000;
+            border: none;
+            padding: 8px 15px;
+            margin-left: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            color: white;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px #ff0000;
+            transition: 0.3s;
         }
+
+        .copy-btn:hover {
+            background: #ff0000;
+            box-shadow: 0px 0px 15px #ff5500;
+        }
+
     </style>
 </head>
 <body>
 
 <!-- زر القائمة -->
-<div class="toggle-btn" onclick="toggleSidebar()">☰</div>
+<div class="toggle-btn" onclick="toggleSidebar()">⛧</div>
 
 <!-- القائمة الجانبية -->
 <div class="sidebar" id="sidebar">
@@ -133,42 +149,19 @@
 </div>
 
 <!-- الصفحات -->
-
 <div id="api" class="container">
-    <div class="decor">✦━❀🎮 API 🎮❀━✦</div>
+    <div class="decor">⛧ 🎮 API 🎮 ⛧</div>
     <h1>🛰 اختر فئة API</h1>
 
     <div class="box" onclick="toggleLinks('gamesLinks')">🎮 ألعاب</div>
     <div id="gamesLinks" class="api-links" style="display: none;">
-        <div class="box">🔹 API 1 - <button onclick="copyText('https://example.com/game1')">نسخ</button></div>
+        <div class="box">🔹 API 1 - <button class="copy-btn" onclick="copyText('https://example.com/game1')">نسخ</button></div>
     </div>
 
     <div class="box" onclick="toggleLinks('toolsLinks')">🛠 أدوات</div>
     <div id="toolsLinks" class="api-links" style="display: none;">
-        <div class="box">🔹 API 2 - <button onclick="copyText('https://example.com/tool1')">نسخ</button></div>
+        <div class="box">🔹 API 2 - <button class="copy-btn" onclick="copyText('https://example.com/tool1')">نسخ</button></div>
     </div>
-</div>
-
-<div id="buy" class="container">
-    <div class="decor">✦━❀💰 شراء السكريبت 💰❀━✦</div>
-    <h1>🍷 أسعار السكريبتات 🍷</h1>
-    <div class="box">⚜️ اسكريبت البوت دون مساعده → 150 جنيه</div>
-    <div class="box">⚜️ اسكريبت البوت مع المساعده في رفعه وتشغيله → 250 جنيه</div>
-    <p>الدفع عبر فودافون كاش او شحن ببجي او instapay</p>
-    <a href="https://wa.me/201063808608"><button class="box">📩 للشراء</button></a>
-</div>
-
-<div id="contact" class="container">
-    <div class="decor">✦━❀📩 تواصل معنا 📩❀━✦</div>
-    <h1>📩 تواصل معنا</h1>
-    <div class="box" onclick="window.open('https://wa.me/201063808608')">📱 واتساب</div>
-</div>
-
-<div id="developer" class="container">
-    <div class="decor">✦━❀💻 المطور 💻❀━✦</div>
-    <h1>💻 المطور</h1>
-    <div class="box">👤 𝑅𝐴𝐷𝐼𝛩 𝐷𝐸𝑀𝛩𝑁</div>
-    <div class="box">🤖 𝙱𝙾𝚃-𝙼𝚄𝙺𝙾</div>
 </div>
 
 <script>
@@ -189,9 +182,9 @@
     }
 
     function copyText(text) {
-        navigator.clipboard.writeText(text).then(() => alert("تم النسخ!"));
+        navigator.clipboard.writeText(text).then(() => alert("⛧ تم النسخ بنجاح! ⛧"));
     }
 </script>
 
 </body>
-    </html>
+</html>
