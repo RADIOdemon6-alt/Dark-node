@@ -11,12 +11,12 @@
             padding: 0; 
             box-sizing: border-box; 
             font-family: 'Orbitron', sans-serif; 
-            color: #ff0077; /* لون الخط وردي نيون */
         }
 
         body { 
             background: url('https://files.catbox.moe/oriq4t.jpg') no-repeat center center fixed; 
             background-size: cover; 
+            color: #fff;
         }
 
         /* القائمة الجانبية */
@@ -29,7 +29,8 @@
             background: rgba(0, 0, 0, 0.9);
             padding: 20px;
             transition: left 0.4s ease-in-out;
-            z-index: 10000;
+            z-index: 1000;
+            box-shadow: 3px 0px 10px rgba(255, 0, 119, 0.5);
         }
 
         .sidebar a {
@@ -39,9 +40,12 @@
             margin: 15px 0;
             text-decoration: none;
             transition: 0.3s;
+            padding: 10px;
+            border-radius: 5px;
         }
 
         .sidebar a:hover {
+            background: rgba(255, 0, 119, 0.2);
             color: #00ffee;
             text-shadow: 0px 0px 10px #00ffee;
         }
@@ -52,11 +56,18 @@
             bottom: 15px;
             right: 15px;
             background: #ff0077;
-            padding: 10px 15px;
-            border-radius: 5px;
+            padding: 12px 18px;
+            border-radius: 8px;
             cursor: pointer;
-            z-index: 10001;
+            z-index: 1001;
             box-shadow: 0px 0px 10px #ff0077;
+            font-size: 20px;
+            transition: 0.3s;
+        }
+
+        .toggle-btn:hover {
+            background: #00ffee;
+            box-shadow: 0px 0px 15px #00ffee;
         }
 
         /* المحتوى الرئيسي */
@@ -65,37 +76,40 @@
             margin: 50px auto;
             padding: 20px;
             border-radius: 10px;
-            background: rgba(20, 20, 20, 0.9);
+            background: rgba(20, 20, 20, 0.95);
             box-shadow: 0px 0px 20px rgba(255, 0, 255, 0.7);
             display: none;
+            text-align: center;
+            transition: 0.3s;
         }
 
         .active { 
             display: block; 
         }
 
-        /* تصميم الزخارف */
+        /* الزخارف */
         .decor {
-            text-align: center;
-            font-size: 24px;
+            font-size: 26px;
             color: #ff0077;
             text-shadow: 0px 0px 15px #ff0077;
             margin-bottom: 20px;
         }
 
-        /* مربعات */
+        /* مربعات القوائم */
         .box {
-            background: rgba(255, 0, 119, 0.5);
+            background: linear-gradient(135deg, rgba(255, 0, 119, 0.6), rgba(0, 255, 255, 0.4));
             padding: 15px;
             margin: 10px 0;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 18px;
             box-shadow: 0px 0px 10px #ff0077;
+            transition: 0.3s;
+            text-align: center;
         }
 
         .box:hover {
-            background: rgba(0, 255, 255, 0.5);
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.6), rgba(255, 0, 119, 0.4));
             box-shadow: 0px 0px 15px #00ffee;
         }
 
@@ -164,9 +178,7 @@
     }
 
     function showPage(pageId) {
-        let pages = document.querySelectorAll('.container');
-        pages.forEach(page => page.style.display = 'none');
-        
+        document.querySelectorAll('.container').forEach(page => page.style.display = 'none');
         document.getElementById(pageId).style.display = 'block';
         toggleSidebar();
     }
@@ -182,4 +194,4 @@
 </script>
 
 </body>
-</html>
+    </html>
