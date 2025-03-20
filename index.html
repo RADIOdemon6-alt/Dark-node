@@ -84,7 +84,19 @@ body {
             background: #00ffee;
             box-shadow: 0px 0px 15px #00ffee;
         }
-
+.overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    background: rgba(0, 0, 0, 0.6); /* خلفية شفافة */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px rgba(255, 0, 255, 0.7);
+    max-width: 80%;
+} 
         /* الصفحة الرئيسية */
         .container {
             max-width: 900px;
@@ -192,8 +204,9 @@ body {
 <body>
 
 <!-- صفحة البداية -->
-<div id="startPage" class="container active">
+<div class="overlay">
     <h1>🔥 مرحبًا بك في <span class="neon-text">API Dark Node</span> 🔥</h1>
+    <p>أفضل مكان للحصول على الـ APIs والسكربتات الجاهزة!</p>
     <button class="btn" onclick="startWebsite()">🚀 ابدأ</button>
 </div>
 
