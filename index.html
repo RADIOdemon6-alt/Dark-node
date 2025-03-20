@@ -1,220 +1,251 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dark Node API</title>
+    <title>⚡ Api Dark Node</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
-
-        body {
-            font-family: 'Orbitron', sans-serif;
-            background: #000;
-            color: #fff;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Orbitron', sans-serif; }
+        body { background: url('https://files.catbox.moe/oriq4t.jpg') no-repeat center center fixed; background-size: cover; color: #fff; text-align: center; overflow-y: auto; }
+        
+        /* القائمة الجانبية */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -220px; /* مخفية افتراضيًا */
+            width: 200px;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 20px;
+            box-shadow: 0px 0px 15px rgba(255, 0, 0, 0.7);
+            transition: left 0.4s ease-in-out;
+            z-index: 10000;
         }
-
-        /* تأثير نيوني */
-        .neon {
-            text-shadow: 0 0 10px red, 0 0 20px crimson, 0 0 30px darkred;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        /* صفحة البداية */
-        #landing-page {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background: url('https://i.imgur.com/9J3ekf5.jpg') no-repeat center center/cover;
-        }
-
-        #start-btn {
-            background: red;
-            color: white;
-            border: 2px solid crimson;
-            padding: 15px 25px;
-            font-size: 22px;
-            cursor: pointer;
-            text-transform: uppercase;
+        .sidebar a {
+            display: block;
+            color: #ff0077;
+            text-decoration: none;
+            font-size: 18px;
+            margin: 15px 0;
             transition: 0.3s;
         }
-
-        #start-btn:hover {
-            box-shadow: 0 0 20px red, 0 0 40px crimson;
+        .sidebar a:hover {
+            color: #00ffee;
+            text-shadow: 0px 0px 10px #00ffee;
         }
+/* تنسيق قسم الـ API */
+.api-item {
+    background: linear-gradient(45deg, #ff0077, #7700ff);
+    color: white;
+    font-size: 20px;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+    text-shadow: 0px 0px 10px #fff;
+    box-shadow: 0px 0px 20px rgba(255, 0, 255, 0.7);
+    transition: 0.3s;
+    cursor: pointer;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
 
-        /* زر النجمة الشيطانية */
-        .star-button {
+.api-item:hover {
+    background: linear-gradient(45deg, #00ffee, #ff0077);
+    box-shadow: 0px 0px 30px rgba(0, 255, 255, 0.9);
+    transform: scale(1.05);
+}
+
+.api-links {
+    display: none;
+    padding: 10px;
+}
+
+.api-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+    margin: 5px 0;
+    box-shadow: 0px 0px 15px rgba(255, 0, 255, 0.5);
+}
+
+.api-link button {
+    background: #ff0077;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.api-link button:hover {
+    background: #00ffee;
+    box-shadow: 0px 0px 10px #00ffee;
+}
+        /* أزرار القائمة والموسيقى */
+        .toggle-btn, .music-btn {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: black;
-            color: red;
-            border: 2px solid red;
-            padding: 15px;
-            font-size: 24px;
-            cursor: pointer;
+            background: #ff0077;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
-            box-shadow: 0 0 10px red;
-            transition: 0.3s;
-        }
-
-        .star-button:hover {
-            box-shadow: 0 0 20px crimson, 0 0 40px darkred;
-        }
-
-        /* القائمة الجانبية */
-        #side-menu {
-            position: fixed;
-            left: -250px;
-            top: 0;
-            width: 250px;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            padding: 20px;
-            transition: left 0.5s ease-in-out;
-            box-shadow: 5px 0 15px red;
-        }
-
-        .menu-item {
-            display: block;
-            background: black;
-            color: red;
-            border: 1px solid crimson;
-            padding: 15px;
-            font-size: 18px;
-            width: 100%;
-            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
+            box-shadow: 0px 0px 10px #ff0077;
             transition: 0.3s;
+            z-index: 11000;
+        }
+        .toggle-btn { top: 20px; }
+        .toggle-btn:hover, .music-btn:hover {
+            background: #00ffee;
+            box-shadow: 0px 0px 15px #00ffee;
         }
 
-        .menu-item:hover {
-            background: red;
-            color: black;
-            box-shadow: 0 0 10px crimson;
-        }
-
-        /* الأقسام */
-        .section {
-            margin-top: 50px;
+        /* الصفحات */
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 10px;
+            background: rgba(20, 20, 20, 0.9);
+            box-shadow: 0px 0px 20px rgba(255, 0, 255, 0.7);
             display: none;
         }
+        .active { display: block; }
 
-        /* زر إظهار أقسام الـ API */
-        #api-toggle {
-            background: red;
+        /* أزرار */
+        .btn {
+            background: #ff0077;
+            padding: 10px 20px;
+            border-radius: 5px;
             color: white;
-            border: none;
-            padding: 12px;
-            font-size: 18px;
             cursor: pointer;
-            box-shadow: 0 0 10px red;
-        }
-
-        /* عناصر API */
-        .api-item {
-            display: flex;
-            justify-content: space-between;
-            background: black;
-            padding: 10px;
-            margin: 10px auto;
-            width: 60%;
-            border: 1px solid crimson;
             transition: 0.3s;
+            box-shadow: 0px 0px 10px #ff0077;
         }
-
-        .api-item button {
-            background: red;
-            border: none;
-            color: white;
-            padding: 5px 10px;
-            cursor: pointer;
-        }
-
-        .api-item:hover {
-            box-shadow: 0 0 15px red;
+        .btn:hover {
+            background: #00ffee;
+            box-shadow: 0px 0px 15px #00ffee;
         }
     </style>
 </head>
 <body>
 
-    <!-- صفحة البداية -->
-    <div id="landing-page">
-        <h1 class="neon">مرحبًا في Dark Node API</h1>
-        <button id="start-btn">ابدأ</button>
-    </div>
+<!-- صفحة البداية -->
+<div id="startPage" class="container active">
+    <h1>🔥 مرحبًا بك في <span class="neon-text">API Dark Node</span> 🔥</h1>
+    <button class="btn" onclick="startWebsite()">🚀 ابدأ</button>
+</div>
 
-    <!-- المحتوى الرئيسي -->
-    <div id="main-content" class="hidden">
-        <!-- زر النجمة الشيطانية -->
-        <button id="menu-toggle" class="star-button">✡</button>
+<!-- القائمة الجانبية -->
+<div class="sidebar" id="sidebar">
+    <a href="#" onclick="showPage('home')">🏠 الرئيسية</a>
+    <a href="#" onclick="showPage('api')">🛠 API</a>
+    <a href="#" onclick="showPage('buy')">🛒 شراء السكريبت</a>
+    <a href="#" onclick="showPage('contact')">📩 تواصل معنا</a>
+    <a href="#" onclick="showPage('developer')">💻 المطور</a>
+</div>
 
-        <!-- القائمة الجانبية -->
-        <div id="side-menu">
-            <button class="menu-item" data-section="home">📜 الصفحة الرئيسية</button>
-            <button class="menu-item" data-section="api">⚙️ API</button>
-            <button class="menu-item" data-section="dev">👨‍💻 المطور</button>
+<!-- زر القائمة -->
+<div class="toggle-btn" onclick="toggleSidebar()">☰</div>
+
+<!-- زر الموسيقى -->
+<div class="music-btn" onclick="toggleMusic()">🎵</div>
+
+<!-- الصفحات -->
+<div id="home" class="container">
+    <h1>✨ مرحبًا بك في <span class="neon-text">API Dark Node</span> ✨</h1>
+</div>
+
+<div id="api" class="container">
+    <h1>🛰 اختر قسم API</h1>
+    
+    <div class="api-item" onclick="toggleLinks('gamesLinks')">🎮 ألعاب</div>
+    <div id="gamesLinks" class="api-links">
+        <div class="api-link">
+            <span>🎲 API الألعاب 1</span>
+            <button onclick="copyToClipboard('https://api.example.com/game1')">📋 نسخ</button>
         </div>
-
-        <!-- الصفحة الرئيسية -->
-        <div id="home" class="section">
-            <h2 class="neon">الصفحة الرئيسية</h2>
-            <p>هنا ستجد كل أنواع الـ API التي تحتاجها.</p>
-        </div>
-
-        <!-- قسم API -->
-        <div id="api" class="section">
-            <h2 class="neon">قسم الـ API</h2>
-            <button id="api-toggle">📂 عرض الأقسام</button>
-            <div id="api-sections" class="hidden">
-                <button class="menu-item">🎮 ألعاب</button>
-                <button class="menu-item">🛠️ أدوات</button>
-                <button class="menu-item">🕌 دين</button>
-                <button class="menu-item">🤖 AI</button>
-                <button class="menu-item">🔍 بحث</button>
-            </div>
-        </div>
-
-        <!-- قسم المطور -->
-        <div id="dev" class="section">
-            <h2 class="neon">👨‍💻 المطور</h2>
-            <div class="api-item">
-                <span>𝑅𝐴𝐷𝐼𝛩 𝐷𝐸𝑀𝛩𝑁</span>
-            </div>
-            <div class="api-item">
-                <span>فريق الدعم</span>
-                <a href="https://wa.me/201063808608" target="_blank">📞 تواصل</a>
-            </div>
+        <div class="api-link">
+            <span>🎯 API الألعاب 2</span>
+            <button onclick="copyToClipboard('https://api.example.com/game2')">📋 نسخ</button>
         </div>
     </div>
+</div>
 
-    <script>
-        document.getElementById("start-btn").addEventListener("click", function () {
-            document.getElementById("landing-page").style.display = "none";
-            document.getElementById("main-content").style.display = "block";
-        });
+<div id="buy" class="container">
+    <h1 style="color: #ff0000; text-shadow: 0px 0px 10px red;">🍷 أسعار السكريبتات 🍷</h1>
+    <div class="api-item">⚜️ اسكريبت البوت دون مساعده → <span>150 جنيه</span></div>
+    <div class="api-item">⚜️ اسكريبت البوت مع المساعده في رفعه و تشغيله → <span>250 جنيه</span></div>
+    <p>الدفع عبر فودافون كاش او شحن ببجي او instapay</p>
+    <a href="https://wa.me/201063808608"><button class="btn">📩 للشراء</button></a>
+</div>
 
-        document.getElementById("menu-toggle").addEventListener("click", function () {
-            const menu = document.getElementById("side-menu");
-            menu.style.left = (menu.style.left === "0px") ? "-250px" : "0px";
-        });
+<div id="contact" class="container">
+    <h1>📩 تواصل معنا</h1>
+    <p>📧 الإيميل: support@darknode.com</p>
+    <p>📞 الهاتف: +201063808608</p>
+    <p>📢 مجموعتنا على واتساب:</p>
+    <a href="https://chat.whatsapp.com/BNARMEg1L87JOz8oSR9eFD"><button class="btn">💬 انضم إلينا</button></a>
+</div>
 
-        document.querySelectorAll(".menu-item").forEach(button => {
-            button.addEventListener("click", function () {
-                document.querySelectorAll(".section").forEach(sec => sec.style.display = "none");
-                document.getElementById(this.dataset.section).style.display = "block";
-            });
-        });
-    </script>
+<div id="developer" class="container">
+    <h1>💻 المطور</h1>
+    <p>👨‍💻 اسم المطور: 𝑅𝐴𝐷𝐼𝛩 𝐷𝐸𝑀𝛩𝑁</p>
+    <p>🤖 اسم البوت: 𝙱𝙾𝚃-𝙼𝚄𝙺𝙾</p>
+    <a href="https://wa.me/201063808608"><button class="btn">📩 واتساب</button></a>
+</div>
+
+<!-- الموسيقى -->
+<audio id="bgMusic" loop>
+    <source src="https://files.catbox.moe/kb3lc8.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+    function showPage(pageId) {
+        document.querySelectorAll('.container').forEach(page => page.classList.remove('active'));
+        document.getElementById(pageId).classList.add('active');
+    }
+
+    function toggleSidebar() {
+        let sidebar = document.getElementById("sidebar");
+        sidebar.style.left = sidebar.style.left === "0px" ? "-220px" : "0px";
+    }
+
+    function toggleMusic() {
+        let music = document.getElementById("bgMusic");
+        music.paused ? music.play() : music.pause();
+    }
+
+    function startWebsite() {
+        document.getElementById("startPage").style.display = "none";
+        document.getElementById("home").classList.add("active");
+    }
+
+    function toggleLinks(sectionId) {
+        let section = document.getElementById(sectionId);
+        if (section.style.display === "block") {
+            section.style.display = "none";
+        } else {
+            section.style.display = "block";
+        }
+    }
+
+    function copyToClipboard(text) {
+        navigator.clipboard.writeText(text);
+        alert("📋 تم نسخ الرابط بنجاح!");
+    }
+</script>
 
 </body>
 </html>
