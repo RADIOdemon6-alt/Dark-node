@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Orbitron', sans-serif; }
-        body { background: url('https://files.catbox.moe/oriq4t.jpg') no-repeat center center fixed; background-size: cover; color: #fff; text-align: center; overflow-y: auto; }
+        body { background: url('https://files.catbox.moe/k2os5y.jpg') no-repeat center center fixed; background-size: cover; color: #fff; text-align: center; overflow-y: auto; }
         
         /* القائمة الجانبية */
         .sidebar {
@@ -33,6 +33,56 @@
         .sidebar a:hover {
             color: #00ffee;
             text-shadow: 0px 0px 10px #00ffee;
+        }
+
+        /* أزرار القائمة والموسيقى (مخفية في البداية) */
+        .toggle-btn, .music-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #ff0077;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: none; /* مخفية */
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0px 0px 10px #ff0077;
+            transition: 0.3s;
+            z-index: 11000;
+        }
+        .toggle-btn { top: 20px; }
+        .toggle-btn:hover, .music-btn:hover {
+            background: #00ffee;
+            box-shadow: 0px 0px 15px #00ffee;
+        }
+
+        /* الصفحة الرئيسية */
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 10px;
+            background: rgba(20, 20, 20, 0.9);
+            box-shadow: 0px 0px 20px rgba(255, 0, 255, 0.7);
+            display: none;
+        }
+        .active { display: block; }
+
+        /* أزرار */
+        .btn {
+            background: #ff0077;
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0px 0px 10px #ff0077;
+        }
+        .btn:hover {
+            background: #00ffee;
+            box-shadow: 0px 0px 15px #00ffee;
         }
 /* تنسيق قسم الـ API */
 .api-item {
@@ -88,54 +138,27 @@
     background: #00ffee;
     box-shadow: 0px 0px 10px #00ffee;
 }
-        /* أزرار القائمة والموسيقى */
-        .toggle-btn, .music-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #ff0077;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0px 0px 10px #ff0077;
-            transition: 0.3s;
-            z-index: 11000;
-        }
-        .toggle-btn { top: 20px; }
-        .toggle-btn:hover, .music-btn:hover {
-            background: #00ffee;
-            box-shadow: 0px 0px 15px #00ffee;
-        }
-
-        /* الصفحات */
-        .container {
-            max-width: 900px;
-            margin: 50px auto;
-            padding: 20px;
-            border-radius: 10px;
-            background: rgba(20, 20, 20, 0.9);
-            box-shadow: 0px 0px 20px rgba(255, 0, 255, 0.7);
-            display: none;
-        }
-        .active { display: block; }
-
-        /* أزرار */
-        .btn {
-            background: #ff0077;
-            padding: 10px 20px;
-            border-radius: 5px;
+        /* تواصل معنا (على شكل بوكس الألعاب) */
+        .contact-box {
+            background: linear-gradient(45deg, #ff0077, #7700ff);
             color: white;
-            cursor: pointer;
+            font-size: 20px;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+            text-shadow: 0px 0px 10px #fff;
+            box-shadow: 0px 0px 20px rgba(255, 0, 255, 0.7);
             transition: 0.3s;
-            box-shadow: 0px 0px 10px #ff0077;
+            cursor: pointer;
+            border: 2px solid rgba(255, 255, 255, 0.3);
         }
-        .btn:hover {
-            background: #00ffee;
-            box-shadow: 0px 0px 15px #00ffee;
+
+        .contact-box:hover {
+            background: linear-gradient(45deg, #00ffee, #ff0077);
+            box-shadow: 0px 0px 30px rgba(0, 255, 255, 0.9);
+            transform: scale(1.05);
         }
     </style>
 </head>
@@ -147,7 +170,7 @@
     <button class="btn" onclick="startWebsite()">🚀 ابدأ</button>
 </div>
 
-<!-- القائمة الجانبية -->
+<!-- القائمة الجانبية (مخفية في البداية) -->
 <div class="sidebar" id="sidebar">
     <a href="#" onclick="showPage('home')">🏠 الرئيسية</a>
     <a href="#" onclick="showPage('api')">🛠 API</a>
@@ -156,17 +179,11 @@
     <a href="#" onclick="showPage('developer')">💻 المطور</a>
 </div>
 
-<!-- زر القائمة -->
-<div class="toggle-btn" onclick="toggleSidebar()">☰</div>
+<!-- زر القائمة (مخفي في البداية) -->
+<div class="toggle-btn" id="toggleBtn" onclick="toggleSidebar()">☰</div>
 
-<!-- زر الموسيقى -->
-<div class="music-btn" onclick="toggleMusic()">🎵</div>
-
-<!-- الصفحات -->
-<div id="home" class="container">
-    <h1>✨ مرحبًا بك في <span class="neon-text">API Dark Node</span> ✨</h1>
-</div>
-
+<!-- زر الموسيقى (مخفي في البداية) -->
+<div class="music-btn" id="musicBtn" onclick="toggleMusic()">🎵</div>
 <div id="api" class="container">
     <h1>🛰 اختر قسم API</h1>
     
@@ -191,19 +208,22 @@
     <a href="https://wa.me/201063808608"><button class="btn">📩 للشراء</button></a>
 </div>
 
-<div id="contact" class="container">
-    <h1>📩 تواصل معنا</h1>
-    <p>📧 الإيميل: support@darknode.com</p>
-    <p>📞 الهاتف: +201063808608</p>
-    <p>📢 مجموعتنا على واتساب:</p>
-    <a href="https://chat.whatsapp.com/BNARMEg1L87JOz8oSR9eFD"><button class="btn">💬 انضم إلينا</button></a>
+<!-- الصفحات -->
+<div id="home" class="container">
+    <h1>✨ مرحبًا بك في <span class="neon-text">API Dark Node</span> ✨</h1>
 </div>
 
-<div id="developer" class="container">
-    <h1>💻 المطور</h1>
-    <p>👨‍💻 اسم المطور: 𝑅𝐴𝐷𝐼𝛩 𝐷𝐸𝑀𝛩𝑁</p>
-    <p>🤖 اسم البوت: 𝙱𝙾𝚃-𝙼𝚄𝙺𝙾</p>
-    <a href="https://wa.me/201063808608"><button class="btn">📩 واتساب</button></a>
+<div id="contact" class="container">
+    <h1>📩 تواصل معنا</h1>
+    <div class="contact-box">
+        <a href="https://wa.me/201063808608" style="color: white; text-decoration: none;">💬 واتساب</a>
+    </div>
+    <div class="contact-box">
+        <a href="https://chat.whatsapp.com/BNARMEg1L87JOz8oSR9eFD" style="color: white; text-decoration: none;">📢 جروب واتساب</a>
+    </div>
+    <div class="contact-box">
+        <a href="https://t.me/DarkNodeSupport" style="color: white; text-decoration: none;">🚀 تليجرام</a>
+    </div>
 </div>
 
 <!-- الموسيقى -->
@@ -230,22 +250,11 @@
     function startWebsite() {
         document.getElementById("startPage").style.display = "none";
         document.getElementById("home").classList.add("active");
-    }
 
-    function toggleLinks(sectionId) {
-        let section = document.getElementById(sectionId);
-        if (section.style.display === "block") {
-            section.style.display = "none";
-        } else {
-            section.style.display = "block";
-        }
-    }
-
-    function copyToClipboard(text) {
-        navigator.clipboard.writeText(text);
-        alert("📋 تم نسخ الرابط بنجاح!");
+        // إظهار زر القائمة وزر الموسيقى بعد الضغط على "ابدأ"
+        document.getElementById("toggleBtn").style.display = "flex";
+        document.getElementById("musicBtn").style.display = "flex";
     }
 </script>
 
-</body>
-</html>
+</body
