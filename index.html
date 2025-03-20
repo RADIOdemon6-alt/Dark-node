@@ -230,19 +230,21 @@
 <audio id="bgMusic" loop>
     <source src="https://files.catbox.moe/kb3lc8.mp3" type="audio/mpeg">
 </audio>
-
+    
 <script>
     function toggleLinks(id) {
-    let links = document.getElementById(id);
-    
-    // التحقق مما إذا كانت القوائم معروضة أو لا
-    if (links.style.display === "block") {
-        links.style.display = "none";
-    } else {
-        // إغلاق جميع القوائم المفتوحة قبل فتح القائمة الجديدة
-        document.querySelectorAll('.api-links').forEach(el => el.style.display = "none");
-        links.style.display = "block";
+        let links = document.getElementById(id);
+        
+        // التحقق مما إذا كانت القوائم معروضة أو لا
+        if (links.style.display === "block") {
+            links.style.display = "none";
+        } else {
+            // إغلاق جميع القوائم المفتوحة قبل فتح القائمة الجديدة
+            document.querySelectorAll('.api-links').forEach(el => el.style.display = "none");
+            links.style.display = "block";
         } 
+    }
 </script>
 
-</body
+</body>
+</html>
