@@ -242,7 +242,43 @@
             // إغلاق جميع القوائم المفتوحة قبل فتح القائمة الجديدة
             document.querySelectorAll('.api-links').forEach(el => el.style.display = "none");
             links.style.display = "block";
-        } 
+        }
+    }
+
+    function startWebsite() {
+        document.getElementById("startPage").style.display = "none";
+        document.getElementById("toggleBtn").style.display = "flex";
+        document.getElementById("musicBtn").style.display = "flex";
+        document.getElementById("home").classList.add("active");
+    }
+
+    function toggleSidebar() {
+        let sidebar = document.getElementById("sidebar");
+        if (sidebar.style.left === "0px") {
+            sidebar.style.left = "-220px";
+        } else {
+            sidebar.style.left = "0px";
+        }
+    }
+
+    function showPage(pageId) {
+        document.querySelectorAll('.container').forEach(el => el.classList.remove("active"));
+        document.getElementById(pageId).classList.add("active");
+    }
+
+    function toggleMusic() {
+        let music = document.getElementById("bgMusic");
+        if (music.paused) {
+            music.play();
+        } else {
+            music.pause();
+        }
+    }
+
+    function copyToClipboard(text) {
+        navigator.clipboard.writeText(text).then(() => {
+            alert("تم نسخ الرابط!");
+        });
     }
 </script>
 
