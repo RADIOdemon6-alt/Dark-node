@@ -34,7 +34,34 @@
             color: #00ffee;
             text-shadow: 0px 0px 10px #00ffee;
         }
+/* تخلي الصفحة كلها صورة */
+body {
+    background: url('https://your-image-url.com/main-background.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
 
+/* تخلي كل صفحة صورة */
+.container {
+    background: url('https://your-image-url.com/section-background.jpg') no-repeat center center;
+    background-size: cover;
+    min-height: 100vh; /* يجعل كل قسم يأخذ الشاشة بالكامل */
+    padding: 20px;
+}
+
+/* تخلي صفحة البداية صورة فقط بدون محتوى */
+#startPage {
+    background: url('https://your-image-url.com/start-page.jpg') no-repeat center center;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100vh;
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    text-shadow: 0px 0px 10px black;
+}
         /* أزرار القائمة والموسيقى (مخفية في البداية) */
         .toggle-btn, .music-btn {
             position: fixed;
