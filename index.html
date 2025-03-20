@@ -3,188 +3,224 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⛧ 𝘿𝙖𝙧𝙠 𝙉𝙤𝙙𝙚 ⛧</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <title>Dark Node API</title>
     <style>
-        * { 
-            margin: 0; 
-            padding: 0; 
-            box-sizing: border-box; 
-            font-family: 'Orbitron', sans-serif; 
+        /* إعدادات الصفحة العامة */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #0d0d0d;
+            color: white;
+            margin: 0;
+            padding: 0;
+            text-align: center;
         }
 
-        body { 
-            background: url('https://files.catbox.moe/oriq4t.jpg') no-repeat center center fixed; 
-            background-size: cover; 
-            color: #ff0000;
+        /* صفحة البداية */
+        .start-page {
+            width: 100%;
+            height: 100vh;
+            background: url('https://files.catbox.moe/oriq4t.jpg') no-repeat center center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .start-page h1 {
+            font-size: 40px;
+            background: linear-gradient(to right, red, darkred);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px red;
+        }
+
+        .start-btn {
+            font-size: 22px;
+            background: darkred;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            margin-top: 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px red;
+        }
+
+        .start-btn:hover {
+            background: red;
+        }
+
+        /* المحتوى المخفي بعد الضغط على البداية */
+        .content {
+            display: none;
+            padding: 20px;
         }
 
         /* القائمة الجانبية */
-        .sidebar {
+        .menu {
             position: fixed;
+            left: -250px;
             top: 0;
-            left: -220px; 
-            width: 200px;
+            width: 250px;
             height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            padding: 20px;
-            transition: left 0.4s ease-in-out;
-            z-index: 1000;
-            box-shadow: 3px 0px 10px rgba(255, 0, 0, 0.7);
+            background-color: black;
+            padding-top: 50px;
+            box-shadow: 5px 0px 10px red;
+            transition: 0.3s;
         }
 
-        .sidebar a {
+        .menu a {
             display: block;
-            color: #ff0000;
-            font-size: 18px;
-            margin: 15px 0;
-            text-decoration: none;
-            transition: 0.3s;
-            padding: 10px;
-            border-radius: 5px;
-        }
-
-        .sidebar a:hover {
-            background: rgba(255, 0, 0, 0.2);
-            color: #ff5500;
-            text-shadow: 0px 0px 10px #ff5500;
-        }
-
-        /* زر القائمة */
-        .toggle-btn {
-            position: fixed;
-            bottom: 15px;
-            right: 15px;
-            background: #8b0000;
-            padding: 12px 18px;
-            border-radius: 8px;
-            cursor: pointer;
-            z-index: 1001;
-            box-shadow: 0px 0px 10px #ff0000;
-            font-size: 20px;
-            transition: 0.3s;
-            color: #ff0000;
-        }
-
-        .toggle-btn:hover {
-            background: #550000;
-            box-shadow: 0px 0px 15px #ff5500;
-        }
-
-        /* المحتوى الرئيسي */
-        .container {
-            max-width: 900px;
-            margin: 50px auto;
-            padding: 20px;
-            border-radius: 10px;
-            background: rgba(20, 20, 20, 0.98);
-            box-shadow: 0px 0px 20px rgba(255, 0, 0, 0.7);
-            display: none;
-            text-align: center;
-            transition: 0.3s;
-        }
-
-        .active { 
-            display: block; 
-        }
-
-        /* زخرفة العناوين */
-        .decor {
-            font-size: 26px;
-            color: #ff0000;
-            text-shadow: 0px 0px 15px #ff0000;
-            margin-bottom: 20px;
-        }
-
-        /* مربعات القوائم */
-        .box {
-            background: linear-gradient(135deg, rgba(139, 0, 0, 0.7), rgba(255, 0, 0, 0.5));
             padding: 15px;
-            margin: 10px 0;
-            border-radius: 8px;
-            cursor: pointer;
+            color: white;
+            text-decoration: none;
             font-size: 18px;
-            box-shadow: 0px 0px 10px #8b0000;
-            transition: 0.3s;
-            text-align: center;
+            border-bottom: 1px solid red;
         }
 
-        .box:hover {
-            background: linear-gradient(135deg, rgba(255, 0, 0, 0.7), rgba(139, 0, 0, 0.5));
-            box-shadow: 0px 0px 15px #ff5500;
+        .menu a:hover {
+            background: darkred;
+        }
+
+        /* زر فتح القائمة */
+        .menu-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: url('pentagram.png') no-repeat center center/cover;
+            width: 60px;
+            height: 60px;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* أقسام الصفحات */
+        .section {
+            display: none;
+            padding: 30px;
+        }
+
+        /* مستطيلات الـ API */
+        .api-box {
+            display: flex;
+            justify-content: space-between;
+            background: black;
+            padding: 15px;
+            margin: 10px;
+            border: 2px solid red;
+            box-shadow: 0px 0px 10px red;
         }
 
         /* زر النسخ */
         .copy-btn {
-            background: #8b0000;
-            border: none;
-            padding: 8px 15px;
-            margin-left: 10px;
-            cursor: pointer;
-            font-size: 14px;
+            background: darkred;
             color: white;
-            border-radius: 5px;
-            box-shadow: 0px 0px 10px #ff0000;
-            transition: 0.3s;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
         }
 
         .copy-btn:hover {
-            background: #ff0000;
-            box-shadow: 0px 0px 15px #ff5500;
+            background: red;
         }
 
     </style>
 </head>
 <body>
 
-<!-- زر القائمة -->
-<div class="toggle-btn" onclick="toggleSidebar()">⛧</div>
-
-<!-- القائمة الجانبية -->
-<div class="sidebar" id="sidebar">
-    <a href="#" onclick="showPage('api')">🛠 API</a>
-    <a href="#" onclick="showPage('buy')">🛒 شراء السكريبت</a>
-    <a href="#" onclick="showPage('contact')">📩 تواصل معنا</a>
-    <a href="#" onclick="showPage('developer')">💻 المطور</a>
-</div>
-
-<!-- الصفحات -->
-<div id="api" class="container">
-    <div class="decor">⛧ 🎮 API 🎮 ⛧</div>
-    <h1>🛰 اختر فئة API</h1>
-
-    <div class="box" onclick="toggleLinks('gamesLinks')">🎮 ألعاب</div>
-    <div id="gamesLinks" class="api-links" style="display: none;">
-        <div class="box">🔹 API 1 - <button class="copy-btn" onclick="copyText('https://example.com/game1')">نسخ</button></div>
+    <!-- صفحة البداية -->
+    <div class="start-page">
+        <h1>مرحبا في Dark Node API</h1>
+        <button class="start-btn" onclick="startSite()">ابدأ</button>
     </div>
 
-    <div class="box" onclick="toggleLinks('toolsLinks')">🛠 أدوات</div>
-    <div id="toolsLinks" class="api-links" style="display: none;">
-        <div class="box">🔹 API 2 - <button class="copy-btn" onclick="copyText('https://example.com/tool1')">نسخ</button></div>
+    <!-- المحتوى بعد الضغط على "ابدأ" -->
+    <div class="content">
+        <button class="menu-btn" onclick="toggleMenu()"></button>
+
+        <!-- القائمة الجانبية -->
+        <div class="menu" id="sideMenu">
+            <a href="#" onclick="showSection('home')">🏠 الصفحة الرئيسية</a>
+            <a href="#" onclick="showSection('api')">⚙️ API</a>
+            <a href="#" onclick="showSection('developer')">👨‍💻 المطور</a>
+        </div>
+
+        <!-- الصفحة الرئيسية -->
+        <div id="home" class="section">
+            <h2>الصفحة الرئيسية</h2>
+            <p>هنا ستجد كل أنواع الـ API التي تحتاجها.</p>
+        </div>
+
+        <!-- قسم API -->
+        <div id="api" class="section">
+            <h2>قائمة API</h2>
+            <button class="copy-btn" onclick="toggleApiList()">📂 عرض القائمة</button>
+            <div id="apiList" style="display: none;">
+                <a href="#" onclick="showSection('games')">🎮 ألعاب</a>
+                <a href="#" onclick="showSection('tools')">🛠 أدوات</a>
+                <a href="#" onclick="showSection('religion')">📜 دين</a>
+                <a href="#" onclick="showSection('ai')">🤖 AI</a>
+                <a href="#" onclick="showSection('search')">🔍 بحث</a>
+                <a href="#" onclick="showSection('download')">⬇️ تحميل</a>
+            </div>
+        </div>
+
+        <!-- صفحة API - الألعاب -->
+        <div id="games" class="section">
+            <h2>API الألعاب</h2>
+            <div class="api-box">
+                <span>https://darknode.com/game1</span>
+                <button class="copy-btn" onclick="copyText('https://darknode.com/game1')">📋 نسخ</button>
+            </div>
+            <div class="api-box">
+                <span>https://darknode.com/game2</span>
+                <button class="copy-btn" onclick="copyText('https://darknode.com/game2')">📋 نسخ</button>
+            </div>
+            <div class="api-box">
+                <span>https://darknode.com/game3</span>
+                <button class="copy-btn" onclick="copyText('https://darknode.com/game3')">📋 نسخ</button>
+            </div>
+        </div>
+
+        <!-- قسم المطور -->
+        <div id="developer" class="section">
+            <h2>المطور</h2>
+            <div class="api-box">
+                <span>𝑅𝐴𝐷𝐼𝛩 𝐷𝐸𝑀𝛩𝑁</span>
+            </div>
+            <div class="api-box">
+                <a href="https://wa.me/201063808608" target="_blank">📞 فريق الدعم</a>
+            </div>
+        </div>
+
     </div>
-</div>
 
-<script>
-    function toggleSidebar() {
-        let sidebar = document.getElementById("sidebar");
-        sidebar.style.left = sidebar.style.left === "0px" ? "-220px" : "0px";
-    }
+    <script>
+        function startSite() {
+            document.querySelector(".start-page").style.display = "none";
+            document.querySelector(".content").style.display = "block";
+        }
 
-    function showPage(pageId) {
-        document.querySelectorAll('.container').forEach(page => page.style.display = 'none');
-        document.getElementById(pageId).style.display = 'block';
-        toggleSidebar();
-    }
+        function toggleMenu() {
+            var menu = document.getElementById("sideMenu");
+            menu.style.left = menu.style.left === "0px" ? "-250px" : "0px";
+        }
 
-    function toggleLinks(linkId) {
-        let links = document.getElementById(linkId);
-        links.style.display = links.style.display === "none" ? "block" : "none";
-    }
+        function showSection(id) {
+            document.querySelectorAll(".section").forEach(sec => sec.style.display = "none");
+            document.getElementById(id).style.display = "block";
+        }
 
-    function copyText(text) {
-        navigator.clipboard.writeText(text).then(() => alert("⛧ تم النسخ بنجاح! ⛧"));
-    }
-</script>
+        function toggleApiList() {
+            var list = document.getElementById("apiList");
+            list.style.display = list.style.display === "none" ? "block" : "none";
+        }
+
+        function copyText(text) {
+            navigator.clipboard.writeText(text);
+            alert("تم النسخ!");
+        }
+    </script>
 
 </body>
 </html>
