@@ -5,13 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dark Node API</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
         body {
-            font-family: 'Arial', sans-serif;
-            background: #111;
+            font-family: 'Orbitron', sans-serif;
+            background: #000;
             color: #fff;
             text-align: center;
             margin: 0;
             padding: 0;
+            overflow-x: hidden;
+        }
+
+        /* تأثير نيوني */
+        .neon {
+            text-shadow: 0 0 10px red, 0 0 20px crimson, 0 0 30px darkred;
         }
 
         .hidden {
@@ -25,15 +33,22 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            background: url('https://i.imgur.com/9J3ekf5.jpg') no-repeat center center/cover;
         }
 
         #start-btn {
             background: red;
             color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 18px;
+            border: 2px solid crimson;
+            padding: 15px 25px;
+            font-size: 22px;
             cursor: pointer;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        #start-btn:hover {
+            box-shadow: 0 0 20px red, 0 0 40px crimson;
         }
 
         /* زر النجمة الشيطانية */
@@ -41,41 +56,57 @@
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: red;
-            color: white;
-            border: none;
+            background: black;
+            color: red;
+            border: 2px solid red;
             padding: 15px;
-            font-size: 20px;
+            font-size: 24px;
             cursor: pointer;
             border-radius: 50%;
+            box-shadow: 0 0 10px red;
+            transition: 0.3s;
+        }
+
+        .star-button:hover {
+            box-shadow: 0 0 20px crimson, 0 0 40px darkred;
         }
 
         /* القائمة الجانبية */
         #side-menu {
             position: fixed;
-            left: -200px;
-            top: 50px;
-            width: 180px;
-            background: rgba(0, 0, 0, 0.9);
-            padding: 10px;
-            transition: left 0.3s ease-in-out;
+            left: -250px;
+            top: 0;
+            width: 250px;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            padding: 20px;
+            transition: left 0.5s ease-in-out;
+            box-shadow: 5px 0 15px red;
         }
 
         .menu-item {
             display: block;
             background: black;
             color: red;
-            border: none;
-            padding: 10px;
+            border: 1px solid crimson;
+            padding: 15px;
+            font-size: 18px;
             width: 100%;
-            text-align: center;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
             cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .menu-item:hover {
+            background: red;
+            color: black;
+            box-shadow: 0 0 10px crimson;
         }
 
         /* الأقسام */
         .section {
             margin-top: 50px;
+            display: none;
         }
 
         /* زر إظهار أقسام الـ API */
@@ -83,19 +114,10 @@
             background: red;
             color: white;
             border: none;
-            padding: 10px;
+            padding: 12px;
+            font-size: 18px;
             cursor: pointer;
-        }
-
-        /* أقسام API */
-        .api-category {
-            display: block;
-            background: black;
-            color: white;
-            border: none;
-            padding: 10px;
-            width: 100%;
-            cursor: pointer;
+            box-shadow: 0 0 10px red;
         }
 
         /* عناصر API */
@@ -106,6 +128,20 @@
             padding: 10px;
             margin: 10px auto;
             width: 60%;
+            border: 1px solid crimson;
+            transition: 0.3s;
+        }
+
+        .api-item button {
+            background: red;
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .api-item:hover {
+            box-shadow: 0 0 15px red;
         }
     </style>
 </head>
@@ -113,7 +149,7 @@
 
     <!-- صفحة البداية -->
     <div id="landing-page">
-        <h1>مرحبًا في Dark Node API</h1>
+        <h1 class="neon">مرحبًا في Dark Node API</h1>
         <button id="start-btn">ابدأ</button>
     </div>
 
@@ -131,45 +167,26 @@
 
         <!-- الصفحة الرئيسية -->
         <div id="home" class="section">
-            <h2>الصفحة الرئيسية</h2>
+            <h2 class="neon">الصفحة الرئيسية</h2>
             <p>هنا ستجد كل أنواع الـ API التي تحتاجها.</p>
         </div>
 
         <!-- قسم API -->
-        <div id="api" class="section hidden">
-            <h2>قسم الـ API</h2>
+        <div id="api" class="section">
+            <h2 class="neon">قسم الـ API</h2>
             <button id="api-toggle">📂 عرض الأقسام</button>
             <div id="api-sections" class="hidden">
-                <button class="api-category" data-section="games">🎮 ألعاب</button>
-                <button class="api-category" data-section="tools">🛠️ أدوات</button>
-                <button class="api-category" data-section="religion">🕌 دين</button>
-                <button class="api-category" data-section="ai">🤖 AI</button>
-                <button class="api-category" data-section="search">🔍 بحث</button>
-                <button class="api-category" data-section="download">⬇️ تحميل</button>
-                <button class="api-category" data-section="other">🔗 آخر</button>
-            </div>
-        </div>
-
-        <!-- صفحات الـ API الفرعية -->
-        <div id="games" class="section hidden">
-            <h2>🎮 ألعاب API</h2>
-            <div class="api-item">
-                <span>API 1</span>
-                <button onclick="copyToClipboard('https://example.com/api1')">📋 نسخ</button>
-            </div>
-            <div class="api-item">
-                <span>API 2</span>
-                <button onclick="copyToClipboard('https://example.com/api2')">📋 نسخ</button>
-            </div>
-            <div class="api-item">
-                <span>API 3</span>
-                <button onclick="copyToClipboard('https://example.com/api3')">📋 نسخ</button>
+                <button class="menu-item">🎮 ألعاب</button>
+                <button class="menu-item">🛠️ أدوات</button>
+                <button class="menu-item">🕌 دين</button>
+                <button class="menu-item">🤖 AI</button>
+                <button class="menu-item">🔍 بحث</button>
             </div>
         </div>
 
         <!-- قسم المطور -->
-        <div id="dev" class="section hidden">
-            <h2>👨‍💻 المطور</h2>
+        <div id="dev" class="section">
+            <h2 class="neon">👨‍💻 المطور</h2>
             <div class="api-item">
                 <span>𝑅𝐴𝐷𝐼𝛩 𝐷𝐸𝑀𝛩𝑁</span>
             </div>
@@ -182,42 +199,21 @@
 
     <script>
         document.getElementById("start-btn").addEventListener("click", function () {
-            document.getElementById("landing-page").classList.add("hidden");
-            document.getElementById("main-content").classList.remove("hidden");
+            document.getElementById("landing-page").style.display = "none";
+            document.getElementById("main-content").style.display = "block";
         });
 
-        // زر القائمة الجانبية
         document.getElementById("menu-toggle").addEventListener("click", function () {
             const menu = document.getElementById("side-menu");
-            menu.style.left = menu.style.left === "0px" ? "-200px" : "0px";
+            menu.style.left = (menu.style.left === "0px") ? "-250px" : "0px";
         });
 
-        // تبديل الأقسام
         document.querySelectorAll(".menu-item").forEach(button => {
             button.addEventListener("click", function () {
-                document.querySelectorAll(".section").forEach(sec => sec.classList.add("hidden"));
-                document.getElementById(this.dataset.section).classList.remove("hidden");
+                document.querySelectorAll(".section").forEach(sec => sec.style.display = "none");
+                document.getElementById(this.dataset.section).style.display = "block";
             });
         });
-
-        // زر إظهار أقسام الـ API
-        document.getElementById("api-toggle").addEventListener("click", function () {
-            document.getElementById("api-sections").classList.toggle("hidden");
-        });
-
-        // تبديل صفحات الـ API
-        document.querySelectorAll(".api-category").forEach(button => {
-            button.addEventListener("click", function () {
-                document.querySelectorAll(".section").forEach(sec => sec.classList.add("hidden"));
-                document.getElementById(this.dataset.section).classList.remove("hidden");
-            });
-        });
-
-        // نسخ رابط الـ API
-        function copyToClipboard(text) {
-            navigator.clipboard.writeText(text);
-            alert("تم النسخ!");
-        }
     </script>
 
 </body>
