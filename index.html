@@ -1,162 +1,261 @@
-<!DOCTYPE html>
-<html lang="ar">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>موقعي</title>
-    <style>
-        /* خلفية صفحة البداية */
-        #startPage {
-            background: url('https://files.catbox.moe/egwifo.jpg') no-repeat center center fixed;
-            background-size: cover;
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            color: white;
-            text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.8);
-            text-align: center;
-        }
 
-        /* خلفية الموقع بعد الدخول */
-        body.main-page {
-            background: url('https://files.catbox.moe/k2os5y.jpg') no-repeat center center fixed;
-            background-size: cover;
-        }
 
-        /* تنسيق الزر */
-        button {
-            background-color: #ff69b4;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 18px;
-            transition: 0.3s;
-        }
+<!DOCTYPE html>  <html lang="ar">    <head>    
+    <meta charset="UTF-8">    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <title>⚡ Api Dark Node</title>    
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">    
+    <style>    
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Orbitron', sans-serif; }    
+        body { background: url('https://files.catbox.moe/k2os5y.jpg') no-repeat center center fixed; background-size: cover; color: #fff; text-align: center; overflow-y: auto; }  /* القائمة الجانبية */    
+    .sidebar {    
+        position: fixed;    
+        top: 0;    
+        left: -220px; /* مخفية افتراضيًا */    
+        width: 200px;    
+        height: 100%;    
+        background: rgba(0, 0, 0, 0.9);    
+        padding: 20px;    
+        box-shadow: 0px 0px 15px rgba(255, 0, 0, 0.7);    
+        transition: left 0.4s ease-in-out;    
+        z-index: 10000;    
+    }    
+    .sidebar a {    
+        display: block;    
+        color: #ff0077;    
+        text-decoration: none;    
+        font-size: 18px;    
+        margin: 15px 0;    
+        transition: 0.3s;    
+    }    
+    .sidebar a:hover {    
+        color: #00ffee;    
+        text-shadow: 0px 0px 10px #00ffee;    
+    }    /* أزرار القائمة والموسيقى (مخفية في البداية) */    
+.toggle-btn, .music-btn {    
+    position: fixed;    
+    bottom: 20px;    
+    right: 20px;    
+    background: #ff0077;    
+    width: 50px;    
+    height: 50px;    
+    border-radius: 50%;    
+    display: none; /* مخفية */    
+    align-items: center;    
+    justify-content: center;    
+    cursor: pointer;    
+    box-shadow: 0px 0px 10px #ff0077;    
+    transition: 0.3s;    
+    z-index: 11000;    
+}    
+.toggle-btn { top: 20px; }    
+.toggle-btn:hover, .music-btn:hover {    
+    background: #00ffee;    
+    box-shadow: 0px 0px 15px #00ffee;    
+}    
 
-        button:hover {
-            background-color: #ff1493;
-        }
+/* الصفحة الرئيسية */    
+.container {    
+    max-width: 900px;    
+    margin: 50px auto;    
+    padding: 20px;    
+    border-radius: 10px;    
+    background: rgba(20, 20, 20, 0.9);    
+    box-shadow: 0px 0px 20px rgba(255, 0, 255, 0.7);    
+    display: none;    
+}    
+.active { display: block; }    
 
-        /* القائمة الجانبية */
-        .sidebar {
-            position: fixed;
-            top: 0;
-            left: -250px;
-            width: 250px;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            padding-top: 60px;
-            transition: 0.5s;
-            text-align: center;
-        }
+/* أزرار */    
+.btn {    
+    background: #ff0077;    
+    padding: 10px 20px;    
+    border-radius: 5px;    
+    color: white;    
+    cursor: pointer;    
+    transition: 0.3s;    
+    box-shadow: 0px 0px 10px #ff0077;    
+}    
+.btn:hover {    
+    background: #00ffee;    
+    box-shadow: 0px 0px 15px #00ffee;    
+}
 
-        .sidebar a {
-            display: block;
-            color: white;
-            padding: 15px;
-            text-decoration: none;
-            transition: 0.3s;
-        }
+/* تنسيق قسم الـ API */
+.api-item {
+background: linear-gradient(45deg, #ff0077, #7700ff);
+color: white;
+font-size: 20px;
+padding: 15px;
+margin: 10px 0;
+border-radius: 10px;
+text-align: center;
+font-weight: bold;
+text-shadow: 0px 0px 10px #fff;
+box-shadow: 0px 0px 20px rgba(255, 0, 255, 0.7);
+transition: 0.3s;
+cursor: pointer;
+border: 2px solid rgba(255, 255, 255, 0.3);
+}
 
-        .sidebar a:hover {
-            background: #ff69b4;
-        }
+.api-item:hover {
+background: linear-gradient(45deg, #00ffee, #ff0077);
+box-shadow: 0px 0px 30px rgba(0, 255, 255, 0.9);
+transform: scale(1.05);
+}
 
-        .toggle-btn {
-            position: fixed;
-            top: 15px;
-            left: 15px;
-            font-size: 24px;
-            background: #ff69b4;
-            color: white;
-            padding: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
+.api-links {
+display: none;
+padding: 10px;
+}
 
-        .toggle-btn:hover {
-            background: #ff1493;
-        }
+.api-link {
+display: flex;
+justify-content: space-between;
+align-items: center;
+background: rgba(0, 0, 0, 0.8);
+color: white;
+padding: 10px;
+border-radius: 8px;
+margin: 5px 0;
+box-shadow: 0px 0px 15px rgba(255, 0, 255, 0.5);
+}
 
-        /* إشعار النسخ */
-        #copyAlert {
-            display: none;
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #28a745;
-            color: white;
-            padding: 10px;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-    </style>
-</head>
-<body>
+.api-link button {
+background: #ff0077;
+color: white;
+border: none;
+padding: 5px 10px;
+border-radius: 5px;
+cursor: pointer;
+transition: 0.3s;
+}
 
-    <!-- صفحة البداية -->
-    <div id="startPage">
-        <h1>مرحبًا بك في موقعي</h1>
-        <p>اضغط على الزر للبدء</p>
-        <button onclick="startWebsite()">ابدأ</button>
-    </div>
+.api-link button:hover {
+background: #00ffee;
+box-shadow: 0px 0px 10px #00ffee;
+}
+/* تواصل معنا (على شكل بوكس الألعاب) */
+.contact-box {
+background: linear-gradient(45deg, #ff0077, #7700ff);
+color: white;
+font-size: 20px;
+padding: 15px;
+margin: 10px 0;
+border-radius: 10px;
+text-align: center;
+font-weight: bold;
+text-shadow: 0px 0px 10px #fff;
+box-shadow: 0px 0px 20px rgba(255, 0, 255, 0.7);
+transition: 0.3s;
+cursor: pointer;
+border: 2px solid rgba(255, 255, 255, 0.3);
+}
 
-    <!-- زر القائمة الجانبية -->
-    <div class="toggle-btn" id="toggleBtn" onclick="toggleMenu()" style="display: none;">☰</div>
+.contact-box:hover {
+background: linear-gradient(45deg, #00ffee, #ff0077);
+box-shadow: 0px 0px 30px rgba(0, 255, 255, 0.9);
+transform: scale(1.05);
+}
+</style>
 
-    <!-- القائمة الجانبية -->
-    <div class="sidebar" id="sidebar">
-        <a href="#" onclick="copyLink()">🔗 نسخ الرابط</a>
-        <a href="#">🏠 الصفحة الرئيسية</a>
-        <a href="#">📞 تواصل معنا</a>
-        <a href="#" onclick="closeMenu()">❌ إغلاق</a>
-    </div>
+</head>    
+<body>  <!-- صفحة البداية -->  <div id="startPage" class="container active">    
+    <h1>🔥 مرحبًا بك في <span class="neon-text">API Dark Node</span> 🔥</h1>    
+    <button class="btn" onclick="startWebsite()">🚀 ابدأ</button>    
+</div>  <!-- القائمة الجانبية (مخفية في البداية) -->  <div class="sidebar" id="sidebar">    
+    <a href="#" onclick="showPage('home')">🏠 الرئيسية</a>    
+    <a href="#" onclick="showPage('api')">🛠 API</a>    
+    <a href="#" onclick="showPage('buy')">🛒 شراء السكريبت</a>    
+    <a href="#" onclick="showPage('contact')">📩 تواصل معنا</a>    
+    <a href="#" onclick="showPage('developer')">💻 المطور</a>    
+</div>  <!-- زر القائمة (مخفي في البداية) -->  <div class="toggle-btn" id="toggleBtn" onclick="toggleSidebar()">☰</div>  <!-- زر الموسيقى (مخفي في البداية) -->  <div class="music-btn" id="musicBtn" onclick="toggleMusic()">🎵</div>    
+<div id="api" class="container">    
+    <h1>🛰 اختر قسم API</h1>  <div class="api-item" onclick="toggleLinks('gamesLinks')">🎮 ألعاب</div>    
+<div id="gamesLinks" class="api-links">    
+    <div class="api-link">    
+        <span>🎲 API الألعاب 1</span>    
+        <button onclick="copyToClipboard('https://api.example.com/game1')">📋 نسخ</button>    
+    </div>    
+    <div class="api-link">    
+        <span>🎯 API الألعاب 2</span>    
+        <button onclick="copyToClipboard('https://api.example.com/game2')">📋 نسخ</button>    
+    </div>    
+</div>  </div>  <div id="buy" class="container">    
+    <h1 style="color: #ff0000; text-shadow: 0px 0px 10px red;">🍷 أسعار السكريبتات 🍷</h1>    
+    <div class="api-item">⚜️ اسكريبت البوت دون مساعده → <span>150 جنيه</span></div>    
+    <div class="api-item">⚜️ اسكريبت البوت مع المساعده في رفعه و تشغيله → <span>250 جنيه</span></div>    
+    <p>الدفع عبر فودافون كاش او شحن ببجي او instapay</p>    
+    <a href="https://wa.me/201063808608"><button class="btn">📩 للشراء</button></a>    
+</div>  <!-- الصفحات --> <div id="developer" class="container">  
+    <h1>💻 المطور</h1>  
+    <p>👨‍💻 اسم المطور: 𝑅𝐴𝐷𝐼𝛩 𝐷𝐸𝑀𝛩𝑁</p>  
+    <p>🤖 اسم البوت: 𝙱𝙾𝚃-𝙼𝚄𝙺𝙾</p>  
+    <a href="https://wa.me/201063808608"><button class="btn">📩 واتساب</button></a>  
+</div>  
+ <div id="home" class="container">    
+    <h1>✨ مرحبًا بك في <span class="neon-text">API Dark Node</span> ✨</h1>    
+</div>  <div id="contact" class="container">    
+    <h1>📩 تواصل معنا</h1>    
+    <div class="contact-box">    
+        <a href="https://wa.me/201063808608" style="color: white; text-decoration: none;">رقم المطور</a>    
+    </div>    
+    <div class="contact-box">    
+        <a href="https://whatsapp.com/channel/0029Vb2j3d6HVvTiMzx5QF13" style="color: white; text-decoration: none;">Dark-node-channel</a>    
+    </div>    
+    <div class="contact-box">    
+        <a href="https://whatsapp.com/channel/0029VaumDtWJZg4B8jLyMK2q" style="color: white; text-decoration: none;">MY-Channel</a>    
+    </div>    
+</div>  <!-- الموسيقى -->  <audio id="bgMusic" loop>    
+    <source src="https://files.catbox.moe/kb3lc8.mp3" type="audio/mpeg">    
+</audio>  <script>    
+    function toggleLinks(id) {    
+        let links = document.getElementById(id);    // التحقق مما إذا كانت القوائم معروضة أو لا    
+    if (links.style.display === "block") {    
+        links.style.display = "none";    
+    } else {    
+        // إغلاق جميع القوائم المفتوحة قبل فتح القائمة الجديدة    
+        document.querySelectorAll('.api-links').forEach(el => el.style.display = "none");    
+        links.style.display = "block";    
+    }    
+}    
 
-    <!-- إشعار النسخ -->
-    <div id="copyAlert">✅ تم نسخ الرابط!</div>
+function startWebsite() {    
+    document.getElementById("startPage").style.display = "none";    
+    document.getElementById("toggleBtn").style.display = "flex";    
+    document.getElementById("musicBtn").style.display = "flex";    
+    document.getElementById("home").classList.add("active");    
+}    
 
-    <script>
-        function startWebsite() {
-            document.getElementById("startPage").style.display = "none";  
-            document.getElementById("toggleBtn").style.display = "block";  
-            document.body.classList.add("main-page"); // تغيير الخلفية بعد بدء الموقع
-        }
+function toggleSidebar() {    
+    let sidebar = document.getElementById("sidebar");    
+    if (sidebar.style.left === "0px") {    
+        sidebar.style.left = "-220px";    
+    } else {    
+        sidebar.style.left = "0px";    
+    }    
+}    
 
-        function toggleMenu() {
-            let sidebar = document.getElementById("sidebar");
-            if (sidebar.style.left === "0px") {
-                sidebar.style.left = "-250px";
-            } else {
-                sidebar.style.left = "0px";
-            }
-        }
+function showPage(pageId) {    
+    document.querySelectorAll('.container').forEach(el => el.classList.remove("active"));    
+    document.getElementById(pageId).classList.add("active");    
+}    
 
-        function closeMenu() {
-            document.getElementById("sidebar").style.left = "-250px";
-        }
+function toggleMusic() {    
+    let music = document.getElementById("bgMusic");    
+    if (music.paused) {    
+        music.play();    
+    } else {    
+        music.pause();    
+    }    
+}    
 
-        function copyLink() {
-            let dummy = document.createElement("input");
-            document.body.appendChild(dummy);
-            dummy.value = window.location.href;
-            dummy.select();
-            document.execCommand("copy");
-            document.body.removeChild(dummy);
+function copyToClipboard(text) {    
+    navigator.clipboard.writeText(text).then(() => {    
+        alert("تم نسخ الرابط!");    
+    });    
+}
 
-            let alertBox = document.getElementById("copyAlert");
-            alertBox.style.display = "block";
-            setTimeout(() => {
-                alertBox.style.display = "none";
-            }, 2000);
-        }
-    </script>
+</script>  </body>
 
-</body>
-</html>
+</html>  
