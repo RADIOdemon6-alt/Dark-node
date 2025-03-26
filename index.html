@@ -237,12 +237,12 @@ border: 2px solid rgba(255, 255, 255, 0.3);
         }  
     }  
   
-    function startWebsite() {  
-        document.getElementById("startPage").style.display = "none";  
-        document.getElementById("toggleBtn").style.display = "flex";  
-        document.getElementById("musicBtn").style.display = "flex";  
-        document.getElementById("home").classList.add("active");  
-    }  
+    function startWebsite() {
+    document.getElementById("startPage").style.display = "none";  
+    document.getElementById("toggleBtn").style.display = "flex";  
+    document.getElementById("musicBtn").style.display = "flex";  
+    document.body.classList.add("main-page"); // تغيير الخلفية بعد بدء الموقع
+}
   
     function toggleSidebar() {  
         let sidebar = document.getElementById("sidebar");  
