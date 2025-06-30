@@ -18,13 +18,13 @@ body {
 
 .navigetion {
   position: fixed;
-  bottom: 0;         /* تمام عند أسفل الشاشة */
+  bottom: 0;
   left: 0;
-  width: 100%;       /* عرض كامل */
-  height: 100px;     /* ارتفاع أكبر */
+  width: 100%;
+  height: 100px;
   background: linear-gradient(45deg, #2196f3, #e91e63);
   display: flex;
-  justify-content: space-around; /* توزيع متساوي للعناصر */
+  justify-content: space-around;
   align-items: center;
   padding: 0 20px;
   box-sizing: border-box;
@@ -35,7 +35,7 @@ body {
 .navigetion ul {
   display: flex;
   width: 100%;
-  justify-content: space-around; /* توزيع متساوي */
+  justify-content: space-around;
   list-style: none;
   padding: 0;
   margin: 0;
@@ -44,7 +44,7 @@ body {
 
 .navigetion ul li {
   position: relative;
-  flex: 1;                 /* كل عنصر يأخذ نفس المساحة */
+  flex: 1;
   height: 100px;
   text-align: center;
 }
@@ -56,17 +56,18 @@ body {
   align-items: center;
   height: 100%;
   color: #fff;
-  text-decoration: none;
   font-weight: 600;
   font-size: 1.1rem;
-  transition: color 0.4s ease;
+  text-decoration: none;
   cursor: pointer;
+  position: relative;
 }
 
 .navigetion ul li a .icon {
-  font-size: 2.5rem;      /* أيقونات كبيرة */
+  font-size: 2.5rem;
   margin-bottom: 8px;
   transition: transform 0.4s ease, color 0.4s ease;
+  color: #fff;
 }
 
 .navigetion ul li.active a .icon {
@@ -74,18 +75,31 @@ body {
   transform: translateY(-10px);
 }
 
+/* نصوص مخفية افتراضياً */
 .navigetion ul li a .text {
   font-size: 1rem;
-  opacity: 0.9;
-  transition: opacity 0.4s ease;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  transform: translateY(10px);
+  color: #fff;
+  user-select: none;
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform-origin: center;
+  transform: translate(-50%, 10px);
 }
 
+/* نص يظهر فقط للعنصر النشط */
 .navigetion ul li.active a .text {
-  color: #ffeb3b;
   opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, 0);
+  color: #ffeb3b;
 }
 
-/* دائرة التحديد */
+/* الدائرة تظهر فقط للعنصر النشط */
 .navigetion ul li a .circle {
   position: absolute;
   top: 15px;
@@ -95,9 +109,9 @@ body {
   height: 50px;
   border-radius: 50%;
   border: 3px solid #fff;
+  background: transparent;
   transition: transform 0.4s ease, border-color 0.4s ease;
   pointer-events: none;
-  background: transparent;
   z-index: -1;
 }
 
@@ -109,62 +123,56 @@ body {
 /* مؤشر الحركة */
 .indicator {
   position: absolute;
-  bottom: 100px; /* فوق الشريط */
+  bottom: 100px;
   left: 0;
   width: 70px;
   height: 70px;
   background: linear-gradient(45deg, #2196f3, #e91e63);
   border: 6px solid #06021b;
   border-radius: 50%;
-  transition: transform 0.5s ease;
+  transition: transform 0.4s ease;
   box-shadow: 0 0 10px #e91e63aa;
   pointer-events: none;
   z-index: 10000;
 }
 
 /* تحريك المؤشر حسب العنصر النشط */
+
+/* نستخدم النسب للتموضع */
 .navigetion ul li:nth-child(1).active ~ .indicator {
-  transform: translateX(calc(100% / 5 * 0 + 15px));
+  transform: translateX(calc(20% * 0 + 15px));
 }
-
 .navigetion ul li:nth-child(2).active ~ .indicator {
-  transform: translateX(calc(100% / 5 * 1 + 15px));
+  transform: translateX(calc(20% * 1 + 15px));
 }
-
 .navigetion ul li:nth-child(3).active ~ .indicator {
-  transform: translateX(calc(100% / 5 * 2 + 15px));
+  transform: translateX(calc(20% * 2 + 15px));
 }
-
 .navigetion ul li:nth-child(4).active ~ .indicator {
-  transform: translateX(calc(100% / 5 * 3 + 15px));
+  transform: translateX(calc(20% * 3 + 15px));
 }
-
 .navigetion ul li:nth-child(5).active ~ .indicator {
-  transform: translateX(calc(100% / 5 * 4 + 15px));
+  transform: translateX(calc(20% * 4 + 15px));
 }
 
-/* للشاشات الصغيرة */
+/* شاشات صغيرة */
 @media (max-width: 420px) {
   .navigetion {
     height: 80px;
     padding: 0 10px;
   }
-
   .navigetion ul li a .icon {
     font-size: 2rem;
   }
-
   .navigetion ul li a .text {
     font-size: 0.9rem;
   }
-
   .navigetion ul li a .circle {
     width: 40px;
     height: 40px;
     border-width: 2.5px;
     top: 10px;
   }
-
   .indicator {
     width: 55px;
     height: 55px;
