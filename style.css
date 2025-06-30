@@ -7,111 +7,98 @@
 
 body {
   margin: 0;
-  padding: 0 0 10px 0; /* مساحة صغيرة من تحت */
+  padding: 0;
   min-height: 100vh;
   background: #06021b;
   display: flex;
-  justify-content: center; /* توسيط أفقي */
-  align-items: flex-end;   /* وضع المحتوى في الأسفل */
-  overflow-x: hidden; /* منع التمرير الأفقي */
+  justify-content: center;
+  align-items: flex-end;
+  overflow-x: hidden;
 }
 
 .navigetion {
-  position: fixed;        /* مثبت في مكانه */
-  bottom: 10px;           /* 10 بكسل من أسفل الشاشة */
-  left: 50%;              /* مركز أفقياً */
-  transform: translateX(-50%); /* تحريك الشريط ليكون بالضبط في الوسط */
-  width: 100%;
-  max-width: 400px;
-  height: 70px;
+  position: fixed;
+  bottom: 0;         /* تمام عند أسفل الشاشة */
+  left: 0;
+  width: 100%;       /* عرض كامل */
+  height: 100px;     /* ارتفاع أكبر */
   background: linear-gradient(45deg, #2196f3, #e91e63);
   display: flex;
-  justify-content: center;
+  justify-content: space-around; /* توزيع متساوي للعناصر */
   align-items: center;
-  border-radius: 15px;
-  padding: 0 10px;
+  padding: 0 20px;
   box-sizing: border-box;
-  box-shadow: 0 0 15px #e91e63aa;
-  overflow-x: auto;
-  z-index: 9999; /* فوق كل العناصر */
+  box-shadow: 0 -3px 15px #e91e63aa;
+  z-index: 9999;
 }
 
 .navigetion ul {
   display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none; /* إخفاء scrollbar في Firefox */
   width: 100%;
+  justify-content: space-around; /* توزيع متساوي */
+  list-style: none;
   padding: 0;
   margin: 0;
-}
-
-.navigetion ul::-webkit-scrollbar {
-  display: none; /* إخفاء scrollbar في Chrome */
+  overflow-x: visible;
 }
 
 .navigetion ul li {
   position: relative;
-  width: 60px;
-  height: 60px;
-  list-style: none;
-  flex-shrink: 0;
-  margin: 0 8px;
+  flex: 1;                 /* كل عنصر يأخذ نفس المساحة */
+  height: 100px;
+  text-align: center;
 }
 
 .navigetion ul li a {
-  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  height: 100%;
   color: #fff;
-  font-weight: 500;
-  text-align: center;
   text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: color 0.4s ease;
+  cursor: pointer;
 }
 
 .navigetion ul li a .icon {
-  font-size: 1.2rem;
-  line-height: 60px;
+  font-size: 2.5rem;      /* أيقونات كبيرة */
+  margin-bottom: 8px;
   transition: transform 0.4s ease, color 0.4s ease;
 }
 
 .navigetion ul li.active a .icon {
-  transform: translateY(-15px);
   color: #ffeb3b;
+  transform: translateY(-10px);
 }
 
 .navigetion ul li a .text {
-  position: absolute;
-  bottom: -18px;
-  font-size: 0.7rem;
-  color: #fff;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.4s ease, transform 0.4s ease;
-  transform: translateY(10px);
+  font-size: 1rem;
+  opacity: 0.9;
+  transition: opacity 0.4s ease;
 }
 
 .navigetion ul li.active a .text {
+  color: #ffeb3b;
   opacity: 1;
-  transform: translateY(0);
 }
 
+/* دائرة التحديد */
 .navigetion ul li a .circle {
   position: absolute;
-  top: -10px;
+  top: 15px;
   left: 50%;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: 2px solid #fff;
-  background: transparent;
   transform: translateX(-50%) scale(0);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 3px solid #fff;
   transition: transform 0.4s ease, border-color 0.4s ease;
   pointer-events: none;
+  background: transparent;
+  z-index: -1;
 }
 
 .navigetion ul li.active a .circle {
@@ -119,67 +106,69 @@ body {
   border-color: #ffeb3b;
 }
 
+/* مؤشر الحركة */
 .indicator {
   position: absolute;
-  top: -45%;
-  width: 60px;
-  height: 60px;
+  bottom: 100px; /* فوق الشريط */
+  left: 0;
+  width: 70px;
+  height: 70px;
   background: linear-gradient(45deg, #2196f3, #e91e63);
-  border: 5px solid #06021b;
+  border: 6px solid #06021b;
   border-radius: 50%;
   transition: transform 0.5s ease;
   box-shadow: 0 0 10px #e91e63aa;
   pointer-events: none;
-  left: 0;
+  z-index: 10000;
 }
 
 /* تحريك المؤشر حسب العنصر النشط */
 .navigetion ul li:nth-child(1).active ~ .indicator {
-  transform: translateX(calc(60px * 0 + 8px));
+  transform: translateX(calc(100% / 5 * 0 + 15px));
 }
 
 .navigetion ul li:nth-child(2).active ~ .indicator {
-  transform: translateX(calc(60px * 1 + 16px));
+  transform: translateX(calc(100% / 5 * 1 + 15px));
 }
 
 .navigetion ul li:nth-child(3).active ~ .indicator {
-  transform: translateX(calc(60px * 2 + 24px));
+  transform: translateX(calc(100% / 5 * 2 + 15px));
 }
 
 .navigetion ul li:nth-child(4).active ~ .indicator {
-  transform: translateX(calc(60px * 3 + 32px));
+  transform: translateX(calc(100% / 5 * 3 + 15px));
 }
 
 .navigetion ul li:nth-child(5).active ~ .indicator {
-  transform: translateX(calc(60px * 4 + 40px));
+  transform: translateX(calc(100% / 5 * 4 + 15px));
 }
 
-/* استجابة الشاشات الصغيرة */
+/* للشاشات الصغيرة */
 @media (max-width: 420px) {
   .navigetion {
-    height: 60px;
-    max-width: 100%;
+    height: 80px;
     padding: 0 10px;
-    bottom: 5px;
   }
-  .navigetion ul li {
-    width: 50px;
-    height: 50px;
-    margin: 0 6px;
-  }
+
   .navigetion ul li a .icon {
-    font-size: 1rem;
-    line-height: 50px;
+    font-size: 2rem;
   }
-  .indicator {
-    width: 50px;
-    height: 50px;
-    border-width: 4px;
-    top: -40%;
+
+  .navigetion ul li a .text {
+    font-size: 0.9rem;
   }
+
   .navigetion ul li a .circle {
-    width: 30px;
-    height: 30px;
-    top: -8px;
+    width: 40px;
+    height: 40px;
+    border-width: 2.5px;
+    top: 10px;
+  }
+
+  .indicator {
+    width: 55px;
+    height: 55px;
+    bottom: 80px;
+    border-width: 4px;
   }
 }
