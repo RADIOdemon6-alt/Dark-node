@@ -53,7 +53,7 @@ body {
   align-items: flex-end;
   flex-direction: column;
   width: 100%;
-  text-align: center;
+  text-align: right; /* صححت هنا */
   font-weight: 500;
 }
 
@@ -62,7 +62,7 @@ body {
   display: block;
   line-height: 75px;
   font-size: 1.2cm; /* خفض الحجم قليلاً للموبايل */
-  text-align: flex-end;
+  text-align: right; /* صححت هنا */
   color: #fff;
   transition: .6s;
 }
@@ -71,13 +71,14 @@ body {
   transform: translateY(-32px);
 }
 
-.navigetion ul li a .taxt {
+.navigetion ul li a .text { /* صححت اسم الكلاس */
   position: absolute;
   color: #fff;
   font-weight: 400;
   font-size: .75em;
   letter-spacing: .05em;
-  transform: translatev(20px);
+  transform: translateY(20px); /* صححت الحرف */
+  opacity: 0;
   transition: .6s;
 }
 
@@ -95,11 +96,10 @@ body {
   border-radius: 50%;
   border: 1.8px solid #fff;
   transform: translateY(-37px) scale(0);
+  transition: transform .4s ease; /* أضفت انتقال */
 }
 
 .navigetion ul li.active a .circle {
-  transition: .4s;
-  transition-delay: .4s;
   transform: translateY(-37px) scale(1);
 }
 
