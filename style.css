@@ -6,39 +6,45 @@
 }
 
 body {
-  display: flex;
-  justify-content: center; /* توسيط أفقي */
-  align-items: center;    /* توسيط عمودي */
+  margin: 0;
+  padding: 0 0 10px 0; /* مساحة صغيرة من تحت */
   min-height: 100vh;
   background: #06021b;
-  padding: 10px; /* مسافة من الأطراف */
+  display: flex;
+  justify-content: center; /* توسيط أفقي */
+  align-items: flex-end;   /* وضع المحتوى في الأسفل */
+  overflow-x: hidden; /* منع التمرير الأفقي */
 }
 
 .navigetion {
-  position: relative;
+  position: fixed;        /* مثبت في مكانه */
+  bottom: 10px;           /* 10 بكسل من أسفل الشاشة */
+  left: 50%;              /* مركز أفقياً */
+  transform: translateX(-50%); /* تحريك الشريط ليكون بالضبط في الوسط */
   width: 100%;
   max-width: 400px;
   height: 70px;
   background: linear-gradient(45deg, #2196f3, #e91e63);
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
-  border-radius: 10px;
-  padding: 0 5px;
+  border-radius: 15px;
+  padding: 0 10px;
   box-sizing: border-box;
+  box-shadow: 0 0 15px #e91e63aa;
   overflow-x: auto;
-  margin: 0 auto; /* توسيط شريط التنقل */
-  box-shadow: 0 0 10px #e91e63aa; /* ظل بسيط لتحسين المظهر */
+  z-index: 9999; /* فوق كل العناصر */
 }
 
 .navigetion ul {
   display: flex;
-  width: 100%;
-  max-width: 400px;
   flex-wrap: nowrap;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none; /* إخفاء scrollbar في Firefox */
+  width: 100%;
+  padding: 0;
+  margin: 0;
 }
 
 .navigetion ul::-webkit-scrollbar {
@@ -47,68 +53,64 @@ body {
 
 .navigetion ul li {
   position: relative;
-  width: 60px;  /* تصغير شوي للأيقونات */
+  width: 60px;
   height: 60px;
   list-style: none;
-  z-index: 1;
   flex-shrink: 0;
-  margin: 0 5px; /* مسافة بين العناصر */
+  margin: 0 8px;
 }
 
 .navigetion ul li a {
   position: relative;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
   width: 100%;
-  text-align: center;
-  font-weight: 500;
   color: #fff;
+  font-weight: 500;
+  text-align: center;
+  text-decoration: none;
 }
 
 .navigetion ul li a .icon {
-  position: relative;
-  display: block;
+  font-size: 1.2rem;
   line-height: 60px;
-  font-size: 1.1rem; /* حجم مناسب */
-  color: #fff;
-  transition: .4s;
+  transition: transform 0.4s ease, color 0.4s ease;
 }
 
 .navigetion ul li.active a .icon {
-  transform: translateY(-20px);
+  transform: translateY(-15px);
   color: #ffeb3b;
 }
 
 .navigetion ul li a .text {
   position: absolute;
-  bottom: 5px;
+  bottom: -18px;
+  font-size: 0.7rem;
   color: #fff;
-  font-weight: 400;
-  font-size: .7em;
-  letter-spacing: .05em;
   opacity: 0;
-  transition: .4s;
   pointer-events: none;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  transform: translateY(10px);
 }
 
 .navigetion ul li.active a .text {
   opacity: 1;
-  transform: translateY(-5px);
+  transform: translateY(0);
 }
 
 .navigetion ul li a .circle {
   position: absolute;
   top: -10px;
   left: 50%;
-  transform: translateX(-50%) scale(0);
   width: 40px;
   height: 40px;
-  background: transparent;
   border-radius: 50%;
   border: 2px solid #fff;
-  transition: transform .4s ease;
+  background: transparent;
+  transform: translateX(-50%) scale(0);
+  transition: transform 0.4s ease, border-color 0.4s ease;
   pointer-events: none;
 }
 
@@ -125,70 +127,49 @@ body {
   background: linear-gradient(45deg, #2196f3, #e91e63);
   border: 5px solid #06021b;
   border-radius: 50%;
-  transition: .5s ease;
+  transition: transform 0.5s ease;
   box-shadow: 0 0 10px #e91e63aa;
-}
-
-.indicator::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: -20px;
-  width: 18px;
-  height: 18px;
-  background: transparent;
-  border-top-left-radius: 18px;
-  box-shadow: 1px -8px 0 #06021b;
-}
-
-.indicator::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  right: -20px;
-  width: 18px;
-  height: 18px;
-  background: transparent;
-  border-top-right-radius: 18px;
-  box-shadow: -1px -8px 0 #06021b;
+  pointer-events: none;
+  left: 0;
 }
 
 /* تحريك المؤشر حسب العنصر النشط */
 .navigetion ul li:nth-child(1).active ~ .indicator {
-  transform: translateX(calc(60px * 0 + 10px));
+  transform: translateX(calc(60px * 0 + 8px));
 }
 
 .navigetion ul li:nth-child(2).active ~ .indicator {
-  transform: translateX(calc(60px * 1 + 20px));
+  transform: translateX(calc(60px * 1 + 16px));
 }
 
 .navigetion ul li:nth-child(3).active ~ .indicator {
-  transform: translateX(calc(60px * 2 + 30px));
+  transform: translateX(calc(60px * 2 + 24px));
 }
 
 .navigetion ul li:nth-child(4).active ~ .indicator {
-  transform: translateX(calc(60px * 3 + 40px));
+  transform: translateX(calc(60px * 3 + 32px));
 }
 
 .navigetion ul li:nth-child(5).active ~ .indicator {
-  transform: translateX(calc(60px * 4 + 50px));
+  transform: translateX(calc(60px * 4 + 40px));
 }
 
-/* Media Query للشاشات الصغيرة */
+/* استجابة الشاشات الصغيرة */
 @media (max-width: 420px) {
   .navigetion {
     height: 60px;
     max-width: 100%;
     padding: 0 10px;
+    bottom: 5px;
   }
   .navigetion ul li {
     width: 50px;
     height: 50px;
-    margin: 0 4px;
+    margin: 0 6px;
   }
   .navigetion ul li a .icon {
-    line-height: 50px;
     font-size: 1rem;
+    line-height: 50px;
   }
   .indicator {
     width: 50px;
