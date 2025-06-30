@@ -1,9 +1,10 @@
 * {
-margin: 0;
-padding: 0;
-box-sizing: border-box;
-font-family: 'Font Awesome 6 Free';
-} 
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Font Awesome 6 Free';
+}
+
 body {
   display: flex;
   justify-content: flex-end;
@@ -14,27 +15,37 @@ body {
 
 .navigetion {
   position: relative;
-  width: 400px;
+  width: 100%;
+  max-width: 400px;
   height: 70px;
   background: linear-gradient(45deg, #2196f3, #e91e63);
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
   border-radius: 10px;
-  
+  padding: 0 5px;
+  box-sizing: border-box;
+  overflow-x: auto; /* يسمح بالتمرير الأفقي */
 }
-.navigetion ul {
- display: flex;
- width: 350px;
-}
-.navigetion ul li {
-position: relative;
-width: 70px;
-height: 70px;
-list-style: none;
-z-index: 1;
 
+.navigetion ul {
+  display: flex;
+  width: 100%;
+  max-width: 400px;
+  flex-wrap: nowrap; /* اجعل العناصر لا تنكسر */
+  overflow-x: auto; /* تمكين التمرير الأفقي */
+  -webkit-overflow-scrolling: touch; /* تمكين التمرير السلس في iOS */
 }
+
+.navigetion ul li {
+  position: relative;
+  width: 70px;
+  height: 70px;
+  list-style: none;
+  z-index: 1;
+  flex-shrink: 0; /* عدم تصغير العناصر */
+}
+
 .navigetion ul li a {
   position: relative;
   display: flex;
@@ -45,19 +56,21 @@ z-index: 1;
   text-align: center;
   font-weight: 500;
 }
+
 .navigetion ul li a .icon {
   position: relative;
   display: block;
   line-height: 75px;
-  font-size: 1.5cm;
+  font-size: 1.2cm; /* خفض الحجم قليلاً للموبايل */
   text-align: flex-end;
   color: #fff;
   transition: .6s;
 }
-.navigetion ul li.active a .icon {
-transform: translateY(-32px);  
 
+.navigetion ul li.active a .icon {
+  transform: translateY(-32px);
 }
+
 .navigetion ul li a .taxt {
   position: absolute;
   color: #fff;
@@ -67,37 +80,42 @@ transform: translateY(-32px);
   transform: translatev(20px);
   transition: .6s;
 }
+
 .navigetion ul li.active a .text {
-transform: translateY(10px);
- opacity: 1; 
+  transform: translateY(10px);
+  opacity: 1;
 }
+
 .navigetion ul li a .circle {
- position: absolute; 
- display: block;
- width: 50px;
- height: 50px;
- background: transparent;
- border-radius: 50%;
- border: 1.8px solid #fff;
- transform: translateY(-37px) scale(0);
+  position: absolute;
+  display: block;
+  width: 50px;
+  height: 50px;
+  background: transparent;
+  border-radius: 50%;
+  border: 1.8px solid #fff;
+  transform: translateY(-37px) scale(0);
 }
+
 .navigetion ul li.active a .circle {
   transition: .4s;
   transition-delay: .4s;
   transform: translateY(-37px) scale(1);
 }
+
 .indicator {
-position: absolute;
-top: -50%;
-width: 70px;
-height: 70px;
-background: linear-gradient(45deg, #2196f3, #e91e63);
-border: 6px solid #06021b;
-border-radius: 50%;
-transition: .6s;
+  position: absolute;
+  top: -50%;
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(45deg, #2196f3, #e91e63);
+  border: 6px solid #06021b;
+  border-radius: 50%;
+  transition: .6s;
 }
-.indicator::before{
-  contain: '';
+
+.indicator::before {
+  content: '';
   position: absolute;
   top: 50%;
   left: -22px;
@@ -107,8 +125,9 @@ transition: .6s;
   border-top-left-radius: 20px;
   box-shadow: 1px -10px 0 #06021b;
 }
-.indicator::after{
-  contain: '';
+
+.indicator::after {
+  content: '';
   position: absolute;
   top: 50%;
   right: -22px;
@@ -118,18 +137,52 @@ transition: .6s;
   border-top-right-radius: 20px;
   box-shadow: -1px -10px 0 #06021b;
 }
+
 .navigetion ul li:nth-child(1).active ~ .indicator {
   transform: translateX(calc(70px * 0));
 }
+
 .navigetion ul li:nth-child(2).active ~ .indicator {
   transform: translateX(calc(70px * 1));
 }
+
 .navigetion ul li:nth-child(3).active ~ .indicator {
   transform: translateX(calc(70px * 2));
 }
+
 .navigetion ul li:nth-child(4).active ~ .indicator {
   transform: translateX(calc(70px * 3));
 }
+
 .navigetion ul li:nth-child(5).active ~ .indicator {
   transform: translateX(calc(70px * 4));
-    }
+}
+
+/* Media Query للشاشات الصغيرة */
+@media (max-width: 420px) {
+  .navigetion {
+    height: 60px;
+  }
+  .navigetion ul li {
+    width: 60px;
+    height: 60px;
+  }
+  .navigetion ul li a .icon {
+    line-height: 60px;
+    font-size: 1cm;
+  }
+  .indicator {
+    width: 60px;
+    height: 60px;
+    border-width: 5px;
+    top: -45%;
+  }
+  .navigetion ul li a .circle {
+    width: 40px;
+    height: 40px;
+    transform: translateY(-32px) scale(0);
+  }
+  .navigetion ul li.active a .circle {
+    transform: translateY(-32px) scale(1);
+  }
+}
