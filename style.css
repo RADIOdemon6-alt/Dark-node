@@ -2,15 +2,16 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Font Awesome 6 Free';
+  font-family: 'Font Awesome 6 Free', sans-serif;
 }
 
 body {
   display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
+  justify-content: center; /* توسيط أفقي */
+  align-items: center;    /* توسيط عمودي */
   min-height: 100vh;
   background: #06021b;
+  padding: 10px; /* مسافة من الأطراف */
 }
 
 .navigetion {
@@ -21,168 +22,183 @@ body {
   background: linear-gradient(45deg, #2196f3, #e91e63);
   display: flex;
   justify-content: flex-end;
-  align-items: flex-end;
+  align-items: center;
   border-radius: 10px;
   padding: 0 5px;
   box-sizing: border-box;
-  overflow-x: auto; /* يسمح بالتمرير الأفقي */
+  overflow-x: auto;
+  margin: 0 auto; /* توسيط شريط التنقل */
+  box-shadow: 0 0 10px #e91e63aa; /* ظل بسيط لتحسين المظهر */
 }
 
 .navigetion ul {
   display: flex;
   width: 100%;
   max-width: 400px;
-  flex-wrap: nowrap; /* اجعل العناصر لا تنكسر */
-  overflow-x: auto; /* تمكين التمرير الأفقي */
-  -webkit-overflow-scrolling: touch; /* تمكين التمرير السلس في iOS */
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* إخفاء scrollbar في Firefox */
+}
+
+.navigetion ul::-webkit-scrollbar {
+  display: none; /* إخفاء scrollbar في Chrome */
 }
 
 .navigetion ul li {
   position: relative;
-  width: 70px;
-  height: 70px;
+  width: 60px;  /* تصغير شوي للأيقونات */
+  height: 60px;
   list-style: none;
   z-index: 1;
-  flex-shrink: 0; /* عدم تصغير العناصر */
+  flex-shrink: 0;
+  margin: 0 5px; /* مسافة بين العناصر */
 }
 
 .navigetion ul li a {
   position: relative;
   display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
   width: 100%;
-  text-align: right; /* صححت هنا */
+  text-align: center;
   font-weight: 500;
+  color: #fff;
 }
 
 .navigetion ul li a .icon {
   position: relative;
   display: block;
-  line-height: 75px;
-  font-size: 1.2cm; /* خفض الحجم قليلاً للموبايل */
-  text-align: right; /* صححت هنا */
+  line-height: 60px;
+  font-size: 1.1rem; /* حجم مناسب */
   color: #fff;
-  transition: .6s;
+  transition: .4s;
 }
 
 .navigetion ul li.active a .icon {
-  transform: translateY(-32px);
+  transform: translateY(-20px);
+  color: #ffeb3b;
 }
 
-.navigetion ul li a .text { /* صححت اسم الكلاس */
+.navigetion ul li a .text {
   position: absolute;
+  bottom: 5px;
   color: #fff;
   font-weight: 400;
-  font-size: .75em;
+  font-size: .7em;
   letter-spacing: .05em;
-  transform: translateY(20px); /* صححت الحرف */
   opacity: 0;
-  transition: .6s;
+  transition: .4s;
+  pointer-events: none;
 }
 
 .navigetion ul li.active a .text {
-  transform: translateY(10px);
   opacity: 1;
+  transform: translateY(-5px);
 }
 
 .navigetion ul li a .circle {
   position: absolute;
-  display: block;
-  width: 50px;
-  height: 50px;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%) scale(0);
+  width: 40px;
+  height: 40px;
   background: transparent;
   border-radius: 50%;
-  border: 1.8px solid #fff;
-  transform: translateY(-37px) scale(0);
-  transition: transform .4s ease; /* أضفت انتقال */
+  border: 2px solid #fff;
+  transition: transform .4s ease;
+  pointer-events: none;
 }
 
 .navigetion ul li.active a .circle {
-  transform: translateY(-37px) scale(1);
+  transform: translateX(-50%) scale(1);
+  border-color: #ffeb3b;
 }
 
 .indicator {
   position: absolute;
-  top: -50%;
-  width: 70px;
-  height: 70px;
+  top: -45%;
+  width: 60px;
+  height: 60px;
   background: linear-gradient(45deg, #2196f3, #e91e63);
-  border: 6px solid #06021b;
+  border: 5px solid #06021b;
   border-radius: 50%;
-  transition: .6s;
+  transition: .5s ease;
+  box-shadow: 0 0 10px #e91e63aa;
 }
 
 .indicator::before {
   content: '';
   position: absolute;
   top: 50%;
-  left: -22px;
-  width: 20px;
-  height: 20px;
+  left: -20px;
+  width: 18px;
+  height: 18px;
   background: transparent;
-  border-top-left-radius: 20px;
-  box-shadow: 1px -10px 0 #06021b;
+  border-top-left-radius: 18px;
+  box-shadow: 1px -8px 0 #06021b;
 }
 
 .indicator::after {
   content: '';
   position: absolute;
   top: 50%;
-  right: -22px;
-  width: 20px;
-  height: 20px;
+  right: -20px;
+  width: 18px;
+  height: 18px;
   background: transparent;
-  border-top-right-radius: 20px;
-  box-shadow: -1px -10px 0 #06021b;
+  border-top-right-radius: 18px;
+  box-shadow: -1px -8px 0 #06021b;
 }
 
+/* تحريك المؤشر حسب العنصر النشط */
 .navigetion ul li:nth-child(1).active ~ .indicator {
-  transform: translateX(calc(70px * 0));
+  transform: translateX(calc(60px * 0 + 10px));
 }
 
 .navigetion ul li:nth-child(2).active ~ .indicator {
-  transform: translateX(calc(70px * 1));
+  transform: translateX(calc(60px * 1 + 20px));
 }
 
 .navigetion ul li:nth-child(3).active ~ .indicator {
-  transform: translateX(calc(70px * 2));
+  transform: translateX(calc(60px * 2 + 30px));
 }
 
 .navigetion ul li:nth-child(4).active ~ .indicator {
-  transform: translateX(calc(70px * 3));
+  transform: translateX(calc(60px * 3 + 40px));
 }
 
 .navigetion ul li:nth-child(5).active ~ .indicator {
-  transform: translateX(calc(70px * 4));
+  transform: translateX(calc(60px * 4 + 50px));
 }
 
 /* Media Query للشاشات الصغيرة */
 @media (max-width: 420px) {
   .navigetion {
     height: 60px;
+    max-width: 100%;
+    padding: 0 10px;
   }
   .navigetion ul li {
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
+    margin: 0 4px;
   }
   .navigetion ul li a .icon {
-    line-height: 60px;
-    font-size: 1cm;
+    line-height: 50px;
+    font-size: 1rem;
   }
   .indicator {
-    width: 60px;
-    height: 60px;
-    border-width: 5px;
-    top: -45%;
+    width: 50px;
+    height: 50px;
+    border-width: 4px;
+    top: -40%;
   }
   .navigetion ul li a .circle {
-    width: 40px;
-    height: 40px;
-    transform: translateY(-32px) scale(0);
-  }
-  .navigetion ul li.active a .circle {
-    transform: translateY(-32px) scale(1);
+    width: 30px;
+    height: 30px;
+    top: -8px;
   }
 }
