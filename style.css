@@ -28,7 +28,7 @@ body {
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
     z-index: 100;
-    box-shadow: 0 -4px 12px rgba(255, 215, 0, 0.4);
+    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .navigation ul {
@@ -61,9 +61,8 @@ body {
     line-height: 75px;
     font-size: 1.5em;
     text-align: center;
-    color: #FFD700;
+    color: #FFD700; /* ذهبي واضح */
     transition: .5s;
-    text-shadow: 0 0 6px #FFD700;
 }
 
 .navigation ul li.active a .icon {
@@ -79,7 +78,6 @@ body {
     opacity: 0;
     transform: translateY(20px);
     transition: .5s;
-    text-shadow: 0 0 6px #FFD700;
 }
 
 .navigation ul li.active a .text {
@@ -104,7 +102,6 @@ body {
     transform: translateY(-37px) scale(1);
 }
 
-/* الدائرة المتحركة (المؤشر) */
 .indicator {
     position: absolute;
     top: -50%;
@@ -117,10 +114,9 @@ body {
     justify-content: center;
     align-items: center;
     transition: .5s;
-    box-shadow: 0 0 12px #FFD700;
 }
 
-/* إزالة الحواف السوداء نهائيًا */
+/* حذف الظلال الجانبية */
 .indicator::before,
 .indicator::after {
     display: none;
